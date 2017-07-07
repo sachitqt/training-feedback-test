@@ -1,0 +1,29 @@
+{
+  "name": "botbuilder-sample-createnewconversation",
+  "version": "1.0.0",
+  "description": "Bot Builder Sample - Create New Conversation",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Quovantis Technology",
+  "license": "MIT",
+  "keywords": [
+    "trainingbot",
+    "bots",
+    "chatbots",
+    "sessionfeedbackbot"
+  ],
+  "bugs": {
+    "url": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+    "botbuilder": "^3.8.2",
+    "dotenv-extended": "^1.0.4",
+    "i18n": "^0.8.3",
+    "restify": "^4.3.0"
+  }
+}
