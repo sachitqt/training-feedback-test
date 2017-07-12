@@ -63,15 +63,18 @@ bot.on('contactRelationUpdate', function (message) {
         var name = message.user ? message.user.name : null;
         var reply = new builder.Message()
             .address(message.address)
-            .text("Hello %s... Thanks for adding me. Say 'hello' to see some great demos.", name || 'there');
+            .text("Hello %s, Thanks for adding me. Say 'hello' to see some great demos.", name || 'there');
         bot.send(reply);
     } else {
         // delete their data
     }
 });
-bot.on('typing', function (message) {
-    // User is typing
+
+
+bot.on('conversationUpdate', function (message) {
+    console.log("Update");
 });
+
 bot.on('deleteUserData', function (message) {
     console.log("Delete data");
     // User asked to delete their data
@@ -95,7 +98,7 @@ bot.dialog("/", [
             session.send("You have just attended the session. We request you to fill the feedback form ASAP. ");
             builder.Prompts.choice(
                 session,
-                'What would you like to do?',
+                'What would you like to do? (** Tip :** *Please select or type the option*)',
                 [DialogLabels.Yes, DialogLabels.Later, DialogLabels.No],
                 {
                     listStyle: builder.ListStyle.button,
@@ -135,10 +138,6 @@ bot.dialog("/", [
 ]);
 
 
-String.prototype.contains = function (content) {
-    return this.indexOf(content) !== -1;
-}
-
 //=========================================================
 // Bots Dialogs
 //=========================================================
@@ -147,9 +146,10 @@ String.prototype.contains = function (content) {
 bot.dialog('startFeedbackQuestions', [
     function (session) {
         session.sendTyping();
+        session.userData["answer"] = [];
         builder.Prompts.choice(
             session,
-            i18n.__('questions')[0],
+            i18n.__('questions')[0] + " (**Tip :** *Please select or type the option*)",
             [RatingDialogLabels.One, RatingDialogLabels.Two, RatingDialogLabels.Three, RatingDialogLabels.Four, RatingDialogLabels.Five],
             {
                 listStyle: builder.ListStyle.button,
@@ -158,7 +158,6 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
-        session.userData["answer"] = [];
         session.userData.answer.push(results.response);
         builder.Prompts.choice(
             session,
@@ -260,7 +259,7 @@ bot.dialog('startFeedbackQuestions', [
     function (session, results) {
         session.sendTyping();
         session.userData.answer.push(results.response);
-        builder.Prompts.text(session, i18n.__('questions')[9])
+        builder.Prompts.text(session, i18n.__('questions')[9] + " (**Tip:** *Please type the answer*)");
     },
     function (session, results) {
         session.sendTyping();
@@ -392,7 +391,7 @@ bot.dialog('showFeedbackReview', [
     },
     function (session, results) {
         var selectOption = results.response.entity.split('_');
-        var qNumber =   selectOption[1];
+        var qNumber = selectOption[1];
         if (qNumber >= 1 && qNumber <= 13) {
             var editQuestionNumber = --(qNumber);
             builder.Prompts.choice(
@@ -445,10 +444,10 @@ function sendEmail(session, subject, text) {
 
 // The dialog stack is cleared and this dialog is invoked when the user enters 'help'.
 bot.dialog('help', function (session, args, next) {
-    session.endDialog("Global commands that are available anytime:\n\n* edit_(question number) - You can edit any question any time by typing for example- **edit_1**" +
-        "\n* submit - You can submit all the response by typing **submit**" +
-        "\n* reset - You can reset all the response by typing **reset**" +
-        "\n* help - You can check all available commands that bot can do by typing **help**");
+    session.endDialog("Global commands that are available anytime:\n\n\n * **edit_(question number)** - You can edit any question any time by typing for example- *edit_1*" +
+        "\n * **submit** - You can submit all the response by typing *submit*" +
+        "\n * **reset** - You can reset all the response by typing *reset*" +
+        "\n * **help** - You can check all available commands that bot can do by typing *help*");
 })
     .triggerAction({
         matches: /^help$/i,
@@ -462,16 +461,28 @@ bot.dialog('help', function (session, args, next) {
 
 // The dialog stack is cleared and this dialog is invoked when the user enters 'help'.
 bot.dialog('submit', function (session, args, next) {
-    submitAllResponse(session);
+    var attempedQuestions = session.userData.answer.length;
+    if (attempedQuestions == 0) {
+        session.endDialog("Hey (wait)! You have not started filling the feedback yet. Please give all responses before submitting the feedback.")
+    } else if (attempedQuestions < 13) {
+        session.endDialog("Hey (wait)! You have only attempted " + attempedQuestions + "/13" + " questions. Please give all responses before submitting the feedback.")
+    } else {
+        submitAllResponse(session);
+    }
 })
     .triggerAction({
         matches: /^submit/i,
+        onSelectAction: (session, args, next) => {
+            // Add the help dialog to the dialog stack
+            // (override the default behavior of replacing the stack)
+            session.beginDialog(args.action, args);
+        }
     });
 
 
 bot.dialog('/delete', (session) => {
     deleteAllData(session);
-    session.endDialog('Everything has been wiped out');
+    session.endDialog("Your session has been reset, type '**Start**' to start the feedback again");
 })
     .triggerAction({
         matches: /reset/i,
