@@ -1,12 +1,26 @@
 var restify = require('restify');
 var builder = require('botbuilder');
 var nodemailer = require('nodemailer');
+var firebase = require('firebase')
 let i18n = require("i18n");
 
 i18n.configure({
     locales: ['en', 'de'],
     directory: __dirname + '/locales'
 });
+
+//========================================================
+//Initialize Firebase
+//========================================================
+var config = {
+    apiKey: "AIzaSyBU4p6ZhtVa1pijJXv4jxzHqb3vqa23tZ4",
+    authDomain: "trainingfeedback-37dcb.firebaseapp.com",
+    databaseURL: "https://trainingfeedback-37dcb.firebaseio.com",
+    projectId: "trainingfeedback-37dcb",
+    storageBucket: "",
+    messagingSenderId: "499900088369"
+};
+firebase.initializeApp(config);
 
 
 //=========================================================
