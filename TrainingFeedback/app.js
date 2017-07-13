@@ -2,6 +2,8 @@ var restify = require('restify');
 var builder = require('botbuilder');
 var nodemailer = require('nodemailer');
 let i18n = require("i18n");
+var json2csv = require('json2csv');
+var fs = require('fs');
 
 i18n.configure({
     locales: ['en', 'de'],
@@ -63,7 +65,7 @@ bot.on('contactRelationUpdate', function (message) {
         var name = message.user ? message.user.name : null;
         var reply = new builder.Message()
             .address(message.address)
-            .text("Hello %s, Thanks for adding me. Say 'hello' to see some great demos.", name || 'there');
+            .text("Hello %s, Thanks for adding me.", name || 'there');
         bot.send(reply);
     } else {
         // delete their data
@@ -71,14 +73,41 @@ bot.on('contactRelationUpdate', function (message) {
 });
 
 
-bot.on('conversationUpdate', function (message) {
-    console.log("Update");
-});
+// Clears userData and privateConversationData, then ends the conversation
+// function deleteProfile(session) {
+//     session.userData = {};
+//     session.privateConversationData = {};
+//     session.endConversation("User profile deleted");
+// }
+//
+// // Handle activities of type 'deleteUserData'
+// bot.on('deleteUserData', (message) => {
+//     // In order to delete any state, we need a session object, so start a dialog
+//     bot.beginDialog(message.address, '/deleteprofile');
+// });
+//
+// // A dialog just for deleting state
+// bot.dialog('/deleteprofile', function(session) {
+//     // Ok, now we have a session so we can delete the state
+//     deleteProfile(session);
+// });
+//
+// // Creates a middleware to handle the /deleteprofile command
+// function deleteProfileMiddleware() {
+//     return {
+//         botbuilder: (session, next) => {
+//             if (/^\/deleteprofile$/i.test(session.message.text)) {
+//                 deleteProfile(session);
+//             } else {
+//                 // next();
+//             }
+//         }
+//     };
+// }
+//
+// // Install middleware
+// bot.use(deleteProfileMiddleware());
 
-bot.on('deleteUserData', function (message) {
-    console.log("Delete data");
-    // User asked to delete their data
-});
 
 //=========================================================
 // Bots Middleware
@@ -93,7 +122,7 @@ bot.dialog("/", [
         session.sendTyping();
         setTimeout(function () {
             session.send("You will be presented with a list of questions. Your answer to those questions can help the trainer identify his strengths and improvement areas to serve you better.")
-            session.send("You can type '**help**' anytime to see all available command that bot can do.")
+            session.send("You can type '**help**' anytime to see all available commands that I can respond to.")
             session.send(i18n.__('Welcome'));
             session.send("You have just attended the session. We request you to fill the feedback form ASAP. ");
             builder.Prompts.choice(
@@ -126,7 +155,7 @@ bot.dialog("/", [
 
                 default:
                     session.send("Sorry I couldn't get you. It seems you have entered something else. " +
-                        "Can you please try 'help' for how to proceed and then type 'start' again");
+                        "Can you please try 'help' for how to proceed.");
                     break;
 
             }
@@ -146,7 +175,7 @@ bot.dialog("/", [
 bot.dialog('startFeedbackQuestions', [
     function (session) {
         session.sendTyping();
-        session.userData["answer"] = [];
+        session.userData["questionArray"] = [];
         builder.Prompts.choice(
             session,
             i18n.__('questions')[0] + " (**Tip :** *Please select or type the option*)",
@@ -158,7 +187,9 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
-        session.userData.answer.push(results.response);
+        var userAnswer = results.response.entity;
+        var questionData = new questionModel(i18n.__('questions')[0], userAnswer);
+        session.userData.questionArray.push(questionData);
         builder.Prompts.choice(
             session,
             i18n.__('questions')[1],
@@ -170,7 +201,9 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
-        session.userData.answer.push(results.response);
+        var userAnswer = results.response.entity;
+        var questionData = new questionModel(i18n.__('questions')[1], userAnswer);
+        session.userData.questionArray.push(questionData);
         builder.Prompts.choice(
             session,
             i18n.__('questions')[2],
@@ -182,7 +215,10 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
-        session.userData.answer.push(results.response);
+        var userAnswer = results.response.entity;
+        var questionData = new questionModel(i18n.__('questions')[2], userAnswer);
+        session.userData.questionArray.push(questionData);
+
         builder.Prompts.choice(
             session,
             i18n.__('questions')[3],
@@ -194,7 +230,10 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
-        session.userData.answer.push(results.response);
+        var userAnswer = results.response.entity;
+        var questionData = new questionModel(i18n.__('questions')[3], userAnswer);
+        session.userData.questionArray.push(questionData);
+
         builder.Prompts.choice(
             session,
             i18n.__('questions')[4],
@@ -206,7 +245,10 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
-        session.userData.answer.push(results.response);
+        var userAnswer = results.response.entity;
+        var questionData = new questionModel(i18n.__('questions')[4], userAnswer);
+        session.userData.questionArray.push(questionData);
+
         builder.Prompts.choice(
             session,
             i18n.__('questions')[5],
@@ -218,7 +260,10 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
-        session.userData.answer.push(results.response);
+        var userAnswer = results.response.entity;
+        var questionData = new questionModel(i18n.__('questions')[5], userAnswer);
+        session.userData.questionArray.push(questionData);
+
         builder.Prompts.choice(
             session,
             i18n.__('questions')[6],
@@ -230,7 +275,10 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
-        session.userData.answer.push(results.response);
+        var userAnswer = results.response.entity;
+        var questionData = new questionModel(i18n.__('questions')[6], userAnswer);
+        session.userData.questionArray.push(questionData);
+
         session.send("You have completed almost half of the questions. (kya) baat hai. Here is a (trophy) for you.");
         setTimeout(function () {
             session.send("Here is next questions, ")
@@ -246,7 +294,10 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
-        session.userData.answer.push(results.response);
+        var userAnswer = results.response.entity;
+        var questionData = new questionModel(i18n.__('questions')[7], userAnswer);
+        session.userData.questionArray.push(questionData);
+
         builder.Prompts.choice(
             session,
             i18n.__('questions')[8],
@@ -258,22 +309,38 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
-        session.userData.answer.push(results.response);
-        builder.Prompts.text(session, i18n.__('questions')[9] + " (**Tip:** *Please type the answer*)");
+        var userAnswer = results.response.entity;
+        var questionData = new questionModel(i18n.__('questions')[8], userAnswer);
+        session.userData.questionArray.push(questionData);
+
+        builder.Prompts.text(session, i18n.__('questions')[9], {
+            speak: 'This is the text that will be spoken initially.',
+            retrySpeak: 'This is the text that is spoken after waiting a while for user input.',
+            inputHint: builder.InputHint.expectingInput
+        });
     },
     function (session, results) {
         session.sendTyping();
-        session.userData.answer.push(results.response);
+        var userAnswer = results.response;
+        var questionData = new questionModel(i18n.__('questions')[9], userAnswer);
+        session.userData.questionArray.push(questionData);
+
         builder.Prompts.text(session, i18n.__('questions')[10])
     },
     function (session, results) {
         session.sendTyping();
-        session.userData.answer.push(results.response);
+        var userAnswer = results.response;
+        var questionData = new questionModel(i18n.__('questions')[10], userAnswer);
+        session.userData.questionArray.push(questionData);
+
         builder.Prompts.text(session, i18n.__('questions')[11])
     },
     function (session, results) {
         session.sendTyping();
-        session.userData.answer.push(results.response);
+        var userAnswer = results.response;
+        var questionData = new questionModel(i18n.__('questions')[11], userAnswer);
+        session.userData.questionArray.push(questionData);
+
         session.send("You are almost there, one more to go.");
         session.send("(bhangra)");
         setTimeout(function () {
@@ -291,7 +358,10 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
-        session.userData.answer.push(results.response);
+        var userAnswer = results.response.entity;
+        var questionData = new questionModel(i18n.__('questions')[12], userAnswer);
+        session.userData.questionArray.push(questionData);
+
         builder.Prompts.choice(
             session,
             'Great Job! (clap) You have submitted all the responses successfully and we appreciate this. (y) What would you like to do now?',
@@ -312,7 +382,6 @@ bot.dialog('startFeedbackQuestions', [
 
                 case 1:
                     session.beginDialog("showFeedbackReview");
-
                     break;
 
                 default:
@@ -355,6 +424,13 @@ bot.dialog('submitResponse', [
 function submitAllResponse(session) {
     session.send("Submitting Response, Please wait...");
     session.sendTyping();
+    var totalResponse   =   session.userData.questionArray;
+    var fields = ['Question', 'Answer'];
+    var csv = json2csv({data: totalResponse, fields: fields});
+    fs.writeFile('response/name.csv', csv, function (err) {
+        if (err) throw err;
+        console.log('file saved');
+    });
     setTimeout(function () {
         sendEmail(session, i18n.__('subject'), "Here is the response: ");
     }, 3000);
@@ -367,16 +443,12 @@ bot.dialog('showFeedbackReview', [
         session.send("Here is the list of responses that you have submitted, you can edit any response before submitting it.");
         session.sendTyping();
         var responseAttachments = [];
-        for (var index = 0; index < session.userData.answer.length; index++) {
-            var response;
-            if (session.userData.answer[index] instanceof Object) {
-                response = session.userData.answer[index].entity;
-            } else {
-                response = session.userData.answer[index];
-            }
+        for (var index = 0; index < session.userData.questionArray.length; index++) {
+            var question = session.userData.questionArray[index].Question;
+            var answer = session.userData.questionArray[index].Answer;
             var heroCard = new builder.HeroCard(session)
-                .title(i18n.__('questions')[index])
-                .text(response)
+                .title(question)
+                .text(answer)
             responseAttachments.push(heroCard);
         }
 
@@ -425,7 +497,11 @@ function sendEmail(session, subject, text) {
         from: 'grubscrub22@gmail.com',
         to: 'sachit.wadhawan@quovantis.com',
         subject: subject,
-        text: text
+        text: text,
+        attachments: [{
+            filename: 'name.csv',
+            path: 'response/name.csv'
+        }]
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
@@ -437,6 +513,7 @@ function sendEmail(session, subject, text) {
             session.send("We have sent your response to TM team. Thanks for your time.")
             session.send("Thanks for filling your feedback (bow)");
         }
+        transporter.close();
         deleteAllData(session)
         session.endDialog();
     });
@@ -461,13 +538,17 @@ bot.dialog('help', function (session, args, next) {
 
 // The dialog stack is cleared and this dialog is invoked when the user enters 'help'.
 bot.dialog('submit', function (session, args, next) {
-    var attempedQuestions = session.userData.answer.length;
-    if (attempedQuestions == 0) {
+    if (!(session.userData.questionArray)) {
         session.endDialog("Hey (wait)! You have not started filling the feedback yet. Please give all responses before submitting the feedback.")
-    } else if (attempedQuestions < 13) {
-        session.endDialog("Hey (wait)! You have only attempted " + attempedQuestions + "/13" + " questions. Please give all responses before submitting the feedback.")
     } else {
-        submitAllResponse(session);
+        var attempedQuestions = session.userData.questionArray.length;
+        if (attempedQuestions == 0) {
+            session.endDialog("Hey (wait)! You have not started filling the feedback yet. Please give all responses before submitting the feedback.")
+        } else if (attempedQuestions < 13) {
+            session.endDialog("Hey (wait)! You have only attempted " + attempedQuestions + "/13" + " questions. Please give all responses before submitting the feedback.")
+        } else {
+            submitAllResponse(session);
+        }
     }
 })
     .triggerAction({
@@ -500,6 +581,13 @@ bot.dialog('/done', (session) => {
 function deleteAllData(session) {
     session.userData = {};
     session.dialogData = {};
+}
+
+//--------------------------------------------------------------------------------------------------------------------//
+
+function questionModel(question, answer) {
+    this.Question = question;
+    this.Answer = answer;
 }
 
 
