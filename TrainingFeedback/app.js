@@ -2,26 +2,13 @@ var restify = require('restify');
 var builder = require('botbuilder');
 var nodemailer = require('nodemailer');
 var firebase = require('firebase')
+var firebaseOperations = require('./firebase_operations.js');
 let i18n = require("i18n");
 
 i18n.configure({
     locales: ['en', 'de'],
     directory: __dirname + '/locales'
 });
-
-//========================================================
-//Initialize Firebase
-//========================================================
-var config = {
-    apiKey: "AIzaSyBU4p6ZhtVa1pijJXv4jxzHqb3vqa23tZ4",
-    authDomain: "trainingfeedback-37dcb.firebaseapp.com",
-    databaseURL: "https://trainingfeedback-37dcb.firebaseio.com",
-    projectId: "trainingfeedback-37dcb",
-    storageBucket: "",
-    messagingSenderId: "499900088369"
-};
-firebase.initializeApp(config);
-
 
 //=========================================================
 // Bot Setup
@@ -101,6 +88,7 @@ bot.on('deleteUserData', function (message) {
 
 bot.dialog("/", [
     function (session) {
+        firebaseOperations.saveQuestionsToDB();
         session.sendTyping();
         setTimeout(function () {
             session.send("You will be presented with a list of questions. Your answer to those questions can help the trainer identify his strengths and improvement areas to serve you better.")
@@ -406,7 +394,7 @@ bot.dialog('showFeedbackReview', [
     },
     function (session, results) {
         var selectOption = results.response.entity.split('_');
-        var qNumber =   selectOption[1];
+        var qNumber = selectOption[1];
         if (qNumber >= 1 && qNumber <= 13) {
             var editQuestionNumber = --(qNumber);
             builder.Prompts.choice(
