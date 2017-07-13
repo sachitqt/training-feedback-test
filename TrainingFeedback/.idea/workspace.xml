@@ -24,8 +24,8 @@
       <file leaf-file-name="firebase_operations.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/firebase_operations.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="26" column="31" lean-forward="false" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+            <state relative-caret-position="1220">
+              <caret line="61" column="1" lean-forward="true" selection-start-line="61" selection-start-column="1" selection-end-line="61" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -34,18 +34,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8140">
-              <caret line="407" column="19" lean-forward="true" selection-start-line="407" selection-start-column="19" selection-end-line="407" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="en.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/locales/en.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+            <state relative-caret-position="240">
+              <caret line="123" column="32" lean-forward="true" selection-start-line="123" selection-start-column="32" selection-end-line="123" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -75,6 +65,10 @@
       <find>for</find>
       <find>5'</find>
       <find>2</find>
+      <find>firebaseOperations</find>
+      <find>questionArra</find>
+      <find>.Question</find>
+      <find>[]</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -96,8 +90,8 @@
         <option value="$PROJECT_DIR$/locales/en.json" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/firebasetest.js" />
-        <option value="$PROJECT_DIR$/firebase_operations.js" />
         <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/firebase_operations.js" />
       </list>
     </option>
   </component>
@@ -180,6 +174,238 @@
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app.js</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.gitignore</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/.bin/json2csv</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/cli-table/README.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/cli-table/lib/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/cli-table/lib/utils.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/cli-table/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/.travis.yml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/MIT-LICENSE.txt</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/ReadMe.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/examples/normal-usage.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/examples/safe-string.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/lib/colors.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/lib/custom/trap.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/lib/custom/zalgo.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/lib/extendStringPrototype.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/lib/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/lib/maps/america.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/lib/maps/rainbow.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/lib/maps/random.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/lib/maps/zebra.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/lib/styles.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/lib/system/supports-colors.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/safe.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/screenshots/colors.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/tests/basic-test.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/tests/safe-test.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/colors/themes/generic-logging.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/commander/History.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/commander/LICENSE</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/commander/Readme.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/commander/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/commander/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/flat/.npmignore</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/flat/.travis.yml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/flat/LICENSE</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/flat/README.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/flat/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/flat/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/flat/test/test.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/is-buffer/.npmignore</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/is-buffer/LICENSE</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/is-buffer/README.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/is-buffer/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/is-buffer/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/is-buffer/test/basic.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/.eslintrc</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/.gitattributes</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/.npmignore</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/CHANGELOG.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/LICENSE.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/README.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/_docpress/_docpress.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/_docpress/assets/script.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/_docpress/assets/style.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/_docpress/index.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/bin/json2csv.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/dist/json2csv.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/index.d.ts</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/lib/json2csv.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/lib/parse-ldjson.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/json2csv/webpack.config.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.clonedeep/LICENSE</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.clonedeep/README.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.clonedeep/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.clonedeep/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.flatten/LICENSE</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.flatten/README.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.flatten/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.flatten/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.get/LICENSE</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.get/README.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.get/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.get/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.set/LICENSE</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.set/README.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.set/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.set/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.uniq/LICENSE</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.uniq/README.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.uniq/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/lodash.uniq/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/.npmignore</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/CHANGELOG.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/LICENSE</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/README.md</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/addressparser/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/base64/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/dkim/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/dkim/message-parser.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/dkim/relaxed-body.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/dkim/sign.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/fetch/cookies.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/fetch/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/json-transport/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/mail-composer/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/mailer/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/mailer/mail-message.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/mime-funcs/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/mime-funcs/mime-types.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/mime-node/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/mime-node/last-newline.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/nodemailer.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/qp/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/sendmail-transport/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/sendmail-transport/le-unix.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/sendmail-transport/le-windows.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/ses-transport/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/shared/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-connection/data-stream.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-connection/http-proxy-client.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-connection/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-pool/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-pool/pool-resource.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/smtp-transport/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/stream-transport/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/well-known/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/well-known/services.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/lib/xoauth2/index.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/node_modules/nodemailer/package.json</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/test.js</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -335,7 +561,7 @@
       <workItem from="1499768807549" duration="250000" />
       <workItem from="1499769111912" duration="713000" />
       <workItem from="1499836563655" duration="9977000" />
-      <workItem from="1499933041759" duration="4583000" />
+      <workItem from="1499933041759" duration="8155000" />
     </task>
     <task id="LOCAL-00001" summary="Added Firebase config">
       <created>1499859365551</created>
@@ -344,11 +570,18 @@
       <option name="project" value="LOCAL" />
       <updated>1499859365551</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Implemented saving questions to Firebase">
+      <created>1499947245236</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1499947245236</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75923000" />
+    <option name="totallyTimeSpent" value="79495000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -411,44 +644,45 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Firebase config" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Firebase config" />
+    <MESSAGE value="Implemented saving questions to Firebase" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented saving questions to Firebase" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app.js</url>
-          <line>21</line>
+          <line>49</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app.js</url>
-          <line>55</line>
+          <line>113</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app.js</url>
-          <line>53</line>
+          <line>111</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app.js</url>
-          <line>331</line>
+          <line>425</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app.js</url>
-          <line>351</line>
+          <line>450</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app.js</url>
-          <line>375</line>
+          <line>473</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app.js</url>
-          <line>370</line>
+          <line>468</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
       </breakpoints>
@@ -500,6 +734,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3460">
           <caret line="173" column="37" lean-forward="true" selection-start-line="173" selection-start-column="37" selection-end-line="173" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -723,6 +958,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2324">
           <caret line="504" column="219" lean-forward="false" selection-start-line="504" selection-start-column="219" selection-end-line="504" selection-end-column="219" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -749,18 +985,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="859" column="0" lean-forward="false" selection-start-line="859" selection-start-column="0" selection-end-line="859" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/firebase_operations.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="26" column="31" lean-forward="false" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+        <state relative-caret-position="1220">
+          <caret line="61" column="1" lean-forward="true" selection-start-line="61" selection-start-column="1" selection-end-line="61" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8140">
-          <caret line="407" column="19" lean-forward="true" selection-start-line="407" selection-start-column="19" selection-end-line="407" selection-end-column="19" />
+        <state relative-caret-position="240">
+          <caret line="123" column="32" lean-forward="true" selection-start-line="123" selection-start-column="32" selection-end-line="123" selection-end-column="32" />
           <folding />
         </state>
       </provider>
