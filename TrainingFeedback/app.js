@@ -1,6 +1,7 @@
 var restify = require('restify');
 var builder = require('botbuilder');
 var nodemailer = require('nodemailer');
+var firebaseOperations = require('./firebase_operations.js');
 let i18n = require("i18n");
 var json2csv = require('json2csv');
 var fs = require('fs');
@@ -9,7 +10,6 @@ i18n.configure({
     locales: ['en', 'de'],
     directory: __dirname + '/locales'
 });
-
 
 //=========================================================
 // Bot Setup
@@ -92,6 +92,7 @@ bot.on('contactRelationUpdate', function (message) {
 
 bot.dialog("/", [
     function (session) {
+        firebaseOperations.saveQuestionsToDB(i18n.__('questions'));
         session.sendTyping();
         setTimeout(function () {
             session.send("You will be presented with a list of questions. Your answer to those questions can help the trainer identify his strengths and improvement areas to serve you better.")
@@ -414,6 +415,7 @@ function submitAllResponse(session) {
     session.send("Submitting Response, Please wait...");
     session.sendTyping();
     var totalResponse = session.userData.questionArray;
+    firebaseOperations.saveFeedbackToDB(0, 1, session.userData.questionArray);
     var fields = ['Question', 'Answer'];
     var csv = json2csv({data: totalResponse, fields: fields});
     fs.writeFile('response/session_feedback.csv', csv, function (err) {
