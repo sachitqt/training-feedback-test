@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cb629fb-fc8d-4ad4-838d-70ccf5496fd0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firebase_operations.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -299,7 +298,7 @@
       <workItem from="1499769111912" duration="713000" />
       <workItem from="1499836563655" duration="9977000" />
       <workItem from="1499933041759" duration="8188000" />
-      <workItem from="1500006697009" duration="950000" />
+      <workItem from="1500006697009" duration="998000" />
     </task>
     <task id="LOCAL-00001" summary="Added Firebase config">
       <created>1499859365551</created>
@@ -322,11 +321,18 @@
       <option name="project" value="LOCAL" />
       <updated>1499965688746</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Implemented saving training feedback to Firebase">
+      <created>1500009639276</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1500009639276</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80478000" />
+    <option name="totallyTimeSpent" value="80526000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -391,7 +397,8 @@
     <MESSAGE value="Added Firebase config" />
     <MESSAGE value="Implemented saving questions to Firebase" />
     <MESSAGE value="Implementing saving training feedback to Firebase" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementing saving training feedback to Firebase" />
+    <MESSAGE value="Implemented saving training feedback to Firebase" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented saving training feedback to Firebase" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -495,6 +502,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3460">
           <caret line="173" column="37" lean-forward="true" selection-start-line="173" selection-start-column="37" selection-end-line="173" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -714,6 +722,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2324">
           <caret line="504" column="219" lean-forward="false" selection-start-line="504" selection-start-column="219" selection-end-line="504" selection-end-column="219" />
+          <folding />
         </state>
       </provider>
     </entry>
