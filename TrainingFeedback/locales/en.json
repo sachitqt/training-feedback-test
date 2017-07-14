@@ -15,5 +15,6 @@
     "12- Do you have any other feedback for improvement?",
     "13- Overall Rating"
   ],
-  "subject":"Session Feedback"
+  "subject":"Session Feedback",
+  "notSubmitting":"Not Submitting"
 }

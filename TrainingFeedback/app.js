@@ -17,7 +17,7 @@ i18n.configure({
 
 // Setup Restify Server
 var server = restify.createServer();
-server.listen(process.env.port || process.env.PORT || 6000, function () {
+server.listen(process.env.port || process.env.PORT || 5000, function () {
     console.log('%s listening to %s', server.name, server.url);
 });
 // Create chat bot
@@ -45,6 +45,13 @@ var SubmitDialogLabels = {
     Review: 'Review'
 }
 
+var TimeDialogLabels = {
+    One: '1 Hour',
+    Two: '2 Hours',
+    Four: '4 Hours'
+}
+
+
 var ConfirmationDialogLabels = {
     Yes: "Yes",
     No: "No"
@@ -59,54 +66,20 @@ server.post('/api/messages', connector.listen());
 // Activity Events
 //=========================================================
 
+var username = 'Unknown';
+
 //Bot on
 bot.on('contactRelationUpdate', function (message) {
     if (message.action === 'add') {
-        var name = message.user ? message.user.name : null;
+        username = message.user ? message.user.name : null;
         var reply = new builder.Message()
             .address(message.address)
-            .text("Hello %s, Thanks for adding me.", name || 'there');
+            .text("Hello %s, Thanks for adding me.", username || 'there');
         bot.send(reply);
     } else {
         // delete their data
     }
 });
-
-
-// Clears userData and privateConversationData, then ends the conversation
-// function deleteProfile(session) {
-//     session.userData = {};
-//     session.privateConversationData = {};
-//     session.endConversation("User profile deleted");
-// }
-//
-// // Handle activities of type 'deleteUserData'
-// bot.on('deleteUserData', (message) => {
-//     // In order to delete any state, we need a session object, so start a dialog
-//     bot.beginDialog(message.address, '/deleteprofile');
-// });
-//
-// // A dialog just for deleting state
-// bot.dialog('/deleteprofile', function(session) {
-//     // Ok, now we have a session so we can delete the state
-//     deleteProfile(session);
-// });
-//
-// // Creates a middleware to handle the /deleteprofile command
-// function deleteProfileMiddleware() {
-//     return {
-//         botbuilder: (session, next) => {
-//             if (/^\/deleteprofile$/i.test(session.message.text)) {
-//                 deleteProfile(session);
-//             } else {
-//                 // next();
-//             }
-//         }
-//     };
-// }
-//
-// // Install middleware
-// bot.use(deleteProfileMiddleware());
 
 
 //=========================================================
@@ -146,7 +119,7 @@ bot.dialog("/", [
                     break;
 
                 case 1:
-                    builder.Prompts.time(session, "Can you please enter the time so that I can remind you at that time? (e.g.: June 6th at 5pm)");
+                    session.beginDialog('later');
                     break;
 
                 case 2:
@@ -313,11 +286,7 @@ bot.dialog('startFeedbackQuestions', [
         var questionData = new questionModel(i18n.__('questions')[8], userAnswer);
         session.userData.questionArray.push(questionData);
 
-        builder.Prompts.text(session, i18n.__('questions')[9], {
-            speak: 'This is the text that will be spoken initially.',
-            retrySpeak: 'This is the text that is spoken after waiting a while for user input.',
-            inputHint: builder.InputHint.expectingInput
-        });
+        builder.Prompts.text(session, i18n.__('questions')[9] + " " + "(**Tip :** *Please type the answer*)");
     },
     function (session, results) {
         session.sendTyping();
@@ -351,7 +320,6 @@ bot.dialog('startFeedbackQuestions', [
                 [RatingDialogLabels.One, RatingDialogLabels.Two, RatingDialogLabels.Three, RatingDialogLabels.Four, RatingDialogLabels.Five],
                 {
                     listStyle: builder.ListStyle.button,
-                    maxRetries: 1,
                     retryPrompt: ["Please choose one option for the above question", "I would request you to please select an option for the above question"]
                 });
         }, 3000)
@@ -407,8 +375,29 @@ bot.dialog('notFillingFeedback', [
         session.send("Submitting Response, Please wait...");
         session.sendTyping();
         setTimeout(function () {
-            sendEmail(session, i18n.__('subject'), response);
+            sendEmail(session, username + "- " + i18n.__('notSubmitting'), "Here is the reason-: " + response, false);
         }, 3000);
+    }
+]);
+
+// Dialog that will ask user to select time
+bot.dialog('later', [
+    function (session) {
+        session.sendTyping();
+        builder.Prompts.choice(
+            session,
+            'Please select the time, I will remind you after that time.',
+            [TimeDialogLabels.One, TimeDialogLabels.Two, TimeDialogLabels.Four],
+            {
+                listStyle: builder.ListStyle.button,
+                retryPrompt: ["Please choose one option for the above question", "I would request you to please select an option for the above question"]
+            });
+    },
+    function (session, results) {
+        session.dialogData.time = results.response;
+        var response = session.dialogData.time.entity;
+        session.send("Sure buddy, I will remind you after "+response+". Keep working (computerrage)");
+        session.endDialog();
     }
 ]);
 
@@ -424,15 +413,15 @@ bot.dialog('submitResponse', [
 function submitAllResponse(session) {
     session.send("Submitting Response, Please wait...");
     session.sendTyping();
-    var totalResponse   =   session.userData.questionArray;
+    var totalResponse = session.userData.questionArray;
     var fields = ['Question', 'Answer'];
     var csv = json2csv({data: totalResponse, fields: fields});
-    fs.writeFile('response/name.csv', csv, function (err) {
+    fs.writeFile('response/session_feedback.csv', csv, function (err) {
         if (err) throw err;
         console.log('file saved');
     });
     setTimeout(function () {
-        sendEmail(session, i18n.__('subject'), "Here is the response: ");
+        sendEmail(session, username + "- " + i18n.__('subject'), "Please check the response in attached file-: ", true);
     }, 3000);
 }
 
@@ -483,7 +472,7 @@ bot.dialog('showFeedbackReview', [
 ]);
 
 
-function sendEmail(session, subject, text) {
+function sendEmail(session, subject, text, feedback) {
 
     var transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -493,17 +482,27 @@ function sendEmail(session, subject, text) {
         }
     });
 
-    var mailOptions = {
-        from: 'grubscrub22@gmail.com',
-        to: 'sachit.wadhawan@quovantis.com',
-        subject: subject,
-        text: text,
-        attachments: [{
-            filename: 'name.csv',
-            path: 'response/name.csv'
-        }]
-    };
+    var mailOptions;
 
+    if (feedback) {
+        mailOptions = {
+            from: 'grubscrub22@gmail.com',
+            to: 'sachit.wadhawan@quovantis.com',
+            subject: subject,
+            text: text,
+            attachments: [{
+                filename: 'name.csv',
+                path: 'response/session_feedback.csv'
+            }]
+        };
+    } else {
+        mailOptions = {
+            from: 'grubscrub22@gmail.com',
+            to: 'sachit.wadhawan@quovantis.com',
+            subject: subject,
+            text: text
+        };
+    }
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.log(error);
@@ -512,6 +511,7 @@ function sendEmail(session, subject, text) {
             console.log('Email sent: ' + info.response);
             session.send("We have sent your response to TM team. Thanks for your time.")
             session.send("Thanks for filling your feedback (bow)");
+            fs.unlinkSync('response/session_feedback.csv');
         }
         transporter.close();
         deleteAllData(session)
