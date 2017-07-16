@@ -66,24 +66,12 @@ function saveTrainingFeedback(trainingId, userId, questionAnswers) {
     for (var index = 0; index < questionAnswers.length; index++){
         questionAnswerData[questionAnswers[index].Question.replace('.', '')] = questionAnswers[index].Answer;
     }
-    console.log(questionAnswerData);
-    firebase.database().ref('trainingFeedback/').set({
+    // console.log(questionAnswerData);
+    firebase.database().ref('trainingFeedback/' + trainingId).push({
         trainingId: trainingId,
         userId: userId,
         questionAnswers: questionAnswerData
     });
-
-    // let questions = i18n.__('questions');
-    // let questionAnswerData = {};
-    // for (let index = 0; index < questions.length; index++) {
-    //     questionAnswerData[questions[index].replace('.', '')] = index;
-    // }
-    // console.log(questionAnswerData);
-    // firebase.database().ref('trainingFeedback/' + trainingId).push({
-    //     trainingId: trainingId,
-    //     userId: userId,
-    //     questionAnswers: questionAnswerData
-    // });
 }
 
 function fetchTrainingFeedback(trainingId){
@@ -93,14 +81,4 @@ function fetchTrainingFeedback(trainingId){
         console.log("The read failed: " + errorObject.code);
     });
 
-
-    // ref.on("value", function(snapshot) {
-    //     console.log(snapshot.val());
-    // }, function (errorObject) {
-    //     console.log("The read failed: " + errorObject.code);
-    // });
 }
-
-// writeQuestionsToFirebase(i18n.__('questions'));
-// saveTrainingFeedback(0, 2, "");
-// fetchTrainingFeedback(0);
