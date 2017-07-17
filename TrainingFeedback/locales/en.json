@@ -1,19 +1,194 @@
 {
-  "Welcome": "**I will help you in providing the feedback for the training** (wave)",
   "questions": [
-    "1- The trainer seemed knowledgeable of the training area.",
-    "2- The trainer presented the contents well.",
-    "3- The trainer was able to engage with the participants to make the session interactive and interesting.",
-    "4- The training has enabled me to put my learning into practice now or will be able to use my learning in the future.",
-    "5- Content was easy to understand and inline with my expectations from the session.",
-    "6- I would recommend this course to other team members.",
-    "7- The training started at the scheduled time?",
-    "8- I was given enough notification for the training to plan my product tasks accordingly?",
-    "9- The training was conducted in a conducive and well-equipped environment?",
-    "10- What is at least one learning that you can take from this session?",
-    "11- How can this training be further improved for better results – give at least 1 recommendation.",
-    "12- Do you have any other feedback for improvement?",
-    "13- Overall Rating"
+    {
+      "id": 1,
+      "question_type": "choice",
+      "question": "The trainer seemed knowledgeable of the training area.",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": ""
+    },
+    {
+      "id": 2,
+      "question_type": "choice",
+      "question": "The trainer presented the contents well.",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": ""
+    },
+    {
+      "id": 3,
+      "question_type": "choice",
+      "question": "The trainer was able to engage with the participants to make the session interactive and interesting.",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": ""
+    },
+    {
+      "id": 4,
+      "question_type": "choice",
+      "question": "The training has enabled me to put my learning into practice now or will be able to use my learning in the future.",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": ""
+    },
+    {
+      "id": 5,
+      "question_type": "choice",
+      "question": "Content was easy to understand and inline with my expectations from the session.",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": ""
+    },
+    {
+      "id": 6,
+      "question_type": "choice",
+      "question": "I would recommend this course to other team members.",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": ""
+    },
+    {
+      "id": 7,
+      "question_type": "choice",
+      "question": "The training started at the scheduled time?",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "answer": ""
+    },
+    {
+      "id": 8,
+      "question_type": "choice",
+      "question": "I was given enough notification for the training to plan my product tasks accordingly?",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "answer": ""
+    },
+    {
+      "id": 9,
+      "question_type": "choice",
+      "question": "The training was conducted in a conducive and well-equipped environment?",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "answer": ""
+    },
+    {
+      "id": 10,
+      "question_type": "text",
+      "question": "What is at least one learning that you can take from this session?",
+      "options": [],
+      "answer": ""
+    },
+    {
+      "id": 11,
+      "question_type": "text",
+      "question": "How can this training be further improved for better results – give at least 1 recommendation.",
+      "options": [],
+      "answer": ""
+    },
+    {
+      "id": 12,
+      "question_type": "choice",
+      "question": "Do you have any other feedback for improvement?",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "answer": ""
+    },
+    {
+      "id": 13,
+      "question_type": "choice",
+      "question": "Overall Rating",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": ""
+    }
   ],
-  "subject":"Session Feedback"
+  "subject": "Session Feedback",
+  "notSubmitting": "Not Submitting",
+  "response_header": "Here is the list of responses that you have submitted, you can edit any response before submitting it.",
+  "retry_prompt": [
+    "Please choose one option for the above question",
+    "I would request you to please select an option for the above question",
+    "I am sorry but I did not understand that. I need you to select one of the options above"
+  ],
+  "session_reset_msg": "I have empty my memory (morningafter), type '**Start**' to start the feedback again",
+  "not_started_msg": "Hey (wait)! You have not started filling the feedback yet. Please give all responses before submitting the feedback.",
+  "help_msg": "* If you want to edit any response type 'edit_question_number'. Example- edit_4 \n * if you want to submit response type 'submit' \n * If you want to reset all responses type 'reset' \n * If you want to check all available commands type 'help'",
+  "mail_not_sent_msg": "We are not able to send your response to TM team. Please contact to support.",
+  "mail_sent_msg": "We have sent your response to TM team. Thanks for your time.",
+  "reason_msg": "Can you please write the reason why you don't want to fill the feedback form?",
+  "complete_all_ques_msg": "Great Job! (clap) You have submitted all the responses successfully and we appreciate this. (y) What would you like to do now?",
+  "half_attempt_msg": "You have completed almost half of the questions. (kya) baat hai. Here is a (trophy) for you.",
+  "error_msg": "There is some problem, please try after some time",
+  "no_option_found_error": "Sorry I couldn't get you. It seems you have entered something else. Can you please try 'help' for how to proceed.",
+  "welcome1_msg": "You will be presented with a list of questions. Your answer to those questions can help the trainer identify his strengths and improvement areas to serve you better.",
+  "welcome2_msg": "You can type '**help**' anytime to see all available commands that I can respond to.",
+  "welcome3_msg": "**I will help you in providing the feedback for the training** (wave)",
+  "feedback_fill_msg": "You have just attended the session. We request you to fill the feedback form ASAP. ",
+  "question_start_msg": "Here are the questions-:",
+  "choose_start_option": "What would you like to do? (** Tip :** *Please select or type the option*)",
+  "delete_bot": "Bot has been delete from the skype list",
+  "dialogLabels": [
+    "Start",
+    "Not Filling"
+  ],
+  "ratingDialogLabels": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "submitDialogLabels": [
+    "Submit",
+    "Review"
+  ],
+  "confirmationDialogLabels": [
+    "Yes",
+    "No"
+  ],
+  "wait": "Hey (wait)! You have only attempted %s/13 questions. Please give all responses before submitting the feedback."
 }
