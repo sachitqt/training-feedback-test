@@ -124,12 +124,9 @@
     },
     {
       "id": 12,
-      "question_type": "choice",
+      "question_type": "text",
       "question": "Do you have any other feedback for improvement?",
-      "options": [
-        "Yes",
-        "No"
-      ],
+      "options": [],
       "answer": ""
     },
     {
@@ -154,9 +151,14 @@
     "I would request you to please select an option for the above question",
     "I am sorry but I did not understand that. I need you to select one of the options above"
   ],
-  "session_reset_msg": "I have empty my memory (morningafter), type '**Start**' to start the feedback again",
+  "retry_command_prompt": [
+    "This is not correct command. Please enter the valid command",
+    "This is incorrect command, type 'help' to see all available commands",
+    "This is invalid question, please type correct command."
+  ],
+  "session_reset_msg": "I have lost my memory (morningafter) please type '**start**' to start the feedback again",
   "not_started_msg": "Hey (wait)! You have not started filling the feedback yet. Please give all responses before submitting the feedback.",
-  "help_msg": "* If you want to edit any response type 'edit_question_number'. Example- edit_4 \n * if you want to submit response type 'submit' \n * If you want to reset all responses type 'reset' \n * If you want to check all available commands type 'help'",
+  "help_msg": "* If you want to edit any response type 'edit_question_number'. Example- **edit_4** \n * if you want to submit response type **'submit'** \n * If you want to reset all responses type **'reset'** \n * If you want to check all available commands type **'help'**",
   "mail_not_sent_msg": "We are not able to send your response to TM team. Please contact to support.",
   "mail_sent_msg": "We have sent your response to TM team. Thanks for your time.",
   "reason_msg": "Can you please write the reason why you don't want to fill the feedback form?",
@@ -190,5 +192,6 @@
     "Yes",
     "No"
   ],
-  "wait": "Hey (wait)! You have only attempted %s/13 questions. Please give all responses before submitting the feedback."
+  "wait": "Hey (wait)! You have only attempted %s/13 questions. Please give all responses before submitting the feedback.",
+  "answer_update":"Your **answer %s** has been updated successfully (rock)"
 }

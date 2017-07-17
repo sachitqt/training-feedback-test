@@ -157,7 +157,7 @@ function isFeedbackPending(userId, trainingId, callbackFunction) {
 // saveUserData();
 // fetchNonFilledTrainings();
 // fetchTrainingData();
-saveTrainingData('Espresso', 'LipikaGupta', ['SachitWadhawan', 'PraweenMishra', 'SahilGoel'], 'June');
-saveTrainingData('Machine Learning', 'SachitWadhawan', ['LipikaGupta', 'PraweenMishra', 'SahilGoel'], 'June');
-saveTrainingData('MVP', 'VikasGoyal', ['GautamGupta', 'SumeetMehta', 'LipikaGupta', 'SachitWadhawan', 'PraweenMishra', 'SahilGoel'], 'June');
+// saveTrainingData('Espresso', 'LipikaGupta', ['SachitWadhawan', 'PraweenMishra', 'SahilGoel'], 'June');
+// saveTrainingData('Machine Learning', 'SachitWadhawan', ['LipikaGupta', 'PraweenMishra', 'SahilGoel'], 'June');
+// saveTrainingData('MVP', 'VikasGoyal', ['GautamGupta', 'SumeetMehta', 'LipikaGupta', 'SachitWadhawan', 'PraweenMishra', 'SahilGoel'], 'June');
 // saveTrainingFeedback(0, 1, "");
