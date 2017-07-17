@@ -86,12 +86,14 @@ function saveTrainingFeedback(trainingId, userId, questionAnswers) {
     for (let index = 0; index < questionAnswers.length; index++) {
         questionAnswerData[questionAnswers[index].question.replace('.', '')] = questionAnswers[index].answer;
     }
-    console.log(questionAnswerData);
-    firebase.database().ref('trainingFeedback/' + trainingId).push({
+    firebase.database().ref('trainingFeedback/' + trainingId + '/' + userId).set({
         trainingId: trainingId,
         userId: userId,
         questionAnswers: questionAnswerData
     });
+    firebase.database().ref('pendingFeedback/' + userId + ':' + trainingId).remove(function (error) {
+        console.log(error);
+    })
 }
 
 function fetchTrainingFeedback(trainingId) {
@@ -108,14 +110,15 @@ function saveTrainingData(trainingName, facilitator, attendees, trainingDate) {
         facilitator: facilitator,
         trainingDate: trainingDate
     });
+    let trainingId = id.path.o[1];
     for (let index = 0; index < attendees.length; index++) {
-        firebase.database().ref('trainings/' + id.path.o[1] + '/attendees/' + index).set({
+        firebase.database().ref('trainings/' + trainingId + '/attendees/' + index).set({
             attendeeName: attendees[index],
             isAttended: true,
         });
-        firebase.database().ref('pendingFeedback/').push({
+        firebase.database().ref('pendingFeedback/' + attendees[index] + ':' + trainingId).set({
             attendeeName: attendees[index],
-            trainingId: id.path.o[1],
+            trainingId: trainingId,
             userId: attendees[index]
         });
     }
@@ -139,11 +142,22 @@ function fetchNonFilledTrainings() {
     });
 }
 
-writeQuestionsToFirebase(i18n.__('questions'));
+function isFeedbackPending(userId, trainingId, callbackFunction) {
+    firebase.database().ref('pendingFeedback/' + userId + ':' + trainingId).once('value', function (snapshot) {
+        callbackFunction(!!snapshot.val());
+    }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+    });
+}
+
+// isFeedbackPending('SahilGoel', '-KpFmXgFygU3AsDywr8h', function(isFeedbackPending){
+//     console.log('isFeedbackPending ' + isFeedbackPending);
+// });
+// writeQuestionsToFirebase(i18n.__('questions'));
 // saveUserData();
 // fetchNonFilledTrainings();
 // fetchTrainingData();
-// saveTrainingData('Espresso', 'LipikaGupta', ['SachitWadhawan', 'PraweenMishra', 'SahilGoel'], 'June');
-// saveTrainingData('Machine Learning', 'SachitWadhawan', ['LipikaGupta', 'PraweenMishra', 'SahilGoel'], 'June');
-// saveTrainingData('MVP', 'VikasGoyal', ['LipikaGupta', 'SachitWadhawan', 'PraweenMishra', 'SahilGoel'], 'June');
+saveTrainingData('Espresso', 'LipikaGupta', ['SachitWadhawan', 'PraweenMishra', 'SahilGoel'], 'June');
+saveTrainingData('Machine Learning', 'SachitWadhawan', ['LipikaGupta', 'PraweenMishra', 'SahilGoel'], 'June');
+saveTrainingData('MVP', 'VikasGoyal', ['GautamGupta', 'SumeetMehta', 'LipikaGupta', 'SachitWadhawan', 'PraweenMishra', 'SahilGoel'], 'June');
 // saveTrainingFeedback(0, 1, "");

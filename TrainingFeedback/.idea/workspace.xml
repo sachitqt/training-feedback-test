@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3cb629fb-fc8d-4ad4-838d-70ccf5496fd0" name="Default" comment="Implementing saving user and training data to DB.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/user_data.xls" />
+    <list default="true" id="3cb629fb-fc8d-4ad4-838d-70ccf5496fd0" name="Default" comment="Implemented saving user and training data to DB.">
       <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/LICENSE" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/README.md" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/app.d.ts" afterPath="" />
@@ -864,12 +863,10 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/tasksnapshot.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/tasksnapshot.js.map" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bot.js" afterPath="$PROJECT_DIR$/bot.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firebase_operations.js" afterPath="$PROJECT_DIR$/firebase_operations.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/json2csv/dist/json2csv.js" afterPath="$PROJECT_DIR$/node_modules/json2csv/dist/json2csv.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/json2csv/package.json" afterPath="$PROJECT_DIR$/node_modules/json2csv/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/nodemailer/package.json" afterPath="$PROJECT_DIR$/node_modules/nodemailer/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -890,8 +887,8 @@
       <file leaf-file-name="firebase_operations.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/firebase_operations.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="940">
-              <caret line="47" column="39" lean-forward="true" selection-start-line="47" selection-start-column="39" selection-end-line="47" selection-end-column="39" />
+            <state relative-caret-position="139">
+              <caret line="152" column="28" lean-forward="false" selection-start-line="152" selection-start-column="28" selection-end-line="152" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -900,7 +897,7 @@
       <file leaf-file-name="bot.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bot.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
+            <state relative-caret-position="7240">
               <caret line="362" column="30" lean-forward="false" selection-start-line="362" selection-start-column="30" selection-end-line="362" selection-end-column="30" />
               <folding />
             </state>
@@ -920,7 +917,7 @@
       <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
+            <state relative-caret-position="640">
               <caret line="32" column="3" lean-forward="false" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="3" />
               <folding />
             </state>
@@ -957,6 +954,7 @@
       <find>saveFee</find>
       <find>__dirname</find>
       <find>firebaseOperations</find>
+      <find>console.lo</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -1023,6 +1021,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1051,7 +1050,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -1227,7 +1225,8 @@
       <workItem from="1500006697009" duration="1686000" />
       <workItem from="1500026878879" duration="4588000" />
       <workItem from="1500268540813" duration="42000" />
-      <workItem from="1500273743340" duration="12372000" />
+      <workItem from="1500273743340" duration="12484000" />
+      <workItem from="1500294431095" duration="2032000" />
     </task>
     <task id="LOCAL-00001" summary="Added Firebase config">
       <created>1499859365551</created>
@@ -1285,11 +1284,18 @@
       <option name="project" value="LOCAL" />
       <updated>1500273279639</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Implemented saving user and training data to DB.">
+      <created>1500290126918</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1500290126918</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="100592000" />
+    <option name="totallyTimeSpent" value="102736000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1307,7 +1313,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13451192" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28699553" sideWeight="0.50269026" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39312407" sideWeight="0.49730977" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39312407" sideWeight="0.49730977" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32884902" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1336,7 +1342,8 @@
     <MESSAGE value="Implementing saving training feedback to Firebase" />
     <MESSAGE value="Implemented saving training feedback to Firebase" />
     <MESSAGE value="Implementing saving user and training data to DB." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementing saving user and training data to DB." />
+    <MESSAGE value="Implemented saving user and training data to DB." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented saving user and training data to DB." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1379,11 +1386,10 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/node_modules/excel-to-json/lib/index.js</url>
           <line>10</line>
-          <properties />
           <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="74" />
+      <option name="time" value="75" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1642,19 +1648,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/npm-debug.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="4058" column="158" lean-forward="true" selection-start-line="4058" selection-start-column="158" selection-end-line="4058" selection-end-column="158" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/npm-debug.log" />
     <entry file="file://$PROJECT_DIR$/node_modules/xls-to-json-lc/node_modules/csv/lib/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="213" column="16" lean-forward="false" selection-start-line="213" selection-start-column="16" selection-end-line="213" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1662,7 +1660,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1678,23 +1675,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/excel-to-json/lib/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/excel-to-json/lib/index.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/xls-to-json-lc/libs/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-238">
           <caret line="39" column="14" lean-forward="false" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1702,7 +1690,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="99" column="66" lean-forward="false" selection-start-line="99" selection-start-column="66" selection-end-line="99" selection-end-column="66" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1714,17 +1701,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="32" column="3" lean-forward="false" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bot.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
+        <state relative-caret-position="7240">
           <caret line="362" column="30" lean-forward="false" selection-start-line="362" selection-start-column="30" selection-end-line="362" selection-end-column="30" />
           <folding />
         </state>
@@ -1732,8 +1711,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/firebase_operations.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="940">
-          <caret line="47" column="39" lean-forward="true" selection-start-line="47" selection-start-column="39" selection-end-line="47" selection-end-column="39" />
+        <state relative-caret-position="139">
+          <caret line="152" column="28" lean-forward="false" selection-start-line="152" selection-start-column="28" selection-end-line="152" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="32" column="3" lean-forward="false" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="3" />
           <folding />
         </state>
       </provider>
