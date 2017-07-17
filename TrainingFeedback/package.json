@@ -21,6 +21,7 @@
     "url": ""
   },
   "dependencies": {
+    "arraylist": "^0.1.0",
     "botbuilder": "^3.8.2",
     "dotenv-extended": "^1.0.4",
     "firebase": "^4.1.3",

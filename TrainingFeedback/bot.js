@@ -8,6 +8,7 @@ var firebaseOperations = require('./firebase_operations.js');
 let i18n = require("i18n");
 var json2csv = require('json2csv');
 var fs = require('fs');
+var ArrayList = require('ArrayList');
 
 
 i18n.configure({
@@ -101,29 +102,26 @@ bot.dialog("/", [
 
 
 /**
- * this method is used to build the choice questions with an options
+ * this method is used to build the questions with an options
  * @param session
  * @param questionObject
  */
-function choiceQuestions(session, questionObject) {
+function buildQuestionsAndOptions(session, questionObject) {
     var question = questionObject.question;
     var options = questionObject.options;
-
-    builder.Prompts.choice(
-        session,
-        question,
-        options,
-        {
-            listStyle: builder.ListStyle.button,
-            retryPrompt: i18n.__('retry_prompt')
-        });
-
-}
-
-function textQuestions(session, questionObject) {
-    var question = questionObject.question;
-
-    builder.Prompts.text(session, question)
+    var questionsType = questionObject.question_type;
+    if (questionsType === 'choice') {
+        builder.Prompts.choice(
+            session,
+            question,
+            options,
+            {
+                listStyle: builder.ListStyle.button,
+                retryPrompt: i18n.__('retry_prompt')
+            });
+    } else if (questionsType === 'text') {
+        builder.Prompts.text(session, question)
+    }
 }
 
 
@@ -134,124 +132,162 @@ function textQuestions(session, questionObject) {
 bot.dialog('startFeedbackQuestions', [
     function (session) {
         session.sendTyping();
-        session.userData["questionArray"] = [];
+        session.userData['questionArray'] = new ArrayList;
+        session.userData.questionArray.add(i18n.__("questions"));
         session.send("**Tip :** *Please select or type the option*");
-        var questionObject  =   i18n.__("questions")[0];
-        choiceQuestions(session, questionObject);
+        // var questionObject = i18n.__("questions")[0];
+        // session.userData.questionArray.push(questionObject);
+        buildQuestionsAndOptions(session, session.userData.questionArray.get(0));
     },
     function (session, results) {
         session.sendTyping();
         var userAnswer = results.response.entity;
-        var questionData = new questionModel(1, (i18n.__('questions')[0]).question, userAnswer);
-        session.userData.questionArray.push(questionData);
-        var questionObject  =   i18n.__("questions")[1];
-        choiceQuestions(session, questionObject);
+        var questionObject = session.userData.questionArray[0];
+        questionObject.answer = userAnswer;
+        // var questionData = new questionModel(1, questionObject.question, userAnswer);
+        // session.userData.questionArray.add(0, questionObject);
+        // var questionObject = i18n.__("questions")[1];
+        buildQuestionsAndOptions(session, session.userData.questionArray[1]);
     },
     function (session, results) {
         session.sendTyping();
         var userAnswer = results.response.entity;
-        var questionData = new questionModel(2, (i18n.__('questions')[1]).question, userAnswer);
-        session.userData.questionArray.push(questionData);
-        var questionObject  =   i18n.__("questions")[2];
-        choiceQuestions(session, questionObject);
+        var questionObject = session.userData.questionArray[1];
+        questionObject.answer = userAnswer;
+        // var questionData = new questionModel(2, (session.userData.questionArray.get(1)).question, userAnswer);
+        // session.userData.questionArray.push(questionData);
+        // var questionObject = i18n.__("questions")[2];
+        buildQuestionsAndOptions(session, session.userData.questionArray[2]);
     },
     function (session, results) {
         session.sendTyping();
         var userAnswer = results.response.entity;
-        var questionData = new questionModel(3, (i18n.__('questions')[2]).question, userAnswer);
-        session.userData.questionArray.push(questionData);
-        var questionObject  =   i18n.__("questions")[3];
-        choiceQuestions(session, questionObject);
-    },
-    function (session, results) {
-        session.sendTyping();
-        var userAnswer = results.response.entity;
-        var questionData = new questionModel(4, (i18n.__('questions')[3]).question, userAnswer);
-        session.userData.questionArray.push(questionData);
-        var questionObject  =   i18n.__("questions")[4];
-        choiceQuestions(session, questionObject);
-    },
-    function (session, results) {
-        session.sendTyping();
-        var userAnswer = results.response.entity;
-        var questionData = new questionModel(5, (i18n.__('questions')[4]).question, userAnswer);
-        session.userData.questionArray.push(questionData);
-        var questionObject  =   i18n.__("questions")[5];
-        choiceQuestions(session, questionObject);
-    },
-    function (session, results) {
-        session.sendTyping();
-        var userAnswer = results.response.entity;
-        var questionData = new questionModel(6, (i18n.__('questions')[5]).question, userAnswer);
-        session.userData.questionArray.push(questionData);
-        var questionObject  =   i18n.__("questions")[6];
-        choiceQuestions(session, questionObject);
-    },
-    function (session, results) {
-        session.sendTyping();
-        var userAnswer = results.response.entity;
-        var questionData = new questionModel(7, (i18n.__('questions')[5]).question, userAnswer);
-        session.userData.questionArray.push(questionData);
+        var questionObject = session.userData.questionArray[2];
+        questionObject.answer = userAnswer;
 
+        // var questionData = new questionModel(3, (session.userData.questionArray.get(2)).question, userAnswer);
+        // session.userData.questionArray.push(questionData);
+        // var questionObject = i18n.__("questions")[3];
+        buildQuestionsAndOptions(session, session.userData.questionArray[3]);
+    },
+    function (session, results) {
+        session.sendTyping();
+        var userAnswer = results.response.entity;
+        var questionObject = session.userData.questionArray[3];
+        questionObject.answer = userAnswer;
+
+        // var questionData = new questionModel(4, (session.userData.questionArray.get(3)).question, userAnswer);
+        // session.userData.questionArray.push(questionData);
+        // var questionObject = i18n.__("questions")[4];
+        buildQuestionsAndOptions(session, session.userData.questionArray[4]);
+    },
+    function (session, results) {
+        session.sendTyping();
+        var userAnswer = results.response.entity;
+        var questionObject = session.userData.questionArray[4];
+        questionObject.answer = userAnswer;
+
+        // var questionData = new questionModel(5, (session.userData.questionArray.get(4)).question, userAnswer);
+        // session.userData.questionArray.push(questionData);
+        // var questionObject = i18n.__("questions")[5];
+        buildQuestionsAndOptions(session, session.userData.questionArray[5]);
+    },
+    function (session, results) {
+        session.sendTyping();
+        var userAnswer = results.response.entity;
+        var questionObject = session.userData.questionArray[5];
+        questionObject.answer = userAnswer;
+
+        // var questionData = new questionModel(6, (session.userData.questionArray.get(5)).question, userAnswer);
+        // session.userData.questionArray.push(questionData);
+        // var questionObject = i18n.__("questions")[6];
+        buildQuestionsAndOptions(session, session.userData.questionArray[6]);
+    },
+    function (session, results) {
+        session.sendTyping();
+        var userAnswer = results.response.entity;
+        var questionObject = session.userData.questionArray[6];
+        questionObject.answer = userAnswer;
+
+        // var questionData = new questionModel(7, (session.userData.questionArray.get(6)).question, userAnswer);
+        // session.userData.questionArray.push(questionData);
         session.send(i18n.__('half_attempt_msg'));
         setTimeout(function () {
             session.send("Here is next question")
-            var questionObject  =   i18n.__("questions")[7];
-            choiceQuestions(session, questionObject);
+            // var questionObject = i18n.__("questions")[7];
+            buildQuestionsAndOptions(session, session.userData.questionArray[7]);
         }, 4000)
     },
     function (session, results) {
         session.sendTyping();
         var userAnswer = results.response.entity;
-        var questionData = new questionModel(8, (i18n.__('questions')[7]).question, userAnswer);
-        session.userData.questionArray.push(questionData);
-        var questionObject  =   i18n.__("questions")[8];
-        choiceQuestions(session, questionObject);
+        var questionObject = session.userData.questionArray[7];
+        questionObject.answer = userAnswer;
+
+        // var questionData = new questionModel(8, (session.userData.questionArray.get(7)).question, userAnswer);
+        // session.userData.questionArray.push(questionData);
+        // var questionObject = i18n.__("questions")[8];
+        buildQuestionsAndOptions(session, session.userData.questionArray[8]);
     },
     function (session, results) {
         session.sendTyping();
         var userAnswer = results.response.entity;
-        var questionData = new questionModel(9, (i18n.__('questions')[8]).question, userAnswer);
-        session.userData.questionArray.push(questionData);
-        var questionObject  =   i18n.__("questions")[9];
+        var questionObject = session.userData.questionArray[8];
+        questionObject.answer = userAnswer;
+
+        // var questionData = new questionModel(9, (session.userData.questionArray.get(8)).question, userAnswer);
+        // session.userData.questionArray.push(questionData);
+        // var questionObject = i18n.__("questions")[9];
         session.send("**Tip :** *Please type the answer*");
-        textQuestions(session, questionObject);
+        buildQuestionsAndOptions(session, session.userData.questionArray[9]);
     },
     function (session, results) {
         session.sendTyping();
         var userAnswer = results.response;
-        var questionData = new questionModel(10, (i18n.__('questions')[9]).question, userAnswer);
-        session.userData.questionArray.push(questionData);
-        var questionObject  =   i18n.__("questions")[10];
-        textQuestions(session, questionObject);
+        var questionObject = session.userData.questionArray[9];
+        questionObject.answer = userAnswer;
+
+        // var questionData = new questionModel(10, (session.userData.questionArray.get(9)).question, userAnswer);
+        // session.userData.questionArray.push(questionData);
+        // var questionObject = i18n.__("questions")[10];
+        buildQuestionsAndOptions(session, session.userData.questionArray[10]);
     },
     function (session, results) {
         session.sendTyping();
         var userAnswer = results.response;
-        var questionData = new questionModel(11, (i18n.__('questions')[10]).question, userAnswer);
-        session.userData.questionArray.push(questionData);
-        var questionObject  =   i18n.__("questions")[11];
-        textQuestions(session, questionObject);
+        var questionObject = session.userData.questionArray[10];
+        questionObject.answer = userAnswer;
+
+        // var questionData = new questionModel(11, (session.userData.questionArray.get(10)).question, userAnswer);
+        // session.userData.questionArray.push(questionData);
+        // var questionObject = i18n.__("questions")[11];
+        buildQuestionsAndOptions(session, session.userData.questionArray[11]);
     },
     function (session, results) {
         session.sendTyping();
         var userAnswer = results.response;
-        var questionData = new questionModel(12, (i18n.__('questions')[11]).question, userAnswer);
-        session.userData.questionArray.push(questionData);
+        var questionObject = session.userData.questionArray[11];
+        questionObject.answer = userAnswer;
+
+        // var questionData = new questionModel(12, (session.userData.questionArray.get(11)).question, userAnswer);
+        // session.userData.questionArray.push(questionData);
 
         session.send("You are almost there, one more to go.");
         session.send("(bhangra)");
         setTimeout(function () {
             session.send("Here is the final question, ")
-            var questionObject  =   i18n.__("questions")[12];
-            choiceQuestions(session, questionObject);
+            // var questionObject = i18n.__("questions")[12];
+            buildQuestionsAndOptions(session, session.userData.questionArray[12]);
         }, 3000)
     },
     function (session, results) {
         session.sendTyping();
         var userAnswer = results.response.entity;
-        var questionData = new questionModel(13, i18n.__('questions')[12], userAnswer);
-        session.userData.questionArray.push(questionData);
+        var questionObject = session.userData.questionArray[12];
+        questionObject.answer = userAnswer;
+
+        // var questionData = new questionModel(13, (session.userData.questionArray.get(12)).question, userAnswer);
+        // session.userData.questionArray.push(questionData);
 
         builder.Prompts.choice(
             session,
