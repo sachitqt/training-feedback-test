@@ -1,4 +1,4 @@
-var firebase = require('firebase')
+let firebase = require('firebase')
 let i18n = require("i18n");
 
 i18n.configure({
@@ -62,12 +62,17 @@ function writeQuestionsToFirebase(questions) {
 }
 
 function saveTrainingFeedback(trainingId, userId, questionAnswers) {
-    var questionAnswerData = {};
-    for (var index = 0; index < questionAnswers.length; index++){
-        questionAnswerData[questionAnswers[index].Question.replace('.', '')] = questionAnswers[index].Answer;
+    // let questionAnswerData = {};
+    // for (let index = 0; index < questionAnswers.length; index++){
+    //     questionAnswerData[questionAnswers[index].Question.replace('.', '')] = questionAnswers[index].Answer;
+    // }
+    let questions = i18n.__('questions');
+    let questionAnswerData = {};
+    for (let index = 0; index < questions.length; index++) {
+        questionAnswerData[questions[index].replace('.', '')] = index;
     }
     console.log(questionAnswerData);
-    firebase.database().ref('trainingFeedback/').set({
+    firebase.database().ref('trainingFeedback/' + trainingId).push({
         trainingId: trainingId,
         userId: userId,
         questionAnswers: questionAnswerData
@@ -78,29 +83,39 @@ function saveTrainingFeedback(trainingId, userId, questionAnswers) {
     // for (let index = 0; index < questions.length; index++) {
     //     questionAnswerData[questions[index].replace('.', '')] = index;
     // }
-    // console.log(questionAnswerData);
-    // firebase.database().ref('trainingFeedback/' + trainingId).push({
-    //     trainingId: trainingId,
-    //     userId: userId,
-    //     questionAnswers: questionAnswerData
-    // });
 }
 
-function fetchTrainingFeedback(trainingId){
-    firebase.database().ref('trainingFeedback/' + trainingId).once('value', function(snapshot){
+function fetchTrainingFeedback(trainingId) {
+    firebase.database().ref('trainingFeedback/' + trainingId).once('value', function (snapshot) {
         console.log(snapshot.val());
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
     });
-
-
-    // ref.on("value", function(snapshot) {
-    //     console.log(snapshot.val());
-    // }, function (errorObject) {
-    //     console.log("The read failed: " + errorObject.code);
-    // });
 }
 
-// writeQuestionsToFirebase(i18n.__('questions'));
-// saveTrainingFeedback(0, 2, "");
-// fetchTrainingFeedback(0);
+function saveTrainingData(trainingName, facilitator, attendees, trainingDate) {
+    let id = firebase.database().ref('trainings/').push({
+        trainingName: trainingName,
+        facilitator: facilitator,
+        trainingDate: trainingDate
+    });
+    for (let index = 0; index < attendees.length; index++) {
+        firebase.database().ref('trainings/' + id.path.o[1] + '/attendees/' + index).set({
+            attendeeName: attendees[index],
+            isAttended: true,
+            isFeedbackFilled: false
+        });
+    }
+}
+
+function fetchTrainingData(){
+    firebase.database().ref('trainings/').once('value', function (snapshot) {
+        console.log(snapshot.val());
+    }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+    });
+}
+
+fetchTrainingData()
+// saveTrainingData('Espresso', 'Lipika', ['Sachit', 'Praween', 'Sahil'], 'June');
+// saveTrainingFeedback(0, 1, "");
