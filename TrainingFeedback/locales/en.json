@@ -158,7 +158,7 @@
   ],
   "session_reset_msg": "I have lost my memory (morningafter) please type '**start**' to start the feedback again",
   "not_started_msg": "Hey (wait)! You have not started filling the feedback yet. Please give all responses before submitting the feedback.",
-  "help_msg": "* If you want to edit any response type 'edit_question_number'. Example- edit_4 \n * if you want to submit response type 'submit' \n * If you want to reset all responses type 'reset' \n * If you want to check all available commands type 'help'",
+  "help_msg": "* If you want to edit any response type 'edit_question_number'. Example- **edit_4** \n * if you want to submit response type **'submit'** \n * If you want to reset all responses type **'reset'** \n * If you want to check all available commands type **'help'**",
   "mail_not_sent_msg": "We are not able to send your response to TM team. Please contact to support.",
   "mail_sent_msg": "We have sent your response to TM team. Thanks for your time.",
   "reason_msg": "Can you please write the reason why you don't want to fill the feedback form?",

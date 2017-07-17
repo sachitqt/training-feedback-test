@@ -52,6 +52,11 @@ bot.on('contactRelationUpdate', function (message) {
 // Anytime the major version is incremented any existing conversations will be restarted.
 // bot.use(builder.Middleware.dialogVersion({version: 1.0, resetCommand: /^reset/i}));
 
+
+//==========================================================
+// dialogs
+//==========================================================
+
 bot.dialog("/", [
     function (session) {
 
@@ -98,31 +103,6 @@ bot.dialog("/", [
         }
     }
 ]);
-
-
-/**
- * this method is used to build the questions with an options
- * @param session
- * @param questionObject
- */
-function buildQuestionsAndOptions(session, questionObject) {
-    var question = questionObject.question;
-    var options = questionObject.options;
-    var questionsType = questionObject.question_type;
-    var id = questionObject.id;
-    if (questionsType === 'choice') {
-        builder.Prompts.choice(
-            session,
-            id + ". " + question,
-            options,
-            {
-                listStyle: builder.ListStyle.button,
-                retryPrompt: i18n.__('retry_prompt')
-            });
-    } else if (questionsType === 'text') {
-        builder.Prompts.text(session, id + ". " + question);
-    }
-}
 
 
 /**
@@ -251,33 +231,6 @@ bot.dialog('startFeedbackQuestions', [
 ]);
 
 
-/**
- * This method will call once user has submitted all the response, there will be two options, submit and review.
- * The selection will navigate user to the corresponding dialog
- * @param session
- * @param results
- */
-function selectOptionAfterCompletingAnswer(session, results) {
-    if (results.response) {
-        var selectedOptionIndex = results.response.index;
-        switch (selectedOptionIndex) {
-            case 0:
-                session.beginDialog("submitResponse");
-                break;
-
-            case 1:
-                session.beginDialog("showFeedbackReview");
-                break;
-
-            default:
-                break;
-
-        }
-
-    }
-}
-
-
 // Dialog that will ask user the reason of not filling the feedback form
 bot.dialog('notFillingFeedback', [
     function (session) {
@@ -306,29 +259,6 @@ bot.dialog('submitResponse', [
     }
 ]);
 
-
-/**
- * This method will submit all response to the server, also will make a CSV file and send it to the TM team
- * @param session
- */
-function submitAllResponse(session) {
-    saveAddress = session.message.address;
-    username = saveAddress.user.name;
-
-    session.send("Submitting Response, Please wait...");
-    session.sendTyping();
-    var totalResponse = session.userData.questionArray;
-    // firebaseOperations.saveFeedbackToDB(0, username, session.userData.questionArray);
-    var fields = ['id', 'question', 'answer'];
-    var csv = json2csv({data: totalResponse, fields: fields});
-    fs.writeFile('response/session_feedback.csv', csv, function (err) {
-        if (err) throw err;
-        console.log('file saved');
-    });
-    sendEmail(session, username + "- " + i18n.__('subject'), "Please check the response in attached file-: ", true);
-}
-
-
 // Dialog will show all the responded answer to the user before submitting, user can edit each answer from here.
 bot.dialog('showFeedbackReview', [
     function (session) {
@@ -355,7 +285,7 @@ bot.dialog('showFeedbackReview', [
                 "edit_9", "edit_10", "edit_11", "edit_12", "edit_13"], {
                 retryPrompt: i18n.__('retry_command_prompt')
             });
-        session.send("Enter 'edit_(question number)' to edit the response. Ex- **edit_1** or 'submit' to submit all responses");
+        session.send("Enter 'edit_(question number)' to edit the response. Ex- **edit_1** or **'submit'** to submit all responses");
     },
     function (session, results, next) {
         var selectOption = results.response.entity.split('_');
@@ -389,61 +319,6 @@ bot.dialog('showFeedbackReview', [
         selectOptionAfterCompletingAnswer(session, results);
     }
 ]);
-
-
-/**
- * This method will send an email with the response as CSV file
- * @param session
- * @param subject
- * @param text
- * @param feedback
- */
-function sendEmail(session, subject, text, feedback) {
-
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'grubscrub22@gmail.com',
-            pass: 'grubscrub@22'
-        }
-    });
-
-    var mailOptions;
-
-    if (feedback) {
-        mailOptions = {
-            from: 'grubscrub22@gmail.com',
-            to: 'sachit.wadhawan@quovantis.com',
-            subject: subject,
-            text: text,
-            attachments: [{
-                filename: username + '.csv',
-                path: 'response/session_feedback.csv'
-            }]
-        };
-    } else {
-        mailOptions = {
-            from: 'grubscrub22@gmail.com',
-            to: 'sachit.wadhawan@quovantis.com',
-            subject: subject,
-            text: text
-        };
-    }
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-            session.send(i18n.__('mail_not_sent_msg'))
-        } else {
-            console.log('Email sent: ' + info.response);
-            session.send(i18n.__('mail_sent_msg'))
-            session.send("Thanks **%s** for filling your feedback (bow)", username);
-            fs.unlinkSync('response/session_feedback.csv');
-        }
-        transporter.close();
-        deleteAllData(session)
-        session.endDialog();
-    });
-}
 
 // The dialog stack is cleared and this dialog is invoked when the user enters 'help'.
 bot.dialog('help', function (session, args, next) {
@@ -501,14 +376,143 @@ bot.dialog('/done', (session) => {
     });
 
 
-function deleteAllData(session) {
-    session.userData = {};
-    session.dialogData = {};
+//==========================================================
+// helper functions
+//==========================================================
+
+/**
+ * This method will send an email with the response as CSV file
+ * @param session
+ * @param subject
+ * @param text
+ * @param feedback
+ */
+function sendEmail(session, subject, text, feedback) {
+
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'grubscrub22@gmail.com',
+            pass: 'grubscrub@22'
+        }
+    });
+
+    var mailOptions;
+
+    if (feedback) {
+        mailOptions = {
+            from: 'grubscrub22@gmail.com',
+            to: 'sachit.wadhawan@quovantis.com',
+            subject: subject,
+            text: text,
+            attachments: [{
+                filename: username + '.csv',
+                path: 'response/session_feedback.csv'
+            }]
+        };
+    } else {
+        mailOptions = {
+            from: 'grubscrub22@gmail.com',
+            to: 'sachit.wadhawan@quovantis.com',
+            subject: subject,
+            text: text
+        };
+    }
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+            session.send(i18n.__('mail_not_sent_msg'))
+        } else {
+            console.log('Email sent: ' + info.response);
+            session.send(i18n.__('mail_sent_msg'))
+            session.send("Thanks **%s** for filling your feedback (bow)", username);
+            fs.unlinkSync('response/session_feedback.csv');
+        }
+        transporter.close();
+        deleteAllData(session);
+        session.endDialog();
+    });
 }
 
 
-function questionModel(sno, question, answer) {
-    this.sno = sno;
-    this.question = question;
-    this.answer = answer;
+/**
+ * This method will submit all response to the server, also will make a CSV file and send it to the TM team
+ * @param session
+ */
+function submitAllResponse(session) {
+    saveAddress = session.message.address;
+    username = saveAddress.user.name;
+
+    session.send("Submitting Response, Please wait...");
+    session.sendTyping();
+    var totalResponse = session.userData.questionArray;
+    firebaseOperations.saveFeedbackToDB('-KpFA4PeCGBwULgWUAKj', username.replace(" ", ""), session.userData.questionArray);
+    var fields = ['id', 'question', 'answer'];
+    var csv = json2csv({data: totalResponse, fields: fields});
+    fs.writeFile('response/session_feedback.csv', csv, function (err) {
+        if (err) throw err;
+        console.log('file saved');
+    });
+    sendEmail(session, username + "- " + i18n.__('subject'), "Please check the response in attached file-: ", true);
+}
+
+
+/**
+ * this method is used to build the questions with an options
+ * @param session
+ * @param questionObject
+ */
+function buildQuestionsAndOptions(session, questionObject) {
+    var question = questionObject.question;
+    var options = questionObject.options;
+    var questionsType = questionObject.question_type;
+    var id = questionObject.id;
+    if (questionsType === 'choice') {
+        builder.Prompts.choice(
+            session,
+            id + ". " + question,
+            options,
+            {
+                listStyle: builder.ListStyle.button,
+                retryPrompt: i18n.__('retry_prompt')
+            });
+    } else if (questionsType === 'text') {
+        builder.Prompts.text(session, id + ". " + question);
+    }
+}
+
+
+/**
+ * This method will call once user has submitted all the response, there will be two options, submit and review.
+ * The selection will navigate user to the corresponding dialog
+ * @param session
+ * @param results
+ */
+function selectOptionAfterCompletingAnswer(session, results) {
+    if (results.response) {
+        var selectedOptionIndex = results.response.index;
+        switch (selectedOptionIndex) {
+            case 0:
+                session.beginDialog("submitResponse");
+                break;
+
+            case 1:
+                session.beginDialog("showFeedbackReview");
+                break;
+
+            default:
+                break;
+
+        }
+
+    }
+}
+
+/**
+ * This method will clear the current session of the user or will delete local data
+ * @param session
+ */
+function deleteAllData(session) {
+    session.userData = {};
+    session.dialogData = {};
 }

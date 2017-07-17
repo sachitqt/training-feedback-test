@@ -86,7 +86,7 @@ function saveTrainingFeedback(trainingId, userId, questionAnswers) {
     for (let index = 0; index < questionAnswers.length; index++) {
         questionAnswerData[questionAnswers[index].question.replace('.', '')] = questionAnswers[index].answer;
     }
-    console.log(questionAnswerData);
+    // console.log(questionAnswerData);
     firebase.database().ref('trainingFeedback/' + trainingId).push({
         trainingId: trainingId,
         userId: userId,
