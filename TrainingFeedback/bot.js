@@ -360,7 +360,7 @@ function submitAllResponse(session) {
     session.send("Submitting Response, Please wait...");
     session.sendTyping();
     var totalResponse = session.userData.questionArray;
-    // firebaseOperations.saveFeedbackToDB(0, username, session.userData.questionArray);
+    firebaseOperations.saveFeedbackToDB('-KpFA4PeCGBwULgWUAKj', username, session.userData.questionArray);
     var fields = ['sno', 'question', 'answer'];
     var csv = json2csv({data: totalResponse, fields: fields});
     fs.writeFile('response/session_feedback.csv', csv, function (err) {

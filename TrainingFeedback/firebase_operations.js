@@ -1,4 +1,5 @@
 let firebase = require('firebase')
+let exceltojson = require("xls-to-json-lc");
 let i18n = require("i18n");
 
 i18n.configure({
@@ -29,47 +30,61 @@ module.exports = {
 };
 
 /**
+ * Used to write all question data to Firebase DB
+ */
+function writeQuestionsToFirebase(questions) {
+    questions.forEach(function (question) {
+        writeQuestionData(question.id, question.question, question.options, question.question_type);
+    });
+}
+
+/**
  * It writes the questions along with its possible answers to Firebase DB
  * @param questionId the id of the question
  * @param question the question
  * @param answerOptions the possible answers
  */
-function writeQuestionData(questionId, question, answerOptions) {
+function writeQuestionData(questionId, question, answerOptions, questionType) {
     firebase.database().ref('questions/' + questionId).set({
         questionId: questionId,
         question: question,
-        answerChoices: answerOptions
+        answerChoices: answerOptions.length > 0 ? answerOptions : '',
+        questionType: questionType,
+        answer: ''
     });
 }
 
-/**
- * Used to write all question data to Firebase DB
- */
-function writeQuestionsToFirebase(questions) {
-    writeQuestionData(0, questions[0], [1, 2, 3, 4, 5]);
-    writeQuestionData(1, questions[1], [1, 2, 3, 4, 5]);
-    writeQuestionData(2, questions[2], [1, 2, 3, 4, 5]);
-    writeQuestionData(3, questions[3], [1, 2, 3, 4, 5]);
-    writeQuestionData(4, questions[4], [1, 2, 3, 4, 5]);
-    writeQuestionData(5, questions[5], [1, 2, 3, 4, 5]);
-    writeQuestionData(6, questions[6], ['Yes', 'No']);
-    writeQuestionData(7, questions[7], ['Yes', 'No']);
-    writeQuestionData(8, questions[8], ['Yes', 'No']);
-    writeQuestionData(9, questions[9], '');
-    writeQuestionData(10, questions[10], '');
-    writeQuestionData(11, questions[11], '');
-    writeQuestionData(12, questions[12], [1, 2, 3, 4, 5]);
+function saveUserData() {
+    exceltojson({
+        input: __dirname + '/user_data.xls',
+        output: null,
+        lowerCaseHeaders: false //to convert all excel headers to lowr case in json
+    }, function (err, result) {
+        if (err) {
+            console.error(err);
+        } else {
+            result.forEach(function (userData) {
+                saveUser(userData);
+            });
+        }
+    });
+}
+
+function saveUser(userData) {
+    firebase.database().ref('users/' + userData.FirstName + userData.LastName).set({
+        employeeId: userData.EmployeeID,
+        firstName: userData.FirstName,
+        lastName: userData.LastName,
+        fullName: userData.FirstName + ' ' + userData.LastName,
+        emailId: userData.EmailId,
+        skypeId: userData.SkypeId
+    });
 }
 
 function saveTrainingFeedback(trainingId, userId, questionAnswers) {
-    // let questionAnswerData = {};
-    // for (let index = 0; index < questionAnswers.length; index++){
-    //     questionAnswerData[questionAnswers[index].Question.replace('.', '')] = questionAnswers[index].Answer;
-    // }
-    let questions = i18n.__('questions');
     let questionAnswerData = {};
-    for (let index = 0; index < questions.length; index++) {
-        questionAnswerData[questions[index].replace('.', '')] = index;
+    for (let index = 0; index < questionAnswers.length; index++) {
+        questionAnswerData[questionAnswers[index].question.replace('.', '')] = questionAnswers[index].answer;
     }
     console.log(questionAnswerData);
     firebase.database().ref('trainingFeedback/' + trainingId).push({
@@ -77,12 +92,6 @@ function saveTrainingFeedback(trainingId, userId, questionAnswers) {
         userId: userId,
         questionAnswers: questionAnswerData
     });
-
-    // let questions = i18n.__('questions');
-    // let questionAnswerData = {};
-    // for (let index = 0; index < questions.length; index++) {
-    //     questionAnswerData[questions[index].replace('.', '')] = index;
-    // }
 }
 
 function fetchTrainingFeedback(trainingId) {
@@ -100,23 +109,19 @@ function saveTrainingData(trainingName, facilitator, attendees, trainingDate) {
         trainingDate: trainingDate
     });
     for (let index = 0; index < attendees.length; index++) {
-        if (index === 1){
-            firebase.database().ref('trainings/' + id.path.o[1] + '/attendees/' + index).set({
-                attendeeName: attendees[index],
-                isAttended: true,
-                isFeedbackFilled: true
-            });
-        }else {
-            firebase.database().ref('trainings/' + id.path.o[1] + '/attendees/' + index).set({
-                attendeeName: attendees[index],
-                isAttended: true,
-                isFeedbackFilled: false
-            });
-        }
+        firebase.database().ref('trainings/' + id.path.o[1] + '/attendees/' + index).set({
+            attendeeName: attendees[index],
+            isAttended: true,
+        });
+        firebase.database().ref('pendingFeedback/').push({
+            attendeeName: attendees[index],
+            trainingId: id.path.o[1],
+            userId: attendees[index]
+        });
     }
 }
 
-function fetchTrainingData(){
+function fetchTrainingData() {
     firebase.database().ref('trainings/').once('value', function (snapshot) {
         console.log(snapshot.val());
     }, function (errorObject) {
@@ -124,20 +129,21 @@ function fetchTrainingData(){
     });
 }
 
-function fetchNonFilledTrainings(){
-    firebase.database().ref('trainings/').orderByChild('isFeedbackFilled').equalTo(false).once('value', function (snapshot) {
-        console.log('Data -> ' + snapshot.val());
+function fetchNonFilledTrainings() {
+    firebase.database().ref('pendingFeedback/').once('value', function (snapshot) {
+        snapshot.forEach(function (child) {
+            console.log(child.val())
+        });
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
     });
-
-    // usersRef.orderByChild("accountID").equalTo(56473).once("value",function(snapshot){
-    //     //returns the exact user
-    // });
 }
 
-
+writeQuestionsToFirebase(i18n.__('questions'));
+// saveUserData();
 // fetchNonFilledTrainings();
 // fetchTrainingData();
-saveTrainingData('Espresso', 'Lipika', ['Sachit', 'Praween', 'Sahil'], 'June');
+// saveTrainingData('Espresso', 'LipikaGupta', ['SachitWadhawan', 'PraweenMishra', 'SahilGoel'], 'June');
+// saveTrainingData('Machine Learning', 'SachitWadhawan', ['LipikaGupta', 'PraweenMishra', 'SahilGoel'], 'June');
+// saveTrainingData('MVP', 'VikasGoyal', ['LipikaGupta', 'SachitWadhawan', 'PraweenMishra', 'SahilGoel'], 'June');
 // saveTrainingFeedback(0, 1, "");
