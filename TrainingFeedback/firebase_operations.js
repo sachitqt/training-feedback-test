@@ -100,11 +100,19 @@ function saveTrainingData(trainingName, facilitator, attendees, trainingDate) {
         trainingDate: trainingDate
     });
     for (let index = 0; index < attendees.length; index++) {
-        firebase.database().ref('trainings/' + id.path.o[1] + '/attendees/' + index).set({
-            attendeeName: attendees[index],
-            isAttended: true,
-            isFeedbackFilled: false
-        });
+        if (index === 1){
+            firebase.database().ref('trainings/' + id.path.o[1] + '/attendees/' + index).set({
+                attendeeName: attendees[index],
+                isAttended: true,
+                isFeedbackFilled: true
+            });
+        }else {
+            firebase.database().ref('trainings/' + id.path.o[1] + '/attendees/' + index).set({
+                attendeeName: attendees[index],
+                isAttended: true,
+                isFeedbackFilled: false
+            });
+        }
     }
 }
 
@@ -116,6 +124,20 @@ function fetchTrainingData(){
     });
 }
 
-fetchTrainingData()
-// saveTrainingData('Espresso', 'Lipika', ['Sachit', 'Praween', 'Sahil'], 'June');
+function fetchNonFilledTrainings(){
+    firebase.database().ref('trainings/').orderByChild('isFeedbackFilled').equalTo(false).once('value', function (snapshot) {
+        console.log('Data -> ' + snapshot.val());
+    }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+    });
+
+    // usersRef.orderByChild("accountID").equalTo(56473).once("value",function(snapshot){
+    //     //returns the exact user
+    // });
+}
+
+
+// fetchNonFilledTrainings();
+// fetchTrainingData();
+saveTrainingData('Espresso', 'Lipika', ['Sachit', 'Praween', 'Sahil'], 'June');
 // saveTrainingFeedback(0, 1, "");
