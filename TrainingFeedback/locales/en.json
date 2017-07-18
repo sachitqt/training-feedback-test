@@ -193,5 +193,6 @@
     "No"
   ],
   "wait": "Hey (wait)! You have only attempted %s/13 questions. Please give all responses before submitting the feedback.",
-  "answer_update":"Your **answer %s** has been updated successfully (rock)"
+  "answer_update":"Your **answer %s** has been updated successfully (rock)",
+  "inactive_msg":"Hey %s, why are you not responding. Its been long time you didn't see me :(, Please fill the form ASAP."
 }
