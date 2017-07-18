@@ -71,7 +71,7 @@ function saveUserData() {
 }
 
 function saveUser(userData) {
-    firebase.database().ref('users/' + userData.FirstName + userData.LastName).set({
+    firebase.database().ref('users/' + userData.EmailId.replaceAll('.', ':')).set({
         employeeId: userData.EmployeeID,
         firstName: userData.FirstName,
         lastName: userData.LastName,
@@ -116,7 +116,7 @@ function saveTrainingData(trainingName, facilitator, attendees, trainingDate) {
             attendeeName: attendees[index],
             isAttended: true,
         });
-        firebase.database().ref('pendingFeedback/' + attendees[index] + ':' + trainingId).set({
+        firebase.database().ref('pendingFeedback/' + attendees[index].replaceAll('.', ':') + '|' + trainingId).set({
             attendeeName: attendees[index],
             trainingId: trainingId,
             userId: attendees[index]
@@ -143,21 +143,44 @@ function fetchNonFilledTrainings() {
 }
 
 function isFeedbackPending(userId, trainingId, callbackFunction) {
-    firebase.database().ref('pendingFeedback/' + userId + ':' + trainingId).once('value', function (snapshot) {
+    firebase.database().ref('pendingFeedback/' + userId.replaceAll('.', ':') + '|' + trainingId).once('value', function (snapshot) {
         callbackFunction(!!snapshot.val());
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
     });
 }
 
-// isFeedbackPending('SahilGoel', '-KpFmXgFygU3AsDywr8h', function(isFeedbackPending){
+function getEmailIdFromUsername(username, callbackFunction) {
+    firebase.database().ref('users/').once('value', function (snapshot) {
+        snapshot.forEach(function (child) {
+            var user = child.val();
+            if (user.firstName + ' ' + user.lastName === username) {
+                callbackFunction(user.emailId);
+            }
+        })
+    }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+    })
+}
+
+String.prototype.replaceAll = function (str1, str2, ignore) {
+    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof(str2) == "string") ? str2.replace(/\$/g, "$$$$") : str2);
+}
+
+
+// getEmailIdFromUsername('Lipika Gupta', function (emailId) {
+//     console.log(emailId);
+// });
+// isFeedbackPending('sahil.goel@quovantis.com', '-KpFmXgFygU3AsDywr8h', function(isFeedbackPending){
 //     console.log('isFeedbackPending ' + isFeedbackPending);
 // });
 // writeQuestionsToFirebase(i18n.__('questions'));
 // saveUserData();
+
+
 // fetchNonFilledTrainings();
 // fetchTrainingData();
-// saveTrainingData('Espresso', 'LipikaGupta', ['SachitWadhawan', 'PraweenMishra', 'SahilGoel'], 'June');
-// saveTrainingData('Machine Learning', 'SachitWadhawan', ['LipikaGupta', 'PraweenMishra', 'SahilGoel'], 'June');
-// saveTrainingData('MVP', 'VikasGoyal', ['GautamGupta', 'SumeetMehta', 'LipikaGupta', 'SachitWadhawan', 'PraweenMishra', 'SahilGoel'], 'June');
+saveTrainingData('Espresso', 'lipika.gupta@quovantis.com', ['sachit.wadhawan@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
+saveTrainingData('Machine Learning', 'sachit.wadhawan@quovantis.com', ['lipika.gupta@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
+saveTrainingData('MVP', 'vikas.goyal@quovantis.com', ['gautam.gupta@quovantis.com', 'sumeet.mehta@quovantis.com', 'lipika.gupta@quovantis.com', 'sachit.wadhawan@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
 // saveTrainingFeedback(0, 1, "");
