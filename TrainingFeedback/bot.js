@@ -9,6 +9,7 @@ let i18n = require("i18n");
 var json2csv = require('json2csv');
 var fs = require('fs');
 var ArrayList = require('ArrayList');
+var cron = require('node-cron');
 
 
 i18n.configure({
@@ -26,6 +27,14 @@ const bot = module.exports = new builder.UniversalBot(connector);
 
 var username = 'Unknown';
 var saveAddress, question, answer, sno;
+var lastSentMessage;
+
+
+var task = cron.schedule('*/2 * * * *', function () {
+    console.log('running a task every two minutes');
+    checkLastSentMessageTime();
+}, false);
+
 
 // log any bot errors into the console
 bot.on('error', function (e) {
@@ -62,8 +71,10 @@ bot.dialog("/", [
 
         saveAddress = session.message.address;
         username = saveAddress.user.name;
-
-        // firebaseOperations.saveQuestionsToDB(i18n.__('questions'));
+        firebaseOperations.getUserEmailId(username, function (emailId) {
+            console.log("Email Id:", emailId);
+            session.userData.userEmailId = emailId;
+        })
         session.sendTyping();
         setTimeout(function () {
             session.send(i18n.__('welcome1_msg'));
@@ -82,6 +93,7 @@ bot.dialog("/", [
     },
     function (session, results) {
         if (results.response) {
+            lastSentMessage =   session.message.localTimestamp;
             var selectedOptionIndex = results.response.index;
             switch (selectedOptionIndex) {
                 case 0:
@@ -112,13 +124,16 @@ bot.dialog("/", [
 bot.dialog('startFeedbackQuestions', [
     function (session) {
         session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
         session.userData['questionArray'] = new ArrayList;
         session.userData.questionArray.add(i18n.__("questions"));
         session.send("**Tip :** *Please select or type the option*");
         buildQuestionsAndOptions(session, session.userData.questionArray[0]);
+        task.start();
     },
     function (session, results) {
         session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[0];
         questionObject.answer = userAnswer;
@@ -126,6 +141,7 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[1];
         questionObject.answer = userAnswer;
@@ -133,6 +149,7 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[2];
         questionObject.answer = userAnswer;
@@ -140,6 +157,7 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[3];
         questionObject.answer = userAnswer;
@@ -147,6 +165,7 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[4];
         questionObject.answer = userAnswer;
@@ -154,6 +173,7 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[5];
         questionObject.answer = userAnswer;
@@ -161,6 +181,7 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[6];
         questionObject.answer = userAnswer;
@@ -172,6 +193,7 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[7];
         questionObject.answer = userAnswer;
@@ -179,6 +201,7 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[8];
         questionObject.answer = userAnswer;
@@ -187,6 +210,7 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response;
         var questionObject = session.userData.questionArray[9];
         questionObject.answer = userAnswer;
@@ -194,6 +218,7 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response;
         var questionObject = session.userData.questionArray[10];
         questionObject.answer = userAnswer;
@@ -201,6 +226,7 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response;
         var questionObject = session.userData.questionArray[11];
         questionObject.answer = userAnswer;
@@ -213,6 +239,7 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[12];
         questionObject.answer = userAnswer;
@@ -265,6 +292,7 @@ bot.dialog('showFeedbackReview', [
         session.send(i18n.__('response_header'));
         session.sendTyping();
         var responseAttachments = [];
+        var response;
         for (var index = 0; index < session.userData.questionArray.length; index++) {
             var question = session.userData.questionArray[index].question;
             var answer = session.userData.questionArray[index].answer;
@@ -279,15 +307,17 @@ bot.dialog('showFeedbackReview', [
         var msg = new builder.Message(session)
             .textFormat(builder.TextFormat.plain)
             .attachments(responseAttachments);
+
         builder.Prompts.choice(session,
             msg,
             ["edit_1", "edit_2", "edit_3", "edit_4", "edit_5", "edit_6", "edit_7", "edit_8",
                 "edit_9", "edit_10", "edit_11", "edit_12", "edit_13"], {
                 retryPrompt: i18n.__('retry_command_prompt')
             });
-        session.send("Enter 'edit_(question number)' to edit the response. Ex- **edit_1** or **'submit'** to submit all responses");
+        session.send("Please type 'edit_(question number)' to edit the response for ex- **edit_1** or **'submit'** to submit all responses");
+        lastSentMessage =   session.message.localTimestamp;
     },
-    function (session, results, next) {
+    function (session, results) {
         var selectOption = results.response.entity.split('_');
         var qNumber = selectOption[1];
         qNumber = --qNumber;
@@ -313,6 +343,7 @@ bot.dialog('showFeedbackReview', [
                 listStyle: builder.ListStyle.button,
                 retryPrompt: i18n.__('retry_command_prompt')
             });
+        lastSentMessage =   session.message.localTimestamp;
 
     },
     function (session, results) {
@@ -380,6 +411,7 @@ bot.dialog('/done', (session) => {
 // helper functions
 //==========================================================
 
+
 /**
  * This method will send an email with the response as CSV file
  * @param session
@@ -446,7 +478,7 @@ function submitAllResponse(session) {
     session.send("Submitting Response, Please wait...");
     session.sendTyping();
     var totalResponse = session.userData.questionArray;
-    firebaseOperations.saveFeedbackToDB('-KpFA4PeCGBwULgWUAKj', username.replace(" ", ""), session.userData.questionArray);
+    firebaseOperations.saveFeedbackToDB('-KpJZU0jR1q7i3n8CstP', session.userData.userEmailId, session.userData.questionArray);
     var fields = ['id', 'question', 'answer'];
     var csv = json2csv({data: totalResponse, fields: fields});
     fs.writeFile('response/session_feedback.csv', csv, function (err) {
@@ -515,4 +547,34 @@ function selectOptionAfterCompletingAnswer(session, results) {
 function deleteAllData(session) {
     session.userData = {};
     session.dialogData = {};
+    task.stop();
 }
+
+/**
+ * This method will check the time difference between the last sent message time and current time and send user a
+ * message accordingly
+ */
+function checkLastSentMessageTime() {
+    var currentDate = new Date();
+    var lastMessageSentDate = new Date(lastSentMessage);
+    var diff = (currentDate.getTime() - lastMessageSentDate.getTime()) / 1000;
+    diff /= 60;
+    console.log(Math.abs(Math.round(diff)));
+    var timeDifference = Math.abs(Math.round(diff));
+    if (timeDifference >= 4) {
+        sendProactiveMessage();
+    }
+}
+
+/**
+ * This method will send a reminder to user to fill the feedback form in case if user is in ideal state
+ */
+function sendProactiveMessage() {
+    var msg = new builder.Message().address(saveAddress);
+    msg.text(i18n.__('inactive_msg'), username);
+    msg.textLocale('en-US');
+    bot.send(msg);
+    lastSentMessage = new Date();
+
+}
+
