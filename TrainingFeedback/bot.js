@@ -263,6 +263,7 @@ bot.dialog('notFillingFeedback', [
     function (session) {
         saveAddress = session.message.address;
         username = saveAddress.user.name;
+        lastSentMessage = session.message.localTimestamp;
         session.sendTyping();
         session.send("(kya) :^)");
         session.sendTyping();
