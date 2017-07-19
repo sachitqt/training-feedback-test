@@ -71,8 +71,10 @@ bot.dialog("/", [
 
         saveAddress = session.message.address;
         username = saveAddress.user.name;
-
-        // firebaseOperations.saveQuestionsToDB(i18n.__('questions'));
+        firebaseOperations.getUserEmailId(username, function (emailId) {
+            console.log("Email Id:", emailId);
+            session.userData.userEmailId = emailId;
+        })
         session.sendTyping();
         setTimeout(function () {
             session.send(i18n.__('welcome1_msg'));
@@ -91,6 +93,7 @@ bot.dialog("/", [
     },
     function (session, results) {
         if (results.response) {
+            lastSentMessage =   session.message.localTimestamp;
             var selectedOptionIndex = results.response.index;
             switch (selectedOptionIndex) {
                 case 0:
@@ -289,6 +292,7 @@ bot.dialog('showFeedbackReview', [
         session.send(i18n.__('response_header'));
         session.sendTyping();
         var responseAttachments = [];
+        var response;
         for (var index = 0; index < session.userData.questionArray.length; index++) {
             var question = session.userData.questionArray[index].question;
             var answer = session.userData.questionArray[index].answer;
@@ -303,6 +307,7 @@ bot.dialog('showFeedbackReview', [
         var msg = new builder.Message(session)
             .textFormat(builder.TextFormat.plain)
             .attachments(responseAttachments);
+
         builder.Prompts.choice(session,
             msg,
             ["edit_1", "edit_2", "edit_3", "edit_4", "edit_5", "edit_6", "edit_7", "edit_8",
@@ -310,6 +315,7 @@ bot.dialog('showFeedbackReview', [
                 retryPrompt: i18n.__('retry_command_prompt')
             });
         session.send("Please type 'edit_(question number)' to edit the response for ex- **edit_1** or **'submit'** to submit all responses");
+        lastSentMessage =   session.message.localTimestamp;
     },
     function (session, results) {
         var selectOption = results.response.entity.split('_');
@@ -337,6 +343,7 @@ bot.dialog('showFeedbackReview', [
                 listStyle: builder.ListStyle.button,
                 retryPrompt: i18n.__('retry_command_prompt')
             });
+        lastSentMessage =   session.message.localTimestamp;
 
     },
     function (session, results) {
@@ -471,7 +478,7 @@ function submitAllResponse(session) {
     session.send("Submitting Response, Please wait...");
     session.sendTyping();
     var totalResponse = session.userData.questionArray;
-    firebaseOperations.saveFeedbackToDB('-KpFA4PeCGBwULgWUAKj', username.replace(" ", ""), session.userData.questionArray);
+    firebaseOperations.saveFeedbackToDB('-KpJZU0jR1q7i3n8CstP', session.userData.userEmailId, session.userData.questionArray);
     var fields = ['id', 'question', 'answer'];
     var csv = json2csv({data: totalResponse, fields: fields});
     fs.writeFile('response/session_feedback.csv', csv, function (err) {
@@ -540,8 +547,13 @@ function selectOptionAfterCompletingAnswer(session, results) {
 function deleteAllData(session) {
     session.userData = {};
     session.dialogData = {};
+    task.stop();
 }
 
+/**
+ * This method will check the time difference between the last sent message time and current time and send user a
+ * message accordingly
+ */
 function checkLastSentMessageTime() {
     var currentDate = new Date();
     var lastMessageSentDate = new Date(lastSentMessage);
@@ -549,17 +561,20 @@ function checkLastSentMessageTime() {
     diff /= 60;
     console.log(Math.abs(Math.round(diff)));
     var timeDifference = Math.abs(Math.round(diff));
-    if (timeDifference > 1) {
+    if (timeDifference >= 4) {
         sendProactiveMessage();
     }
+}
 
-    // send simple notification
-    function sendProactiveMessage() {
-        var msg = new builder.Message().address(saveAddress);
-        msg.text(i18n.__('inactive_msg'), username);
-        msg.textLocale('en-US');
-        bot.send(msg);
-        lastSentMessage =   new Date();
-    }
+/**
+ * This method will send a reminder to user to fill the feedback form in case if user is in ideal state
+ */
+function sendProactiveMessage() {
+    var msg = new builder.Message().address(saveAddress);
+    msg.text(i18n.__('inactive_msg'), username);
+    msg.textLocale('en-US');
+    bot.send(msg);
+    lastSentMessage = new Date();
+
 }
 
