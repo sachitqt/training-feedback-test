@@ -1,872 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3cb629fb-fc8d-4ad4-838d-70ccf5496fd0" name="Default" comment="Implemented saving user and training data to DB.">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/app.d.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/app.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/app.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/app/deep_copy.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/app/deep_copy.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/app/errors.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/app/errors.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/app/firebase_app.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/app/firebase_app.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/app/shared_promise.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/app/shared_promise.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/app/subscribe.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/app/subscribe.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/auth.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/database-node.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/database-node.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/database.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/database.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/externs/firebase-app-externs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/externs/firebase-app-internal-externs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/externs/firebase-auth-externs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/externs/firebase-client-auth-externs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/externs/firebase-database-externs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/externs/firebase-database-internal-externs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/externs/firebase-error-externs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/externs/firebase-externs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/externs/firebase-messaging-externs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/externs/firebase-storage-externs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-app.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-app.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-auth.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-browser.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-browser.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-database.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-database.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-messaging.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-messaging.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-node.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-node.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-react-native.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-react-native.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-storage.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase-storage.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase.d.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/firebase.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/controllers/controller-interface.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/controllers/controller-interface.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/controllers/sw-controller.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/controllers/sw-controller.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/controllers/window-controller.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/controllers/window-controller.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/helpers/array-buffer-to-base64.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/helpers/array-buffer-to-base64.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/db-interface.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/db-interface.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/default-sw.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/default-sw.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/errors.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/errors.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/fcm-details.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/fcm-details.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/notification-permission.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/notification-permission.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/token-details-model.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/token-details-model.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/token-manager.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/token-manager.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/vapid-details-model.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/vapid-details-model.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/worker-page-message.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/messaging/models/worker-page-message.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/base64url/dist/.gitkeep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/base64url/dist/base64url.d.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/base64url/dist/base64url.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/base64url/dist/pad-string.d.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/base64url/dist/pad-string.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/base64url/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/base64url/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/base64url/readme.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/base64url/typings/globals/node/index.d.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/base64url/typings/globals/node/typings.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/base64url/typings/index.d.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/buffer-equal-constant-time/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/buffer-equal-constant-time/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/buffer-equal-constant-time/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/buffer-equal-constant-time/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/buffer-equal-constant-time/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/buffer-equal-constant-time/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/buffer-equal-constant-time/test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/dom-storage/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/dom-storage/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/dom-storage/lib/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/dom-storage/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/dom-storage/tests/test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/ecdsa-sig-formatter/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/ecdsa-sig-formatter/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/ecdsa-sig-formatter/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/ecdsa-sig-formatter/src/ecdsa-sig-formatter.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/ecdsa-sig-formatter/src/param-bytes-for-alg.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/examples/autobahn_client.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/examples/client.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/examples/haproxy.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/examples/proxy_server.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/examples/server.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/examples/sse.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/examples/ws.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/lib/faye/eventsource.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/lib/faye/websocket.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/lib/faye/websocket/api.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/lib/faye/websocket/api/event.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/lib/faye/websocket/api/event_target.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/lib/faye/websocket/client.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/faye-websocket/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/hoek/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/hoek/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/hoek/CONTRIBUTING.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/hoek/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/hoek/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/hoek/lib/escape.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/hoek/lib/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/hoek/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/hoek/test/escaper.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/hoek/test/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/hoek/test/modules/ignore.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/hoek/test/modules/test1.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/hoek/test/modules/test2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/hoek/test/modules/test3.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/isemail/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/isemail/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/isemail/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/isemail/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/isemail/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/isemail/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/isemail/lib/isemail.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/isemail/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/isemail/test/isemail.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/isemail/test/mocha.opts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/isemail/test/tests.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/.eslintignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/API.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/CONTRIBUTING.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/examples/conditionalRequire.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/examples/customMessage.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/examples/multipleWhen.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/generate-readme-toc.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/alternatives.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/any.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/array.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/binary.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/boolean.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/cast.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/date.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/errors.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/language.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/number.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/object.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/ref.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/string.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/string/ip.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/string/rfc3986.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/lib/string/uri.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/test/alternatives.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/test/any.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/test/array.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/test/binary.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/test/boolean.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/test/date.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/test/errors.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/test/function.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/test/helper.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/test/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/test/number.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/test/object.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/test/ref.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/joi/test/string.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/.gitignore_20170513142606" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/.gitignore_20170513144908" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/.gitignore_20170513144915" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/.travis_20170513142530.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/CHANGELOG_20170424191735.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/CHANGELOG_20170517113221.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/CHANGELOG_20170517113321.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/README_20170513163312.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/index.d_20170513010248.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/index.d_20170513010322.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/lib/timespan_20170513162630.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/lib/timespan_20170513162744.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/package_20170513122214.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/package_20170513122244.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/package_20170513142409.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/package_20170513142453.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/package_20170513142659.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/package_20170513144757.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/sign_2017011304458.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/sign_2017011304615.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/sign_20170216133031.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/sign_20170308134619.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/sign_20170308134646.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/sign_20170308140651.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/async_sign.tests_20170308134859.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/async_sign.tests_20170308135641.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/issue_196.tests_20170206184753.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/issue_70.tests_20170321165837.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/issue_70.tests_20170321165848.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/jwt.hs.tests_20170308135416.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/jwt.hs.tests_20170308135605.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/jwt.hs.tests_20170308135831.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/jwt.hs.tests_20170308140535.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/jwt.hs.tests_20170308140747.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513143941.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513145829.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513154325.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513155354.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513155439.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513155454.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513160038.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513160219.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513160322.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513160425.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513163356.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513163601.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513163715.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513163904.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513164126.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513164226.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513164631.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513164846.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513165123.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513165254.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513165528.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513165610.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513165649.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513165838.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513165848.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513165930.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513170022.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513170217.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513170326.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513170345.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513170401.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513170437.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513170504.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513170522.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513170741.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513170816.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513171243.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513171418.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513171450.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513171456.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513171617.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513171931.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513172028.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513172038.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513172123.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513172506.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513172519.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170513172637.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170516110727.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170516110926.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170516111003.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170516111045.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170516111149.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170516111224.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170516111501.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170516111544.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170516111615.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/test/verify.tests_20170516111736.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_2017011304950.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_2017011305133.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_2017011305435.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513141638.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513141721.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513141900.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513160544.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513161150.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513161232.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513161617.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513162315.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513162823.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513162938.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513163049.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513163058.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513164052.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513172602.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170513172907.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170516110653.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170516110827.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170516111751.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.history/verify_20170516111805.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.jshintrc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/bin/changelog" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/decode.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/lib/JsonWebTokenError.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/lib/NotBeforeError.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/lib/TokenExpiredError.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/lib/timespan.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/sign.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/async_sign.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/buffer.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/encoding.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/expires_format.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/iat.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/invalid_exp.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/invalid_pub.pem" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/issue_147.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/issue_196.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/issue_304.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/issue_70.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/jwt.hs.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/jwt.rs.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/keyid.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/noTimestamp.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/non_object_values.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/priv.pem" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/pub.pem" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/rsa-private.pem" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/rsa-public-key.pem" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/rsa-public-key.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/rsa-public.pem" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/set_headers.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/undefined_secretOrPublickey.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/util/fakeDate.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/verify.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/test/wrong_alg.tests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jsonwebtoken/verify.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jwa/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jwa/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jwa/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jwa/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jwa/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jws/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jws/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jws/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jws/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jws/lib/data-stream.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jws/lib/sign-stream.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jws/lib/tostring.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jws/lib/verify-stream.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jws/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/jws/readme.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/lodash.once/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/lodash.once/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/lodash.once/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/lodash.once/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/ender.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/af.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ar-dz.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ar-kw.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ar-ly.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ar-ma.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ar-sa.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ar-tn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/az.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/be.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/bg.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/bn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/bo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/br.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/bs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/cs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/cv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/cy.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/da.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/de-at.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/de-ch.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/de.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/dv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/el.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/en-au.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/en-ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/en-gb.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/en-ie.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/en-nz.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/eo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/es-do.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/es.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/et.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/eu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/fa.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/fi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/fo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/fr-ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/fr-ch.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/fr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/fy.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/gd.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/gl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/gom-latn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/he.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/hi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/hr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/hu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/hy-am.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/id.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/is.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/it.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ja.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/jv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ka.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/kk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/km.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/kn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ko.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ky.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/lb.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/lo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/lt.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/lv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/me.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/mi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/mk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ml.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/mr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ms-my.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ms.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/my.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/nb.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ne.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/nl-be.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/nl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/nn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/pa-in.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/pl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/pt-br.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/pt.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ro.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ru.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/sd.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/se.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/si.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/sk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/sl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/sq.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/sr-cyrl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/sr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ss.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/sv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/sw.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ta.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/te.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/tet.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/th.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/tl-ph.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/tlh.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/tr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/tzl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/tzm-latn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/tzm.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/uk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/ur.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/uz-latn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/uz.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/vi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/x-pseudo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/yo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/zh-cn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/zh-hk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/locale/zh-tw.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/min/locales.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/min/locales.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/min/moment-with-locales.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/min/moment-with-locales.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/min/moment.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/moment.d.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/moment.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/package.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/create/check-overflow.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/create/date-from-array.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/create/from-anything.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/create/from-array.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/create/from-object.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/create/from-string-and-array.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/create/from-string-and-format.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/create/from-string.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/create/local.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/create/parsing-flags.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/create/utc.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/create/valid.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/duration/abs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/duration/add-subtract.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/duration/as.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/duration/bubble.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/duration/constructor.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/duration/create.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/duration/duration.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/duration/get.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/duration/humanize.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/duration/iso-string.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/duration/prototype.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/duration/valid.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/format/format.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/locale/base-config.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/locale/calendar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/locale/constructor.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/locale/en.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/locale/formats.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/locale/invalid.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/locale/lists.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/locale/locale.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/locale/locales.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/locale/ordinal.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/locale/pre-post-format.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/locale/prototype.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/locale/relative.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/locale/set.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/add-subtract.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/calendar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/clone.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/compare.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/constructor.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/creation-data.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/diff.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/format.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/from.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/get-set.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/locale.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/min-max.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/moment.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/now.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/prototype.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/start-end-of.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/to-type.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/to.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/moment/valid.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/parse/regex.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/parse/token.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/aliases.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/constants.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/day-of-month.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/day-of-week.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/day-of-year.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/hour.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/millisecond.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/minute.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/month.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/offset.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/priorities.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/quarter.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/second.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/timestamp.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/timezone.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/units.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/week-calendar-utils.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/week-year.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/week.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/units/year.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/abs-ceil.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/abs-floor.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/abs-round.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/compare-arrays.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/defaults.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/deprecate.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/extend.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/has-own-prop.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/hooks.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/index-of.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/is-array.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/is-date.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/is-function.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/is-number.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/is-object-empty.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/is-object.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/is-undefined.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/keys.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/map.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/some.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/to-int.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/lib/utils/zero-fill.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/af.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ar-dz.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ar-kw.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ar-ly.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ar-ma.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ar-sa.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ar-tn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/az.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/be.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/bg.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/bn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/bo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/br.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/bs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/cs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/cv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/cy.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/da.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/de-at.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/de-ch.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/de.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/dv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/el.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/en-au.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/en-ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/en-gb.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/en-ie.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/en-nz.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/eo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/es-do.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/es.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/et.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/eu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/fa.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/fi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/fo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/fr-ca.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/fr-ch.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/fr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/fy.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/gd.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/gl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/gom-latn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/he.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/hi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/hr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/hu.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/hy-am.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/id.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/is.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/it.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ja.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/jv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ka.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/kk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/km.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/kn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ko.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ky.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/lb.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/lo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/lt.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/lv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/me.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/mi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/mk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ml.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/mr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ms-my.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ms.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/my.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/nb.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ne.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/nl-be.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/nl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/nn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/pa-in.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/pl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/pt-br.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/pt.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ro.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ru.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/sd.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/se.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/si.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/sk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/sl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/sq.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/sr-cyrl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/sr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ss.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/sv.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/sw.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ta.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/te.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/tet.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/th.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/tl-ph.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/tlh.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/tr.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/tzl.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/tzm-latn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/tzm.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/uk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/ur.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/uz-latn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/uz.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/vi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/x-pseudo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/yo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/zh-cn.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/zh-hk.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/locale/zh-tw.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/moment/src/moment.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/ms/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/ms/license.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/ms/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/ms/readme.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/promise-polyfill/.editorconfig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/promise-polyfill/.eslintrc.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/promise-polyfill/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/promise-polyfill/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/promise-polyfill/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/promise-polyfill/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/promise-polyfill/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/promise-polyfill/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/promise-polyfill/karma.conf.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/promise-polyfill/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/promise-polyfill/promise.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/promise-polyfill/promise.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/promise-polyfill/test/adapter.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/promise-polyfill/test/promise.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/safe-buffer/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/safe-buffer/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/safe-buffer/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/safe-buffer/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/safe-buffer/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/safe-buffer/test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/topo/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/topo/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/topo/API.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/topo/CONTRIBUTING.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/topo/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/topo/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/topo/lib/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/topo/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/topo/test/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/CODE_OF_CONDUCT.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/examples/tcp_server.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/lib/websocket/driver.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/lib/websocket/driver/base.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/lib/websocket/driver/client.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/lib/websocket/driver/draft75.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/lib/websocket/driver/draft76.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/lib/websocket/driver/headers.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/lib/websocket/driver/hybi.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/lib/websocket/driver/hybi/frame.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/lib/websocket/driver/hybi/message.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/lib/websocket/driver/proxy.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/lib/websocket/driver/server.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/lib/websocket/driver/stream_reader.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/lib/websocket/http_parser.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/lib/websocket/streams.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-driver/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-extensions/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-extensions/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-extensions/lib/parser.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-extensions/lib/pipeline/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-extensions/lib/pipeline/cell.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-extensions/lib/pipeline/functor.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-extensions/lib/pipeline/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-extensions/lib/pipeline/pledge.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-extensions/lib/pipeline/ring_buffer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-extensions/lib/websocket_extensions.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/websocket-extensions/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xmlhttprequest/.jshintrc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xmlhttprequest/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xmlhttprequest/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xmlhttprequest/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xmlhttprequest/lib/XMLHttpRequest.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xmlhttprequest/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xtend/.jshintrc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xtend/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xtend/LICENCE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xtend/Makefile" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xtend/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xtend/immutable.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xtend/mutable.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xtend/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/node_modules/xtend/test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/npm-shrinkwrap.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/args.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/args.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/array.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/array.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/async.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/async.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/authwrapper.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/authwrapper.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/backoff.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/backoff.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/blob.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/blob.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/constants.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/constants.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/error.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/error.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/failrequest.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/failrequest.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/fs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/fs.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/json.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/json.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/location.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/location.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/metadata.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/metadata.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/object.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/object.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/observer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/observer.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/path.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/path.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/promise_external.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/promise_external.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/request.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/request.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/requestinfo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/requestinfo.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/requestmaker.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/requestmaker.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/requestmap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/requestmap.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/requests.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/requests.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/string.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/string.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/taskenums.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/taskenums.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/type.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/type.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/url.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/url.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/xhrio.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/xhrio.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/xhrio_network.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/xhrio_network.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/xhriopool.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/implementation/xhriopool.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/metadata.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/metadata.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/reference.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/reference.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/service.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/service.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/task.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/task.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/tasksnapshot.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/firebase/storage/tasksnapshot.js.map" afterPath="" />
+    <list default="true" id="3cb629fb-fc8d-4ad4-838d-70ccf5496fd0" name="Default" comment="Implemented removing pending feedback once training feedback has been filled.&#10;Implemented method to check if there is pending feedback for a user and training combination.">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firebase_operations.js" afterPath="$PROJECT_DIR$/firebase_operations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/json2csv/dist/json2csv.js" afterPath="$PROJECT_DIR$/node_modules/json2csv/dist/json2csv.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/json2csv/package.json" afterPath="$PROJECT_DIR$/node_modules/json2csv/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/nodemailer/package.json" afterPath="$PROJECT_DIR$/node_modules/nodemailer/package.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -884,11 +21,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="firebase_operations.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="firebase_operations.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/firebase_operations.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="152" column="28" lean-forward="false" selection-start-line="152" selection-start-column="28" selection-end-line="152" selection-end-column="28" />
+            <state relative-caret-position="2740">
+              <caret line="155" column="7" lean-forward="true" selection-start-line="155" selection-start-column="7" selection-end-line="155" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -897,8 +44,8 @@
       <file leaf-file-name="bot.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bot.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7240">
-              <caret line="362" column="30" lean-forward="false" selection-start-line="362" selection-start-column="30" selection-end-line="362" selection-end-column="30" />
+            <state relative-caret-position="8960">
+              <caret line="448" column="64" lean-forward="false" selection-start-line="448" selection-start-column="64" selection-end-line="448" selection-end-column="89" />
               <folding />
             </state>
           </provider>
@@ -955,6 +102,8 @@
       <find>__dirname</find>
       <find>firebaseOperations</find>
       <find>console.lo</find>
+      <find>GautamGupta</find>
+      <find>laceAll('.', ':'</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -979,6 +128,7 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/bot.js" />
         <option value="$PROJECT_DIR$/firebase_operations.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -1021,6 +171,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -1050,7 +201,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1226,7 +376,14 @@
       <workItem from="1500026878879" duration="4588000" />
       <workItem from="1500268540813" duration="42000" />
       <workItem from="1500273743340" duration="12484000" />
-      <workItem from="1500294431095" duration="2032000" />
+      <workItem from="1500294431095" duration="2414000" />
+      <workItem from="1500307605651" duration="74000" />
+      <workItem from="1500352437070" duration="598000" />
+      <workItem from="1500358772059" duration="3184000" />
+      <workItem from="1500377867213" duration="827000" />
+      <workItem from="1500380505605" duration="1880000" />
+      <workItem from="1500444810429" duration="766000" />
+      <workItem from="1500468446683" duration="197000" />
     </task>
     <task id="LOCAL-00001" summary="Added Firebase config">
       <created>1499859365551</created>
@@ -1291,11 +448,32 @@
       <option name="project" value="LOCAL" />
       <updated>1500290126918</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Implemented removing pending feedback once training feedback has been filled.&#10;Implemented method to check if there is pending feedback for a user and training combination.">
+      <created>1500300258304</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1500300258304</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Implemented method for getting email id from username from Firebase DB.&#10;Changed key of user from username to email.">
+      <created>1500378041916</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1500378041916</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Implemented structure change for pending feedback to group by users.">
+      <created>1500468556692</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1500468556692</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102736000" />
+    <option name="totallyTimeSpent" value="110644000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1313,13 +491,13 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13451192" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28699553" sideWeight="0.50269026" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39312407" sideWeight="0.49730977" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32884902" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39312407" sideWeight="0.49730977" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34678626" sideWeight="0.496875" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34678626" sideWeight="0.496875" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1343,7 +521,10 @@
     <MESSAGE value="Implemented saving training feedback to Firebase" />
     <MESSAGE value="Implementing saving user and training data to DB." />
     <MESSAGE value="Implemented saving user and training data to DB." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented saving user and training data to DB." />
+    <MESSAGE value="Implemented removing pending feedback once training feedback has been filled.&#10;Implemented method to check if there is pending feedback for a user and training combination." />
+    <MESSAGE value="Implemented method for getting email id from username from Firebase DB.&#10;Changed key of user from username to email." />
+    <MESSAGE value="Implemented structure change for pending feedback to group by users." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented structure change for pending feedback to group by users." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1388,19 +569,17 @@
           <line>10</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/firebase_operations.js</url>
+          <line>152</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="75" />
+      <option name="time" value="82" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2820">
@@ -1627,13 +806,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package-lock.json" />
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2324">
-          <caret line="504" column="219" lean-forward="false" selection-start-line="504" selection-start-column="219" selection-end-line="504" selection-end-column="219" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/i18n/i18n.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1420">
@@ -1703,16 +875,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bot.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7240">
-          <caret line="362" column="30" lean-forward="false" selection-start-line="362" selection-start-column="30" selection-end-line="362" selection-end-column="30" />
+        <state relative-caret-position="8960">
+          <caret line="448" column="64" lean-forward="false" selection-start-line="448" selection-start-column="64" selection-end-line="448" selection-end-column="89" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="62">
+          <caret line="477" column="56" lean-forward="false" selection-start-line="477" selection-start-column="56" selection-end-line="477" selection-end-column="56" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/firebase_operations.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="152" column="28" lean-forward="false" selection-start-line="152" selection-start-column="28" selection-end-line="152" selection-end-column="28" />
+        <state relative-caret-position="2740">
+          <caret line="155" column="7" lean-forward="true" selection-start-line="155" selection-start-column="7" selection-end-line="155" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -1721,6 +900,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="640">
           <caret line="32" column="3" lean-forward="false" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
         </state>
       </provider>
