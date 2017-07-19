@@ -29,6 +29,9 @@ module.exports = {
     },
     getUserEmailId: function (username, callbackFunction) {
         getEmailIdFromUsername(username, callbackFunction);
+    },
+    isFeedbackPendingForUser: function isFeedbackPending(userId, trainingId, callbackFunction){
+        isFeedbackPending(userId, trainingId, callbackFunction);
     }
 };
 
@@ -94,7 +97,7 @@ function saveTrainingFeedback(trainingId, userId, questionAnswers) {
         userId: userId,
         questionAnswers: questionAnswerData
     });
-    firebase.database().ref('pendingFeedback/' + userId.replaceAll('.', ':') + '|' + trainingId).remove(function (error) {
+    firebase.database().ref('pendingFeedback/' + userId + ':' + trainingId).remove(function (error) {
         console.log(error);
     })
 }
@@ -119,7 +122,7 @@ function saveTrainingData(trainingName, facilitator, attendees, trainingDate) {
             attendeeName: attendees[index],
             isAttended: true,
         });
-        firebase.database().ref('pendingFeedback/' + attendees[index].replaceAll('.', ':') + '|' + trainingId).set({
+        firebase.database().ref('pendingFeedback/' + attendees[index].replaceAll('.', ':') + '/' + trainingId).set({
             attendeeName: attendees[index],
             trainingId: trainingId,
             userId: attendees[index]
@@ -146,7 +149,7 @@ function fetchNonFilledTrainings() {
 }
 
 function isFeedbackPending(userId, trainingId, callbackFunction) {
-    firebase.database().ref('pendingFeedback/' + userId.replaceAll('.', ':') + '|' + trainingId).once('value', function (snapshot) {
+    firebase.database().ref('pendingFeedback/' + userId.replaceAll('.', ':')).once('value', function (snapshot) {
         callbackFunction(!!snapshot.val());
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
@@ -156,10 +159,12 @@ function isFeedbackPending(userId, trainingId, callbackFunction) {
 function getEmailIdFromUsername(username, callbackFunction) {
     firebase.database().ref('users/').once('value', function (snapshot) {
         snapshot.forEach(function (child) {
-            var user = child.val();
+            let user = child.val();
+            let emailId = '';
             if (user.firstName + ' ' + user.lastName === username) {
-                callbackFunction(user.emailId);
+                emailId = user.emailId;
             }
+            callbackFunction(emailId);
         })
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
@@ -171,9 +176,9 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
 }
 
 
-// getEmailIdFromUsername('Lipika Gupta', function (emailId) {
-//     console.log(emailId);
-// });
+getEmailIdFromUsername('Lipika Gupta', function (emailId) {
+    console.log(emailId);
+});
 // isFeedbackPending('sahil.goel@quovantis.com', '-KpFmXgFygU3AsDywr8h', function(isFeedbackPending){
 //     console.log('isFeedbackPending ' + isFeedbackPending);
 // });
@@ -183,7 +188,7 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
 
 // fetchNonFilledTrainings();
 // fetchTrainingData();
-saveTrainingData('Espresso', 'lipika.gupta@quovantis.com', ['sachit.wadhawan@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
-saveTrainingData('Machine Learning', 'sachit.wadhawan@quovantis.com', ['lipika.gupta@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
-saveTrainingData('MVP', 'vikas.goyal@quovantis.com', ['gautam.gupta@quovantis.com', 'sumeet.mehta@quovantis.com', 'lipika.gupta@quovantis.com', 'sachit.wadhawan@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
+// saveTrainingData('Espresso', 'lipika.gupta@quovantis.com', ['sachit.wadhawan@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
+// saveTrainingData('Machine Learning', 'sachit.wadhawan@quovantis.com', ['lipika.gupta@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
+// saveTrainingData('MVP', 'vikas.goyal@quovantis.com', ['gautam.gupta@quovantis.com', 'sumeet.mehta@quovantis.com', 'lipika.gupta@quovantis.com', 'sachit.wadhawan@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
 // saveTrainingFeedback(0, 1, "");
