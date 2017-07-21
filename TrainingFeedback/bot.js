@@ -71,10 +71,10 @@ bot.dialog("/", [
 
         saveAddress = session.message.address;
         username = saveAddress.user.name;
-        firebaseOperations.getUserEmailId(username, function (emailId) {
-            console.log("Email Id:", emailId);
-            session.userData.userEmailId = emailId;
-        })
+        // firebaseOperations.getUserEmailId(username, function (emailId) {
+        //     console.log("Email Id:", emailId);
+        //     session.userData.userEmailId = emailId;
+        // })
         session.sendTyping();
         setTimeout(function () {
             session.send(i18n.__('welcome1_msg'));
@@ -479,7 +479,7 @@ function submitAllResponse(session) {
     session.send("Submitting Response, Please wait...");
     session.sendTyping();
     var totalResponse = session.userData.questionArray;
-    firebaseOperations.saveFeedbackToDB('-KpPvlK9LVIJQBzvL-wF', session.userData.userEmailId, session.userData.questionArray);
+    firebaseOperations.saveFeedbackToDB('-KpPvlK9LVIJQBzvL-wF', username, session.userData.questionArray);
     var fields = ['id', 'question', 'answer'];
     var csv = json2csv({data: totalResponse, fields: fields});
     fs.writeFile('response/session_feedback.csv', csv, function (err) {
