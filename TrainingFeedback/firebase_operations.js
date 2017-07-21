@@ -25,7 +25,7 @@ module.exports = {
         writeQuestionsToFirebase(questions);
     },
     saveFeedbackToDB: function (trainingId, userId, questionAnswers) {
-        saveTrainingFeedback(trainingId, userId, questionAnswers);
+        saveFeedback(trainingId, userId, questionAnswers);
     },
     getUserEmailId: function (username, callbackFunction) {
         getEmailIdFromUsername(username, callbackFunction);
@@ -84,6 +84,14 @@ function saveUser(userData) {
         fullName: userData.FirstName + ' ' + userData.LastName,
         emailId: userData.EmailId,
         skypeId: userData.SkypeId
+    });
+}
+
+function saveFeedback(trainingId, userId, questionAnswers){
+    getEmailIdFromUsername(userId, function (emailId) {
+        if (emailId) {
+            saveTrainingFeedback(trainingId, emailId, questionAnswers);
+        }
     });
 }
 
@@ -176,9 +184,9 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
 }
 
 
-getEmailIdFromUsername('Lipika Gupta', function (emailId) {
-    console.log(emailId);
-});
+// getEmailIdFromUsername('Lipika Gupta', function (emailId) {
+//     console.log(emailId);
+// });
 // isFeedbackPending('sahil.goel@quovantis.com', '-KpFmXgFygU3AsDywr8h', function(isFeedbackPending){
 //     console.log('isFeedbackPending ' + isFeedbackPending);
 // });
@@ -192,3 +200,4 @@ getEmailIdFromUsername('Lipika Gupta', function (emailId) {
 // saveTrainingData('Machine Learning', 'sachit.wadhawan@quovantis.com', ['lipika.gupta@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
 // saveTrainingData('MVP', 'vikas.goyal@quovantis.com', ['gautam.gupta@quovantis.com', 'sumeet.mehta@quovantis.com', 'lipika.gupta@quovantis.com', 'sachit.wadhawan@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
 // saveTrainingFeedback(0, 1, "");
+saveFeedback('1', 'Lipika Gupta', "");
