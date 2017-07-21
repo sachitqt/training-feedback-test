@@ -97,7 +97,7 @@ function saveTrainingFeedback(trainingId, userId, questionAnswers) {
         userId: userId,
         questionAnswers: questionAnswerData
     });
-    firebase.database().ref('pendingFeedback/' + userId + ':' + trainingId).remove(function (error) {
+    firebase.database().ref('pendingFeedback/' + userId.replaceAll('.', ':') + '/' + trainingId).remove(function (error) {
         console.log(error);
     })
 }
