@@ -36,6 +36,13 @@ module.exports = {
                 isFeedbackPending(emailId, callbackFunction);
             }
         });
+    },
+    getPendingFeedbackForUser: function (username, callbackFunction){
+        getEmailIdFromUsername(username, function (emailId) {
+            if (emailId) {
+                getUserPendingFeedback(emailId, callbackFunction);
+            }
+        });
     }
 };
 
