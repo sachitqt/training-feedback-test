@@ -90,6 +90,7 @@ function saveUser(userData) {
 function saveFeedback(trainingId, userId, questionAnswers){
     getEmailIdFromUsername(userId, function (emailId) {
         if (emailId) {
+            console.log("EmailId is "+emailId);
             saveTrainingFeedback(trainingId, emailId, questionAnswers);
         }
     });
@@ -100,13 +101,13 @@ function saveTrainingFeedback(trainingId, userId, questionAnswers) {
     for (let index = 0; index < questionAnswers.length; index++) {
         questionAnswerData[questionAnswers[index].question.replace('.', '')] = questionAnswers[index].answer;
     }
-    firebase.database().ref('trainingFeedback/' + trainingId + '/' + userId).set({
+    firebase.database().ref('trainingFeedback/' + trainingId + '/' + userId.replaceAll('.', ':')).set({
         trainingId: trainingId,
         userId: userId,
         questionAnswers: questionAnswerData
     });
     firebase.database().ref('pendingFeedback/' + userId.replaceAll('.', ':') + '/' + trainingId).remove(function (error) {
-        console.log(error);
+        console.log("Error is "+error);
     })
 }
 
@@ -200,4 +201,4 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
 // saveTrainingData('Machine Learning', 'sachit.wadhawan@quovantis.com', ['lipika.gupta@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
 // saveTrainingData('MVP', 'vikas.goyal@quovantis.com', ['gautam.gupta@quovantis.com', 'sumeet.mehta@quovantis.com', 'lipika.gupta@quovantis.com', 'sachit.wadhawan@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
 // saveTrainingFeedback(0, 1, "");
-saveFeedback('1', 'Lipika Gupta', "");
+// saveFeedback('1', 'Lipika Gupta', "");

@@ -139,91 +139,91 @@ bot.dialog('startFeedbackQuestions', [
         questionObject.answer = userAnswer;
         buildQuestionsAndOptions(session, session.userData.questionArray[1]);
     },
-    function (session, results) {
-        session.sendTyping();
-        lastSentMessage = session.message.localTimestamp;
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[1];
-        questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[2]);
-    },
-    function (session, results) {
-        session.sendTyping();
-        lastSentMessage = session.message.localTimestamp;
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[2];
-        questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[3]);
-    },
-    function (session, results) {
-        session.sendTyping();
-        lastSentMessage = session.message.localTimestamp;
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[3];
-        questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[4]);
-    },
-    function (session, results) {
-        session.sendTyping();
-        lastSentMessage = session.message.localTimestamp;
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[4];
-        questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[5]);
-    },
-    function (session, results) {
-        session.sendTyping();
-        lastSentMessage = session.message.localTimestamp;
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[5];
-        questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[6]);
-    },
-    function (session, results) {
-        session.sendTyping();
-        lastSentMessage = session.message.localTimestamp;
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[6];
-        questionObject.answer = userAnswer;
-        session.send(i18n.__('half_attempt_msg'));
-        setTimeout(function () {
-            session.send("Here is next question")
-            buildQuestionsAndOptions(session, session.userData.questionArray[7]);
-        }, 4000)
-    },
-    function (session, results) {
-        session.sendTyping();
-        lastSentMessage = session.message.localTimestamp;
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[7];
-        questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[8]);
-    },
-    function (session, results) {
-        session.sendTyping();
-        lastSentMessage = session.message.localTimestamp;
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[8];
-        questionObject.answer = userAnswer;
-        session.send("**Tip :** *Please type the answer*");
-        buildQuestionsAndOptions(session, session.userData.questionArray[9]);
-    },
-    function (session, results) {
-        session.sendTyping();
-        lastSentMessage = session.message.localTimestamp;
-        var userAnswer = results.response;
-        var questionObject = session.userData.questionArray[9];
-        questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[10]);
-    },
-    function (session, results) {
-        session.sendTyping();
-        lastSentMessage = session.message.localTimestamp;
-        var userAnswer = results.response;
-        var questionObject = session.userData.questionArray[10];
-        questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[11]);
-    },
+    // function (session, results) {
+    //     session.sendTyping();
+    //     lastSentMessage = session.message.localTimestamp;
+    //     var userAnswer = results.response.entity;
+    //     var questionObject = session.userData.questionArray[1];
+    //     questionObject.answer = userAnswer;
+    //     buildQuestionsAndOptions(session, session.userData.questionArray[2]);
+    // },
+    // function (session, results) {
+    //     session.sendTyping();
+    //     lastSentMessage = session.message.localTimestamp;
+    //     var userAnswer = results.response.entity;
+    //     var questionObject = session.userData.questionArray[2];
+    //     questionObject.answer = userAnswer;
+    //     buildQuestionsAndOptions(session, session.userData.questionArray[3]);
+    // },
+    // function (session, results) {
+    //     session.sendTyping();
+    //     lastSentMessage = session.message.localTimestamp;
+    //     var userAnswer = results.response.entity;
+    //     var questionObject = session.userData.questionArray[3];
+    //     questionObject.answer = userAnswer;
+    //     buildQuestionsAndOptions(session, session.userData.questionArray[4]);
+    // },
+    // function (session, results) {
+    //     session.sendTyping();
+    //     lastSentMessage = session.message.localTimestamp;
+    //     var userAnswer = results.response.entity;
+    //     var questionObject = session.userData.questionArray[4];
+    //     questionObject.answer = userAnswer;
+    //     buildQuestionsAndOptions(session, session.userData.questionArray[5]);
+    // },
+    // function (session, results) {
+    //     session.sendTyping();
+    //     lastSentMessage = session.message.localTimestamp;
+    //     var userAnswer = results.response.entity;
+    //     var questionObject = session.userData.questionArray[5];
+    //     questionObject.answer = userAnswer;
+    //     buildQuestionsAndOptions(session, session.userData.questionArray[6]);
+    // },
+    // function (session, results) {
+    //     session.sendTyping();
+    //     lastSentMessage = session.message.localTimestamp;
+    //     var userAnswer = results.response.entity;
+    //     var questionObject = session.userData.questionArray[6];
+    //     questionObject.answer = userAnswer;
+    //     session.send(i18n.__('half_attempt_msg'));
+    //     setTimeout(function () {
+    //         session.send("Here is next question")
+    //         buildQuestionsAndOptions(session, session.userData.questionArray[7]);
+    //     }, 4000)
+    // },
+    // function (session, results) {
+    //     session.sendTyping();
+    //     lastSentMessage = session.message.localTimestamp;
+    //     var userAnswer = results.response.entity;
+    //     var questionObject = session.userData.questionArray[7];
+    //     questionObject.answer = userAnswer;
+    //     buildQuestionsAndOptions(session, session.userData.questionArray[8]);
+    // },
+    // function (session, results) {
+    //     session.sendTyping();
+    //     lastSentMessage = session.message.localTimestamp;
+    //     var userAnswer = results.response.entity;
+    //     var questionObject = session.userData.questionArray[8];
+    //     questionObject.answer = userAnswer;
+    //     session.send("**Tip :** *Please type the answer*");
+    //     buildQuestionsAndOptions(session, session.userData.questionArray[9]);
+    // },
+    // function (session, results) {
+    //     session.sendTyping();
+    //     lastSentMessage = session.message.localTimestamp;
+    //     var userAnswer = results.response;
+    //     var questionObject = session.userData.questionArray[9];
+    //     questionObject.answer = userAnswer;
+    //     buildQuestionsAndOptions(session, session.userData.questionArray[10]);
+    // },
+    // function (session, results) {
+    //     session.sendTyping();
+    //     lastSentMessage = session.message.localTimestamp;
+    //     var userAnswer = results.response;
+    //     var questionObject = session.userData.questionArray[10];
+    //     questionObject.answer = userAnswer;
+    //     buildQuestionsAndOptions(session, session.userData.questionArray[11]);
+    // },
     function (session, results) {
         session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
@@ -479,7 +479,7 @@ function submitAllResponse(session) {
     session.send("Submitting Response, Please wait...");
     session.sendTyping();
     var totalResponse = session.userData.questionArray;
-    firebaseOperations.saveFeedbackToDB('-KpPvlK9LVIJQBzvL-wF', username, session.userData.questionArray);
+    firebaseOperations.saveFeedbackToDB('-KpoIMihPuePLyJIMw_c', username, session.userData.questionArray);
     var fields = ['id', 'question', 'answer'];
     var csv = json2csv({data: totalResponse, fields: fields});
     fs.writeFile('response/session_feedback.csv', csv, function (err) {
