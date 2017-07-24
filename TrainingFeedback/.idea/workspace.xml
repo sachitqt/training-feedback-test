@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3cb629fb-fc8d-4ad4-838d-70ccf5496fd0" name="Default" comment="Port Changes">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bot.js" afterPath="$PROJECT_DIR$/bot.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firebase_operations.js" afterPath="$PROJECT_DIR$/firebase_operations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locales/en.json" afterPath="$PROJECT_DIR$/locales/en.json" />
-    </list>
+    <list default="true" id="3cb629fb-fc8d-4ad4-838d-70ccf5496fd0" name="Default" comment="Port Changes" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -317,7 +312,7 @@
       <workItem from="1500356139449" duration="4925000" />
       <workItem from="1500380588144" duration="8132000" />
       <workItem from="1500620187043" duration="5824000" />
-      <workItem from="1500896259816" duration="7151000" />
+      <workItem from="1500896259816" duration="7252000" />
     </task>
     <task id="LOCAL-00001" summary="Review answer functionality implemented.">
       <created>1499746576635</created>
@@ -372,7 +367,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="188957000" />
+    <option name="totallyTimeSpent" value="189058000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
