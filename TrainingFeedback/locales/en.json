@@ -170,6 +170,7 @@
   "welcome2_msg": "You can type '**help**' anytime to see all available commands that I can respond to.",
   "welcome3_msg": "**I will help you in providing the feedback for the training** (wave)",
   "feedback_fill_msg": "You have just attended the session. We request you to fill the feedback form ASAP. ",
+  "msg_to_start_feedback": "You have just attended the session. We request you to fill the feedback form ASAP. Please type **'go'** to start filling the feedback.",
   "question_start_msg": "Here are the questions-:",
   "choose_start_option": "What would you like to do? (** Tip :** *Please select or type the option*)",
   "delete_bot": "Bot has been delete from the skype list",
@@ -194,5 +195,6 @@
   ],
   "wait": "Hey (wait)! You have only attempted %s/13 questions. Please give all responses before submitting the feedback.",
   "answer_update":"Your **answer %s** has been updated successfully (rock)",
-  "inactive_msg":"Hey %s, why are you not responding. Its been long time you didn't see me :(, Please fill the form ASAP."
+  "inactive_msg":"Hey %s, why are you not responding. Its been long time you didn't see me :(, Please fill the form ASAP.",
+  "invalid_query":"Hey %s, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'help'** to see all available commands that I can handle."
 }
