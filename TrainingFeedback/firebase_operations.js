@@ -30,8 +30,12 @@ module.exports = {
     getUserEmailId: function (username, callbackFunction) {
         getEmailIdFromUsername(username, callbackFunction);
     },
-    isFeedbackPendingForUser: function isFeedbackPending(userId, trainingId, callbackFunction){
-        isFeedbackPending(userId, trainingId, callbackFunction);
+    isFeedbackPendingForUser: function (username, callbackFunction){
+        getEmailIdFromUsername(username, function (emailId) {
+            if (emailId) {
+                isFeedbackPending(emailId, callbackFunction);
+            }
+        });
     }
 };
 
@@ -156,7 +160,7 @@ function fetchNonFilledTrainings() {
     });
 }
 
-function isFeedbackPending(userId, trainingId, callbackFunction) {
+function isFeedbackPending(userId, callbackFunction) {
     firebase.database().ref('pendingFeedback/' + userId.replaceAll('.', ':')).once('value', function (snapshot) {
         callbackFunction(!!snapshot.val());
     }, function (errorObject) {
@@ -179,9 +183,25 @@ function getEmailIdFromUsername(username, callbackFunction) {
     })
 }
 
+function getUserPendingFeedback(emailId, callbackFunction){
+    firebase.database().ref('pendingFeedback/'+emailId.replaceAll('.', ':')).once('value', function (snapshot) {
+        callbackFunction(snapshot.val());
+    }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+    })
+}
+
 String.prototype.replaceAll = function (str1, str2, ignore) {
     return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof(str2) == "string") ? str2.replace(/\$/g, "$$$$") : str2);
 }
+
+// function test(username, callbackFunction){
+//     getEmailIdFromUsername(username, function (emailId) {
+//         if (emailId) {
+//             getUserPendingFeedback(emailId, callbackFunction);
+//         }
+//     });
+// }
 
 
 // getEmailIdFromUsername('Lipika Gupta', function (emailId) {
@@ -200,4 +220,8 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
 // saveTrainingData('Machine Learning', 'sachit.wadhawan@quovantis.com', ['lipika.gupta@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
 // saveTrainingData('MVP', 'vikas.goyal@quovantis.com', ['gautam.gupta@quovantis.com', 'sumeet.mehta@quovantis.com', 'lipika.gupta@quovantis.com', 'sachit.wadhawan@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
 // saveTrainingFeedback(0, 1, "");
-saveFeedback('1', 'Lipika Gupta', "");
+// saveFeedback('1', 'Lipika Gupta', "");
+// test('Lipika Gupta', function (isFeedbackPending) {
+//     console.log(isFeedbackPending);
+// });
+
