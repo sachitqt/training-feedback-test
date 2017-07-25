@@ -32,7 +32,7 @@ var lastSentMessage;
 var isUserStartFilling = false;
 var trainingId;
 var trainingName;
-var taskForIdealState, taskForPendingFeedback;
+var taskForPendingFeedback, taskForIdealState;
 
 
 // log any bot errors into the console
