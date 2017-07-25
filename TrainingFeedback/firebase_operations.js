@@ -11,12 +11,12 @@ i18n.configure({
 //Initialize Firebase
 //========================================================
 let config = {
-    apiKey: "AIzaSyBU4p6ZhtVa1pijJXv4jxzHqb3vqa23tZ4",
-    authDomain: "trainingfeedback-37dcb.firebaseapp.com",
-    databaseURL: "https://trainingfeedback-37dcb.firebaseio.com",
-    projectId: "trainingfeedback-37dcb",
-    storageBucket: "",
-    messagingSenderId: "499900088369"
+    apiKey: "AIzaSyBpguhnkqvKLkdnnjyicMNstu8lRgXQGYY",
+    authDomain: "botsun-83f8c.firebaseapp.com",
+    databaseURL: "https://botsun-83f8c.firebaseio.com",
+    projectId: "botsun-83f8c",
+    storageBucket: "botsun-83f8c.appspot.com",
+    messagingSenderId: "673044083117"
 };
 firebase.initializeApp(config);
 
@@ -111,7 +111,7 @@ function saveTrainingFeedback(trainingId, userId, questionAnswers) {
     for (let index = 0; index < questionAnswers.length; index++) {
         questionAnswerData[questionAnswers[index].question.replace('.', '')] = questionAnswers[index].answer;
     }
-    firebase.database().ref('trainingFeedback/' + trainingId + '/' + userId).set({
+    firebase.database().ref('trainingFeedback/' + trainingId + '/' + userId.replaceAll('.', ':')).set({
         trainingId: trainingId,
         userId: userId,
         questionAnswers: questionAnswerData
@@ -217,8 +217,8 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
 // isFeedbackPending('sahil.goel@quovantis.com', '-KpFmXgFygU3AsDywr8h', function(isFeedbackPending){
 //     console.log('isFeedbackPending ' + isFeedbackPending);
 // });
-// writeQuestionsToFirebase(i18n.__('questions'));
-// saveUserData();
+writeQuestionsToFirebase(i18n.__('questions'));
+saveUserData();
 
 
 // fetchNonFilledTrainings();
