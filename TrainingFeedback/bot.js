@@ -8,7 +8,7 @@ var firebaseOperations = require('./firebase_operations.js');
 let i18n = require("i18n");
 var json2csv = require('json2csv');
 var fs = require('fs');
-var ArrayList = require('ArrayList');
+var arraylist = require('arraylist');
 var cron = require('node-cron');
 
 
@@ -28,11 +28,17 @@ const bot = module.exports = new builder.UniversalBot(connector);
 var username = 'Unknown';
 var saveAddress, question, answer, sno;
 var lastSentMessage;
+var isUserStartFilling  =   false;
 
 
-var task = cron.schedule('*/2 * * * *', function () {
+var taskForIdealState = cron.schedule('*/2 * * * *', function () {
     console.log('running a task every two minutes');
     checkLastSentMessageTime();
+}, false);
+
+var taskForPendingFeedback = cron.schedule('*/1 * * * *', function () {
+    console.log('Running a task to check pending feedback');
+    checkForPendingFeedback();
 }, false);
 
 
@@ -41,16 +47,22 @@ bot.on('error', function (e) {
     console.log('And error ocurred', e);
 });
 
-bot.on('contactRelationUpdate', function (message) {
+bot.on('contactRelationUpdate', function (message, session) {
     if (message.action === 'add') {
+        taskForPendingFeedback.start();
         username = message.user ? message.user.name : null;
+        saveAddress =   message.address;
+
         var reply = new builder.Message()
             .address(message.address)
             .text('Hello %s, Thanks for adding me.', username || 'there');
         bot.send(reply);
     } else {
+        session.dialogData = {};
+        taskForPendingFeedback.stop();
         console.log(i18n.__('delete_bot'))
     }
+
 });
 
 
@@ -68,32 +80,45 @@ bot.on('contactRelationUpdate', function (message) {
 
 bot.dialog("/", [
     function (session) {
-
+        // if(!taskForPendingFeedback.isStarted()) {
+        //     taskForPendingFeedback.start();
+        // }
         saveAddress = session.message.address;
         username = saveAddress.user.name;
-        // firebaseOperations.getUserEmailId(username, function (emailId) {
-        //     console.log("Email Id:", emailId);
-        //     session.userData.userEmailId = emailId;
-        // })
-        session.sendTyping();
-        setTimeout(function () {
-            session.send(i18n.__('welcome1_msg'));
-            session.send(i18n.__('welcome2_msg'));
-            session.send(i18n.__('welcome3_msg'));
-            session.send(i18n.__('feedback_fill_msg'));
-            builder.Prompts.choice(
-                session,
-                i18n.__('choose_start_option'),
-                i18n.__('dialogLabels'),
-                {
-                    listStyle: builder.ListStyle.button,
-                    retryPrompt: i18n.__('retry_prompt')
-                });
-        }, 3000);
+        var userMessage = (session.message.text).toLowerCase();
+        if (userMessage != 'go') {
+            session.endDialog("Hey %s, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'help'** to see all available commands that I can handle.", username);
+        } else {
+            firebaseOperations.isFeedbackPendingForUser(username, function (isPendingFeedback) {
+                if (isPendingFeedback) {
+                    lastSentMessage = session.message.localTimestamp;
+                    taskForPendingFeedback.stop();
+                    isUserStartFilling  =   true;
+                    taskForIdealState.start();
+                    session.sendTyping();
+                    setTimeout(function () {
+                        session.send(i18n.__('welcome1_msg'));
+                        session.send(i18n.__('welcome2_msg'));
+                        session.send(i18n.__('welcome3_msg'));
+                        session.send(i18n.__('feedback_fill_msg'));
+                        builder.Prompts.choice(
+                            session,
+                            i18n.__('choose_start_option'),
+                            i18n.__('dialogLabels'),
+                            {
+                                listStyle: builder.ListStyle.button,
+                                retryPrompt: i18n.__('retry_prompt')
+                            });
+                    }, 3000);
+                } else {
+                    session.endDialog("You have no pending feedback yet. Enjoy!!!")
+                }
+            })
+        }
     },
     function (session, results) {
         if (results.response) {
-            lastSentMessage =   session.message.localTimestamp;
+            lastSentMessage = session.message.localTimestamp;
             var selectedOptionIndex = results.response.index;
             switch (selectedOptionIndex) {
                 case 0:
@@ -125,11 +150,10 @@ bot.dialog('startFeedbackQuestions', [
     function (session) {
         session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
-        session.userData['questionArray'] = new ArrayList;
+        session.userData['questionArray'] = new new arraylist();
         session.userData.questionArray.add(i18n.__("questions"));
         session.send("**Tip :** *Please select or type the option*");
         buildQuestionsAndOptions(session, session.userData.questionArray[0]);
-        task.start();
     },
     function (session, results) {
         session.sendTyping();
@@ -139,91 +163,91 @@ bot.dialog('startFeedbackQuestions', [
         questionObject.answer = userAnswer;
         buildQuestionsAndOptions(session, session.userData.questionArray[1]);
     },
-    // function (session, results) {
-    //     session.sendTyping();
-    //     lastSentMessage = session.message.localTimestamp;
-    //     var userAnswer = results.response.entity;
-    //     var questionObject = session.userData.questionArray[1];
-    //     questionObject.answer = userAnswer;
-    //     buildQuestionsAndOptions(session, session.userData.questionArray[2]);
-    // },
-    // function (session, results) {
-    //     session.sendTyping();
-    //     lastSentMessage = session.message.localTimestamp;
-    //     var userAnswer = results.response.entity;
-    //     var questionObject = session.userData.questionArray[2];
-    //     questionObject.answer = userAnswer;
-    //     buildQuestionsAndOptions(session, session.userData.questionArray[3]);
-    // },
-    // function (session, results) {
-    //     session.sendTyping();
-    //     lastSentMessage = session.message.localTimestamp;
-    //     var userAnswer = results.response.entity;
-    //     var questionObject = session.userData.questionArray[3];
-    //     questionObject.answer = userAnswer;
-    //     buildQuestionsAndOptions(session, session.userData.questionArray[4]);
-    // },
-    // function (session, results) {
-    //     session.sendTyping();
-    //     lastSentMessage = session.message.localTimestamp;
-    //     var userAnswer = results.response.entity;
-    //     var questionObject = session.userData.questionArray[4];
-    //     questionObject.answer = userAnswer;
-    //     buildQuestionsAndOptions(session, session.userData.questionArray[5]);
-    // },
-    // function (session, results) {
-    //     session.sendTyping();
-    //     lastSentMessage = session.message.localTimestamp;
-    //     var userAnswer = results.response.entity;
-    //     var questionObject = session.userData.questionArray[5];
-    //     questionObject.answer = userAnswer;
-    //     buildQuestionsAndOptions(session, session.userData.questionArray[6]);
-    // },
-    // function (session, results) {
-    //     session.sendTyping();
-    //     lastSentMessage = session.message.localTimestamp;
-    //     var userAnswer = results.response.entity;
-    //     var questionObject = session.userData.questionArray[6];
-    //     questionObject.answer = userAnswer;
-    //     session.send(i18n.__('half_attempt_msg'));
-    //     setTimeout(function () {
-    //         session.send("Here is next question")
-    //         buildQuestionsAndOptions(session, session.userData.questionArray[7]);
-    //     }, 4000)
-    // },
-    // function (session, results) {
-    //     session.sendTyping();
-    //     lastSentMessage = session.message.localTimestamp;
-    //     var userAnswer = results.response.entity;
-    //     var questionObject = session.userData.questionArray[7];
-    //     questionObject.answer = userAnswer;
-    //     buildQuestionsAndOptions(session, session.userData.questionArray[8]);
-    // },
-    // function (session, results) {
-    //     session.sendTyping();
-    //     lastSentMessage = session.message.localTimestamp;
-    //     var userAnswer = results.response.entity;
-    //     var questionObject = session.userData.questionArray[8];
-    //     questionObject.answer = userAnswer;
-    //     session.send("**Tip :** *Please type the answer*");
-    //     buildQuestionsAndOptions(session, session.userData.questionArray[9]);
-    // },
-    // function (session, results) {
-    //     session.sendTyping();
-    //     lastSentMessage = session.message.localTimestamp;
-    //     var userAnswer = results.response;
-    //     var questionObject = session.userData.questionArray[9];
-    //     questionObject.answer = userAnswer;
-    //     buildQuestionsAndOptions(session, session.userData.questionArray[10]);
-    // },
-    // function (session, results) {
-    //     session.sendTyping();
-    //     lastSentMessage = session.message.localTimestamp;
-    //     var userAnswer = results.response;
-    //     var questionObject = session.userData.questionArray[10];
-    //     questionObject.answer = userAnswer;
-    //     buildQuestionsAndOptions(session, session.userData.questionArray[11]);
-    // },
+    function (session, results) {
+        session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
+        var userAnswer = results.response.entity;
+        var questionObject = session.userData.questionArray[1];
+        questionObject.answer = userAnswer;
+        buildQuestionsAndOptions(session, session.userData.questionArray[2]);
+    },
+    function (session, results) {
+        session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
+        var userAnswer = results.response.entity;
+        var questionObject = session.userData.questionArray[2];
+        questionObject.answer = userAnswer;
+        buildQuestionsAndOptions(session, session.userData.questionArray[3]);
+    },
+    function (session, results) {
+        session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
+        var userAnswer = results.response.entity;
+        var questionObject = session.userData.questionArray[3];
+        questionObject.answer = userAnswer;
+        buildQuestionsAndOptions(session, session.userData.questionArray[4]);
+    },
+    function (session, results) {
+        session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
+        var userAnswer = results.response.entity;
+        var questionObject = session.userData.questionArray[4];
+        questionObject.answer = userAnswer;
+        buildQuestionsAndOptions(session, session.userData.questionArray[5]);
+    },
+    function (session, results) {
+        session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
+        var userAnswer = results.response.entity;
+        var questionObject = session.userData.questionArray[5];
+        questionObject.answer = userAnswer;
+        buildQuestionsAndOptions(session, session.userData.questionArray[6]);
+    },
+    function (session, results) {
+        session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
+        var userAnswer = results.response.entity;
+        var questionObject = session.userData.questionArray[6];
+        questionObject.answer = userAnswer;
+        session.send(i18n.__('half_attempt_msg'));
+        setTimeout(function () {
+            session.send("Here is next question")
+            buildQuestionsAndOptions(session, session.userData.questionArray[7]);
+        }, 4000)
+    },
+    function (session, results) {
+        session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
+        var userAnswer = results.response.entity;
+        var questionObject = session.userData.questionArray[7];
+        questionObject.answer = userAnswer;
+        buildQuestionsAndOptions(session, session.userData.questionArray[8]);
+    },
+    function (session, results) {
+        session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
+        var userAnswer = results.response.entity;
+        var questionObject = session.userData.questionArray[8];
+        questionObject.answer = userAnswer;
+        session.send("**Tip :** *Please type the answer*");
+        buildQuestionsAndOptions(session, session.userData.questionArray[9]);
+    },
+    function (session, results) {
+        session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
+        var userAnswer = results.response;
+        var questionObject = session.userData.questionArray[9];
+        questionObject.answer = userAnswer;
+        buildQuestionsAndOptions(session, session.userData.questionArray[10]);
+    },
+    function (session, results) {
+        session.sendTyping();
+        lastSentMessage = session.message.localTimestamp;
+        var userAnswer = results.response;
+        var questionObject = session.userData.questionArray[10];
+        questionObject.answer = userAnswer;
+        buildQuestionsAndOptions(session, session.userData.questionArray[11]);
+    },
     function (session, results) {
         session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
@@ -274,6 +298,8 @@ bot.dialog('notFillingFeedback', [
         var response = session.dialogData.notFillingFeedbackReason;
         session.send("Submitting Response, Please wait...");
         session.sendTyping();
+        saveAddress = session.message.address;
+        username = saveAddress.user.name;
         setTimeout(function () {
             sendEmail(session, username + "- " + i18n.__('notSubmitting'), "Here is the reason-: " + response, false);
         }, 3000);
@@ -316,7 +342,7 @@ bot.dialog('showFeedbackReview', [
                 retryPrompt: i18n.__('retry_command_prompt')
             });
         session.send("Please type 'edit_(question number)' to edit the response for ex- **edit_1** or **'submit'** to submit all responses");
-        lastSentMessage =   session.message.localTimestamp;
+        lastSentMessage = session.message.localTimestamp;
     },
     function (session, results) {
         var selectOption = results.response.entity.split('_');
@@ -344,7 +370,7 @@ bot.dialog('showFeedbackReview', [
                 listStyle: builder.ListStyle.button,
                 retryPrompt: i18n.__('retry_command_prompt')
             });
-        lastSentMessage =   session.message.localTimestamp;
+        lastSentMessage = session.message.localTimestamp;
 
     },
     function (session, results) {
@@ -475,6 +501,7 @@ function sendEmail(session, subject, text, feedback) {
 function submitAllResponse(session) {
     saveAddress = session.message.address;
     username = saveAddress.user.name;
+    isUserStartFilling  =   false;
 
     session.send("Submitting Response, Please wait...");
     session.sendTyping();
@@ -546,9 +573,9 @@ function selectOptionAfterCompletingAnswer(session, results) {
  * @param session
  */
 function deleteAllData(session) {
-    session.userData = {};
+    session.userData['questionArray'] = new arraylist();
     session.dialogData = {};
-    task.stop();
+    taskForIdealState.stop();
 }
 
 /**
@@ -567,13 +594,27 @@ function checkLastSentMessageTime() {
     }
 }
 
+
+/**
+ * This method will check the current logged in user has any pending feedback or not
+ */
+function checkForPendingFeedback() {
+    firebaseOperations.isFeedbackPendingForUser(username, function (isPendingFeedback) {
+        if(isPendingFeedback && !isUserStartFilling) {
+            var msg = new builder.Message().address(saveAddress);
+            msg.text((i18n.__('msg_to_start_feedback')), username);
+            bot.send(msg);
+        }
+    })
+}
+
+
 /**
  * This method will send a reminder to user to fill the feedback form in case if user is in ideal state
  */
 function sendProactiveMessage() {
     var msg = new builder.Message().address(saveAddress);
     msg.text(i18n.__('inactive_msg'), username);
-    msg.textLocale('en-US');
     bot.send(msg);
     lastSentMessage = new Date();
 
