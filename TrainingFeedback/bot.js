@@ -150,7 +150,7 @@ bot.dialog('startFeedbackQuestions', [
     function (session) {
         session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
-        session.userData['questionArray'] = new ArrayList;
+        session.userData['questionArray'] = new new arraylist();
         session.userData.questionArray.add(i18n.__("questions"));
         session.send("**Tip :** *Please select or type the option*");
         buildQuestionsAndOptions(session, session.userData.questionArray[0]);
@@ -573,7 +573,7 @@ function selectOptionAfterCompletingAnswer(session, results) {
  * @param session
  */
 function deleteAllData(session) {
-    session.userData['questionArray'] = new ArrayList;
+    session.userData['questionArray'] = new arraylist();
     session.dialogData = {};
     taskForIdealState.stop();
 }
