@@ -8,7 +8,7 @@ var firebaseOperations = require('./firebase_operations.js');
 let i18n = require("i18n");
 var json2csv = require('json2csv');
 var fs = require('fs');
-var ArrayList = require('arraylist');
+var arraylist = require('arraylist');
 var cron = require('node-cron');
 
 
