@@ -156,7 +156,7 @@
     "This is incorrect command, type 'help' to see all available commands",
     "This is invalid question, please type correct command."
   ],
-  "session_reset_msg": "I have lost my memory (morningafter) please type '**start**' to start the feedback again",
+  "session_reset_msg": "I have lost my memory (morningafter) please type '**go**' to start the feedback again",
   "not_started_msg": "Hey (wait)! You have not started filling the feedback yet. Please give all responses before submitting the feedback.",
   "help_msg": "\n* If you want to edit any response type **'edit_question_number'**. Example- edit_4 \n* if you want to submit response type **'submit'** \n* If you want to reset all responses type **'reset'** \n* If you want to check all available commands type **'help'**",
   "mail_not_sent_msg": "We are not able to send your response to TM team. Please contact to support.",

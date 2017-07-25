@@ -584,6 +584,7 @@ function deleteAllData(session) {
     session.userData['questionArray'] = new arraylist();
     session.dialogData = {};
     taskForIdealState.stop();
+    isUserStartFilling  =   false;
 }
 
 /**
