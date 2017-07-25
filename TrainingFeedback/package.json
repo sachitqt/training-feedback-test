@@ -1,7 +1,7 @@
 {
-  "name": "botbuilder-sample-createnewconversation",
+  "name": "botsun",
   "version": "1.0.0",
-  "description": "Bot Builder Sample - Create New Conversation",
+  "description": "This bot will ask user to fill the feedback form after the training session.",
   "scripts": {
     "start": "node app.js"
   },
