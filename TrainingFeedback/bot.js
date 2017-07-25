@@ -298,6 +298,8 @@ bot.dialog('notFillingFeedback', [
         var response = session.dialogData.notFillingFeedbackReason;
         session.send("Submitting Response, Please wait...");
         session.sendTyping();
+        saveAddress = session.message.address;
+        username = saveAddress.user.name;
         setTimeout(function () {
             sendEmail(session, username + "- " + i18n.__('notSubmitting'), "Here is the reason-: " + response, false);
         }, 3000);
