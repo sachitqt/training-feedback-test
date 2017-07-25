@@ -642,8 +642,7 @@ module.exports = {
     getUniversalBotInstance: function () {
         return bot;
     },
-    startCron: function (session) {
-        console.log(session);
+    startCron: function () {
         startCronToCheckIdealState();
         startCronToCheckPendingFeedback();
     }
