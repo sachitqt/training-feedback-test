@@ -32,16 +32,7 @@ var lastSentMessage;
 var isUserStartFilling = false;
 var trainingId;
 var trainingName;
-
-var taskForIdealState = cron.schedule('*/2 * * * *', function () {
-    console.log('running a task every two minutes');
-    checkLastSentMessageTime();
-}, false);
-
-var taskForPendingFeedback = cron.schedule('*/1 * * * *', function () {
-    console.log('Running a task to check pending feedback');
-    checkForPendingFeedback();
-}, false);
+var taskForIdealState, taskForPendingFeedback;
 
 
 // log any bot errors into the console
@@ -49,30 +40,22 @@ bot.on('error', function (e) {
     console.log('And error ocurred', e);
 });
 
-bot.on('contactRelationUpdate', function (message, session) {
+bot.on('contactRelationUpdate', function (message) {
     if (message.action === 'add') {
         taskForPendingFeedback.start();
         username = message.user ? message.user.name : null;
         saveAddress = message.address;
-
         var reply = new builder.Message()
             .address(message.address)
             .text('Hello %s, Thanks for adding me.', username || 'there');
         bot.send(reply);
     } else {
+        isUserStartFilling  =   false;
         taskForPendingFeedback.stop();
         console.log(i18n.__('delete_bot'))
     }
 
 });
-
-// module.exports ={
-//
-//     getPendingFeedbackTaskVariable: function () {
-//         return taskForPendingFeedback;
-//     }
-//
-// }
 
 
 //=========================================================
@@ -89,9 +72,7 @@ bot.on('contactRelationUpdate', function (message, session) {
 
 bot.dialog("/", [
     function (session) {
-        // if(!taskForPendingFeedback.isStarted()) {
-        //     taskForPendingFeedback.start();
-        // }
+
         saveAddress = session.message.address;
         username = saveAddress.user.name;
         var userMessage = (session.message.text).toLowerCase();
@@ -584,7 +565,7 @@ function deleteAllData(session) {
     session.userData['questionArray'] = new arraylist();
     session.dialogData = {};
     taskForIdealState.stop();
-    isUserStartFilling  =   false;
+    isUserStartFilling = false;
 }
 
 /**
@@ -620,7 +601,7 @@ function checkForPendingFeedback() {
 
                 var msg = new builder.Message().address(saveAddress);
                 msg.text("You have just attended the **'%s'** session. We request you to fill the feedback form ASAP. " +
-                    "Please type **go** to start filling the feedback.", trainingName);
+                    "Please type **'go'** to start filling the feedback.", trainingName);
                 bot.send(msg);
             })
         }
@@ -639,10 +620,31 @@ function sendProactiveMessage() {
 
 }
 
+function startCronToCheckIdealState() {
+    taskForIdealState = cron.schedule('*/2 * * * *', function () {
+        console.log('running a task every two minutes');
+        checkLastSentMessageTime();
+    }, false);
+    taskForIdealState.start();
+}
+
+
+function startCronToCheckPendingFeedback() {
+    taskForPendingFeedback = cron.schedule('*/1 * * * *', function () {
+        console.log('Running a task to check pending feedback');
+        checkForPendingFeedback();
+    }, false);
+    taskForPendingFeedback.start();
+}
+
 module.exports = {
+
     getUniversalBotInstance: function () {
         return bot;
     },
-    taskForPendingFeedback,
-    taskForIdealState
+    startCron: function (session) {
+        console.log(session);
+        startCronToCheckIdealState();
+        startCronToCheckPendingFeedback();
+    }
 }
