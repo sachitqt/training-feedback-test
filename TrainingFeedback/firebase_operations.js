@@ -43,6 +43,13 @@ module.exports = {
                 getUserPendingFeedback(emailId, callbackFunction);
             }
         });
+    },
+    deleteUserPendingFeedback : function (trainingId, username) {
+        getEmailIdFromUsername(username, function (emailId) {
+            if (emailId) {
+                deletePendingFeedback(trainingId, emailId);
+            }
+        });
     }
 };
 
@@ -198,6 +205,18 @@ function getUserPendingFeedback(emailId, callbackFunction){
     })
 }
 
+function deletePendingFeedback(trainingId, emailId){
+    firebase.database().ref('pendingFeedback/' + emailId.replaceAll('.', ':') + '/' + trainingId).remove();
+}
+
+function getQuestions(){
+    firebase.database().ref('questions/').once('value', function (snapshot) {
+        console.log(snapshot);
+    }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+    })
+}
+
 String.prototype.replaceAll = function (str1, str2, ignore) {
     return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof(str2) == "string") ? str2.replace(/\$/g, "$$$$") : str2);
 }
@@ -210,15 +229,14 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
 //     });
 // }
 
-
 // getEmailIdFromUsername('Lipika Gupta', function (emailId) {
 //     console.log(emailId);
 // });
 // isFeedbackPending('sahil.goel@quovantis.com', '-KpFmXgFygU3AsDywr8h', function(isFeedbackPending){
 //     console.log('isFeedbackPending ' + isFeedbackPending);
 // });
-writeQuestionsToFirebase(i18n.__('questions'));
-saveUserData();
+// writeQuestionsToFirebase(i18n.__('questions'));
+// saveUserData();
 
 
 // fetchNonFilledTrainings();
