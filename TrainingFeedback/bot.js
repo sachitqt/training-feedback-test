@@ -27,6 +27,7 @@ const bot = new builder.UniversalBot(connector);
 
 
 var username = 'Unknown';
+var firstName;
 var saveAddress, question, answer;
 var lastSentMessage;
 var isUserStartFilling = false;
@@ -43,14 +44,16 @@ bot.on('error', function (e) {
 bot.on('contactRelationUpdate', function (message) {
     if (message.action === 'add') {
         taskForPendingFeedback.start();
-        username = message.user ? message.user.name : null;
+        username = message.user ? message.user.name : "Unknown";
+        firstName = username.split(" ")[0];
         saveAddress = message.address;
         var reply = new builder.Message()
             .address(message.address)
-            .text('Hello %s, Thanks for adding me.', username || 'there');
+            .text('Hey %s, thanks for adding me (handshake).  I will guide you in providing feedback for the trainings you attend.', firstName || 'there');
         bot.send(reply);
     } else {
-        isUserStartFilling  =   false;
+        isUserStartFilling = false;
+        taskForIdealState.stop();
         taskForPendingFeedback.stop();
         console.log(i18n.__('delete_bot'))
     }
@@ -63,7 +66,7 @@ bot.on('contactRelationUpdate', function (message) {
 //=========================================================
 
 // Anytime the major version is incremented any existing conversations will be restarted.
-// bot.use(builder.Middleware.dialogVersion({version: 1.0, resetCommand: /^reset/i}));
+bot.use(builder.Middleware.dialogVersion({version: 1.0, resetCommand: /^reset/i}));
 
 
 //==========================================================
@@ -72,33 +75,27 @@ bot.on('contactRelationUpdate', function (message) {
 
 bot.dialog("/", [
     function (session) {
-
         saveAddress = session.message.address;
         username = saveAddress.user.name;
         var userMessage = (session.message.text).toLowerCase();
         if (userMessage != 'go') {
-            session.endDialog("Hey %s, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'help'** to see all available commands that I can handle.", username);
+            session.endDialog("Hey %s, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'go'** to start filling the feedback", firstName);
         } else {
             firebaseOperations.isFeedbackPendingForUser(username, function (isPendingFeedback) {
                 if (isPendingFeedback) {
                     lastSentMessage = session.message.localTimestamp;
                     taskForIdealState.start();
                     isUserStartFilling = true;
-                    session.sendTyping();
-                    setTimeout(function () {
-                        session.send(i18n.__('welcome1_msg'));
-                        session.send(i18n.__('welcome2_msg'));
-                        session.send(i18n.__('welcome3_msg'));
-                        session.send(i18n.__('feedback_fill_msg'));
-                        builder.Prompts.choice(
-                            session,
-                            i18n.__('choose_start_option'),
-                            i18n.__('dialogLabels'),
-                            {
-                                listStyle: builder.ListStyle.button,
-                                retryPrompt: i18n.__('retry_prompt')
-                            });
-                    }, 3000);
+                    session.send(i18n.__('welcome1_msg'));
+                    session.send(i18n.__('welcome2_msg'));
+                    builder.Prompts.choice(
+                        session,
+                        i18n.__('choose_start_option'),
+                        i18n.__('dialogLabels'),
+                        {
+                            listStyle: builder.ListStyle.button,
+                            retryPrompt: i18n.__('retry_prompt')
+                        });
                 } else {
                     session.endDialog("You have no pending feedback yet. Enjoy!!!")
                 }
@@ -111,6 +108,7 @@ bot.dialog("/", [
             var selectedOptionIndex = results.response.index;
             switch (selectedOptionIndex) {
                 case 0:
+                    session.send('Shabaash! (monkey) (monkey)');
                     session.send(i18n.__('question_start_msg'));
                     session.beginDialog('startFeedbackQuestions');
                     break;
@@ -137,7 +135,6 @@ bot.dialog("/", [
  */
 bot.dialog('startFeedbackQuestions', [
     function (session) {
-        session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
         session.userData['questionArray'] = new arraylist();
         session.userData.questionArray.add(i18n.__("questions"));
@@ -145,7 +142,7 @@ bot.dialog('startFeedbackQuestions', [
         buildQuestionsAndOptions(session, session.userData.questionArray[0]);
     },
     function (session, results) {
-        session.sendTyping();
+
         lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[0];
@@ -153,7 +150,6 @@ bot.dialog('startFeedbackQuestions', [
         buildQuestionsAndOptions(session, session.userData.questionArray[1]);
     },
     function (session, results) {
-        session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[1];
@@ -161,7 +157,6 @@ bot.dialog('startFeedbackQuestions', [
         buildQuestionsAndOptions(session, session.userData.questionArray[2]);
     },
     function (session, results) {
-        session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[2];
@@ -169,7 +164,6 @@ bot.dialog('startFeedbackQuestions', [
         buildQuestionsAndOptions(session, session.userData.questionArray[3]);
     },
     function (session, results) {
-        session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[3];
@@ -177,7 +171,6 @@ bot.dialog('startFeedbackQuestions', [
         buildQuestionsAndOptions(session, session.userData.questionArray[4]);
     },
     function (session, results) {
-        session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[4];
@@ -185,7 +178,6 @@ bot.dialog('startFeedbackQuestions', [
         buildQuestionsAndOptions(session, session.userData.questionArray[5]);
     },
     function (session, results) {
-        session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[5];
@@ -199,13 +191,10 @@ bot.dialog('startFeedbackQuestions', [
         var questionObject = session.userData.questionArray[6];
         questionObject.answer = userAnswer;
         session.send(i18n.__('half_attempt_msg'));
-        setTimeout(function () {
-            session.send("Here is next question")
-            buildQuestionsAndOptions(session, session.userData.questionArray[7]);
-        }, 4000)
+        session.send("Here is the next question")
+        buildQuestionsAndOptions(session, session.userData.questionArray[7]);
     },
     function (session, results) {
-        session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[7];
@@ -213,7 +202,6 @@ bot.dialog('startFeedbackQuestions', [
         buildQuestionsAndOptions(session, session.userData.questionArray[8]);
     },
     function (session, results) {
-        session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[8];
@@ -222,7 +210,6 @@ bot.dialog('startFeedbackQuestions', [
         buildQuestionsAndOptions(session, session.userData.questionArray[9]);
     },
     function (session, results) {
-        session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response;
         var questionObject = session.userData.questionArray[9];
@@ -230,7 +217,6 @@ bot.dialog('startFeedbackQuestions', [
         buildQuestionsAndOptions(session, session.userData.questionArray[10]);
     },
     function (session, results) {
-        session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response;
         var questionObject = session.userData.questionArray[10];
@@ -245,13 +231,10 @@ bot.dialog('startFeedbackQuestions', [
         questionObject.answer = userAnswer;
         session.send("You are almost there, one more to go.");
         session.send("(bhangra)");
-        setTimeout(function () {
-            session.send("Here is the final question ")
-            buildQuestionsAndOptions(session, session.userData.questionArray[12]);
-        }, 3000)
+        session.send("Here is the final question ")
+        buildQuestionsAndOptions(session, session.userData.questionArray[12]);
     },
     function (session, results) {
-        session.sendTyping();
         lastSentMessage = session.message.localTimestamp;
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[12];
@@ -277,9 +260,7 @@ bot.dialog('notFillingFeedback', [
         saveAddress = session.message.address;
         username = saveAddress.user.name;
         lastSentMessage = session.message.localTimestamp;
-        session.sendTyping();
         session.send("(kya) :^)");
-        session.sendTyping();
         builder.Prompts.text(session, username + ", " + i18n.__('reason_msg'));
     },
     function (session, results) {
@@ -289,9 +270,7 @@ bot.dialog('notFillingFeedback', [
         session.sendTyping();
         saveAddress = session.message.address;
         username = saveAddress.user.name;
-        setTimeout(function () {
-            sendEmail(session, username + "- " + i18n.__('notSubmitting'), "Here is the reason-: " + response, false);
-        }, 3000);
+        sendEmail(session, username + "- " + i18n.__('notSubmitting'), "Here is the reason-: " + response, false);
     }
 ]);
 
@@ -326,11 +305,11 @@ bot.dialog('showFeedbackReview', [
 
         builder.Prompts.choice(session,
             msg,
-            ["edit_1", "edit_2", "edit_3", "edit_4", "edit_5", "edit_6", "edit_7", "edit_8",
-                "edit_9", "edit_10", "edit_11", "edit_12", "edit_13"], {
+            ["edit 1", "edit 2", "edit 3", "edit 4", "edit 5", "edit 6", "edit 7", "edit 8",
+                "edit 9", "edit 10", "edit 11", "edit 12", "edit 13"], {
                 retryPrompt: i18n.__('retry_command_prompt')
             });
-        session.send("Please type 'edit_(question number)' to edit the response for ex- **edit_1** or **'submit'** to submit all responses");
+        session.send("Please type 'edit (question number)' to edit the response for ex- **edit 1** or **'submit'** to submit all responses");
         lastSentMessage = session.message.localTimestamp;
     },
     function (session, results) {
@@ -386,14 +365,16 @@ bot.dialog('submit', function (session, args, next) {
     if (!(session.userData.questionArray)) {
         session.endDialog(i18n.__('not_started_msg'))
     } else {
-        var attempedQuestions = session.userData.questionArray.length;
-        if (attempedQuestions === 0) {
-            session.endDialog(i18n.__('not_started_msg'))
-        } else if (attempedQuestions < 13) {
-            session.endDialog(i18n.__("wait"), attempedQuestions)
-        } else {
-            submitAllResponse(session);
+        var length = session.userData.questionArray.length;
+        for (var index = 0; index < length; index++) {
+            var answer = session.userData.questionArray[index].answer;
+            var id = session.userData.questionArray[index].id;
+            if (answer == '') {
+                session.endDialog(i18n.__("wait"), id)
+                return;
+            }
         }
+        submitAllResponse(session);
     }
 })
     .triggerAction({
@@ -409,9 +390,10 @@ bot.dialog('submit', function (session, args, next) {
 bot.dialog('/delete', (session) => {
     deleteAllData(session);
     session.endDialog(i18n.__('session_reset_msg'));
+
 })
     .triggerAction({
-        matches: /reset/i,
+        matches: /restart/i,
         confirmPrompt: "This will wipe everything out. Are you sure?"
     });
 
@@ -473,8 +455,8 @@ function sendEmail(session, subject, text, feedback) {
         } else {
             console.log('Email sent: ' + info.response);
             session.send(i18n.__('mail_sent_msg'))
-            session.send("Thanks **%s** for filling your feedback (bow)", username);
-            // fs.unlinkSync('response/session_feedback.csv');
+            session.send("Thanks **%s** for filling your feedback (bow)", firstName);
+            fs.unlinkSync('response/session_feedback.csv');
         }
         transporter.close();
         deleteAllData(session);
@@ -490,6 +472,8 @@ function sendEmail(session, subject, text, feedback) {
 function submitAllResponse(session) {
     saveAddress = session.message.address;
     username = saveAddress.user.name;
+
+    firstName = username.split(" ")[0];
     isUserStartFilling = false;
 
     session.send("Submitting Response, Please wait...");
@@ -562,7 +546,7 @@ function selectOptionAfterCompletingAnswer(session, results) {
  * @param session
  */
 function deleteAllData(session) {
-    session.userData['questionArray'] = new arraylist();
+    session.userData = {};
     session.dialogData = {};
     taskForIdealState.stop();
     isUserStartFilling = false;
@@ -613,11 +597,15 @@ function checkForPendingFeedback() {
  * This method will send a reminder to user to fill the feedback form in case if user is in ideal state
  */
 function sendProactiveMessage() {
-    var msg = new builder.Message().address(saveAddress);
-    msg.text(i18n.__('inactive_msg'), username);
-    bot.send(msg);
-    lastSentMessage = new Date();
-
+    try {
+        var msg = new builder.Message().address(saveAddress);
+        firstName = username.split(" ")[0];
+        msg.text(i18n.__('inactive_msg'), firstName);
+        bot.send(msg);
+        lastSentMessage = new Date();
+    } catch (err) {
+        console.log(err.message);
+    }
 }
 
 function startCronToCheckIdealState() {

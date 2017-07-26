@@ -158,10 +158,10 @@
   ],
   "session_reset_msg": "I have lost my memory (morningafter) please type '**go**' to start the feedback again",
   "not_started_msg": "Hey (wait)! You have not started filling the feedback yet. Please give all responses before submitting the feedback.",
-  "help_msg": "\n* If you want to edit any response type **'edit_question_number'**. Example- edit_4 \n* if you want to submit response type **'submit'** \n* If you want to reset all responses type **'reset'** \n* If you want to check all available commands type **'help'**",
+  "help_msg": "\n* If you want to edit any response type **'edit question_number'**. Example- edit 4 \n* if you want to submit response type **'submit'** \n* If you want to reset all responses type **'restart'** \n* If you want to check all available commands type **'help'**",
   "mail_not_sent_msg": "We are not able to send your response to TM team. Please contact to support.",
   "mail_sent_msg": "We have sent your response to TM team. Thanks for your time.",
-  "reason_msg": "Can you please write the reason why you don't want to fill the feedback form?",
+  "reason_msg": "Can you please write the reason why don't you want to fill the feedback? (chappal)",
   "complete_all_ques_msg": "Great Job! (clap) You have submitted all the responses successfully and we appreciate this. (y) What would you like to do now?",
   "half_attempt_msg": "You have completed almost half of the questions. (kya) baat hai. Here is a (trophy) for you.",
   "error_msg": "There is some problem, please try after some time",
@@ -169,14 +169,14 @@
   "welcome1_msg": "You will be presented with a list of questions. Your answer to those questions can help the trainer identify his strengths and improvement areas to serve you better.",
   "welcome2_msg": "You can type '**help**' anytime to see all available commands that I can respond to.",
   "welcome3_msg": "**I will help you in providing the feedback for the training** (wave)",
-  "feedback_fill_msg": "You have just attended the session. We request you to fill the feedback form ASAP. ",
-  "msg_to_start_feedback": "You have just attended the session. We request you to fill the feedback form ASAP. Please type **'go'** to start filling the feedback.",
-  "question_start_msg": "Here are the questions-:",
+  "feedback_fill_msg": "You have just attended the session. We request you to fill the feedback ASAP. ",
+  "msg_to_start_feedback": "You have just attended the session. We request you to fill the feedback ASAP. Please type **'go'** to start filling the feedback.",
+  "question_start_msg": "Here are the questions:",
   "choose_start_option": "What would you like to do? (** Tip :** *Please select or type the option*)",
   "delete_bot": "Bot has been delete from the skype list",
   "dialogLabels": [
     "Start",
-    "Not Filling"
+    "Skip"
   ],
   "ratingDialogLabels": [
     "1",
@@ -195,6 +195,6 @@
   ],
   "wait": "Hey (wait)! You have only attempted %s/13 questions. Please give all responses before submitting the feedback.",
   "answer_update":"Your **answer %s** has been updated successfully (rock)",
-  "inactive_msg":"Hey %s, why are you not responding. Its been long time you didn't see me :(, Please fill the form ASAP.",
+  "inactive_msg":"Hey %s, why are you not responding. Its been long time you didn't see me :(, Please choose option ASAP.",
   "invalid_query":"Hey %s, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'help'** to see all available commands that I can handle."
 }

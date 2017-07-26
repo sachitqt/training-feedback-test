@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3cb629fb-fc8d-4ad4-838d-70ccf5496fd0" name="Default" comment="Port Changes">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bot.js" afterPath="$PROJECT_DIR$/bot.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/locales/en.json" afterPath="$PROJECT_DIR$/locales/en.json" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,11 +18,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="bot.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="bot.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bot.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="645" column="0" lean-forward="false" selection-start-line="645" selection-start-column="0" selection-end-line="645" selection-end-column="0" />
+            <state relative-caret-position="235">
+              <caret line="441" column="10" lean-forward="true" selection-start-line="441" selection-start-column="10" selection-end-line="441" selection-end-column="10" />
               <folding>
                 <element signature="e#0#41#0" expanded="false" />
               </folding>
@@ -29,21 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="firebase_operations.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="firebase_operations.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/firebase_operations.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="194" column="7" lean-forward="false" selection-start-line="194" selection-start-column="7" selection-end-line="194" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="14" lean-forward="true" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+            <state relative-caret-position="98">
+              <caret line="195" column="31" lean-forward="true" selection-start-line="195" selection-start-column="31" selection-end-line="195" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -60,36 +51,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ArrayList</find>
+      <find>Thanks</find>
+      <find>sendTy</find>
+      <find>response</find>
+      <find>firstName</find>
+      <find>deleteall</find>
+      <find>setTimeout</find>
+      <find>its bee</find>
+      <find>form</find>
+      <find>here is</find>
+      <find>setT</find>
+      <find>set</find>
+      <find>submitResponse</find>
       <find>deleteAllData</find>
-      <find>arraylist</find>
-      <find>not</find>
+      <find>submit</find>
+      <find>submitAllResponse</find>
+      <find>break</find>
+      <find>Here is</find>
+      <find>edit_1</find>
+      <find>edit_</find>
+      <find>startFeedbackQuestions</find>
+      <find>question_start_msg</find>
+      <find>shaba</find>
       <find>notFillingFeedback</find>
-      <find>-k</find>
-      <find>KpoIMihPuePLyJIMw_c</find>
-      <find>firebase</find>
-      <find>firebaseOperations</find>
-      <find>getUserPendingFeedback</find>
-      <find>fetchno</find>
-      <find>forEach</find>
-      <find>msg_to_start_feedback</find>
-      <find>%s</find>
-      <find>taskForPendingFeedback</find>
-      <find>deleteAl</find>
-      <find>I have</find>
-      <find>saveTrainingFeedback</find>
-      <find>saveFeedback</find>
-      <find>trainingId</find>
-      <find>cron</find>
-      <find>taskForIdealState</find>
-      <find>checkLastSentMessageTime</find>
-      <find>taskForIdealState.start()</find>
-      <find>username</find>
+      <find>reason_msg</find>
+      <find>delete</find>
+      <find>hello</find>
+      <find>notFill</find>
       <find>saveAddress</find>
-      <find>session.userData.name</find>
-      <find>startCronToCheckPendingFeedback</find>
-      <find>checkForPendingFeedback</find>
-      <find>session</find>
+      <find>username</find>
+      <find>reset</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -112,9 +103,9 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/firebase_operations.js" />
-        <option value="$PROJECT_DIR$/locales/en.json" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/bot.js" />
+        <option value="$PROJECT_DIR$/locales/en.json" />
       </list>
     </option>
   </component>
@@ -440,7 +431,7 @@
       <workItem from="1500380588144" duration="8132000" />
       <workItem from="1500620187043" duration="5824000" />
       <workItem from="1500896259816" duration="14757000" />
-      <workItem from="1500974077551" duration="15984000" />
+      <workItem from="1500974077551" duration="27607000" />
     </task>
     <task id="LOCAL-00001" summary="Review answer functionality implemented.">
       <created>1499746576635</created>
@@ -495,7 +486,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="212547000" />
+    <option name="totallyTimeSpent" value="224170000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -504,7 +495,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16123907" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34794158" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25068492" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24931507" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -542,17 +533,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>350</line>
+          <line>329</line>
           <option name="timeStamp" value="137" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>164</line>
+          <line>159</line>
           <option name="timeStamp" value="142" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>172</line>
+          <line>166</line>
           <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -562,90 +553,48 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>480</line>
+          <line>462</line>
           <properties />
           <option name="timeStamp" value="155" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>469</line>
+          <line>451</line>
           <properties />
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/firebase_operations.js</url>
-          <line>194</line>
+          <url>file://$PROJECT_DIR$/bot.js</url>
+          <line>77</line>
           <properties />
-          <option name="timeStamp" value="166" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/firebase_operations.js</url>
-          <line>196</line>
-          <properties />
-          <option name="timeStamp" value="167" />
+          <option name="timeStamp" value="189" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>594</line>
+          <line>472</line>
           <properties />
-          <option name="timeStamp" value="173" />
+          <option name="timeStamp" value="192" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>597</line>
+          <line>279</line>
           <properties />
-          <option name="timeStamp" value="174" />
+          <option name="timeStamp" value="193" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>604</line>
+          <line>364</line>
           <properties />
-          <option name="timeStamp" value="175" />
+          <option name="timeStamp" value="194" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>623</line>
+          <line>550</line>
           <properties />
-          <option name="timeStamp" value="176" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>627</line>
-          <properties />
-          <option name="timeStamp" value="177" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>632</line>
-          <properties />
-          <option name="timeStamp" value="178" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>636</line>
-          <properties />
-          <option name="timeStamp" value="179" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>624</line>
-          <properties />
-          <option name="timeStamp" value="180" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>633</line>
-          <properties />
-          <option name="timeStamp" value="183" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/bot.js</url>
-          <line>593</line>
-          <properties />
-          <option name="timeStamp" value="184" />
+          <option name="timeStamp" value="196" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="186" />
+      <option name="time" value="197" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -695,7 +644,6 @@
     <entry file="file://$PROJECT_DIR$/node_modules/i18n/i18n.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/botbuilder/lib/bots/Library.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/promise/lib/done.js" />
-    <entry file="file://$PROJECT_DIR$/node_modules/botbuilder/lib/middleware/Middleware.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/botbuilder/lib/cards/CardAction.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/botbuilder/lib/cards/Keyboard.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/botbuilder/lib/Message.js" />
@@ -707,7 +655,6 @@
     <entry file="file://$PROJECT_DIR$/node_modules/restify/lib/server.js" />
     <entry file="file://$PROJECT_DIR$/response/name.csv" />
     <entry file="file://$PROJECT_DIR$/submitresponse.js" />
-    <entry file="file://$PROJECT_DIR$/node_modules/botbuilder/lib/bots/ChatConnector.js" />
     <entry file="file://$PROJECT_DIR$/startfeedback.js" />
     <entry file="file://$PROJECT_DIR$/constant.js" />
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
@@ -734,7 +681,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/botbuilder/lib/botbuilder.d.ts" />
     <entry file="file://$PROJECT_DIR$/test.js" />
-    <entry file="file://$PROJECT_DIR$/node_modules/botbuilder/lib/Session.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/botbuilder/lib/bots/UniversalBot.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/botbuilder/lib/dialogs/WaterfallDialog.js" />
     <entry file="file://$PROJECT_DIR$/npm-debug.log" />
@@ -770,14 +716,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/locales/en.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="156" column="60" lean-forward="true" selection-start-line="156" selection-start-column="60" selection-end-line="156" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/firebase/database-node.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -794,10 +732,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/firebase_operations.js">
+    <entry file="file://$PROJECT_DIR$/node_modules/botbuilder/lib/bots/ChatConnector.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="194" column="7" lean-forward="false" selection-start-line="194" selection-start-column="7" selection-end-line="194" selection-end-column="7" />
+        <state relative-caret-position="318">
+          <caret line="549" column="27" lean-forward="false" selection-start-line="549" selection-start-column="27" selection-end-line="549" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/botbuilder/lib/middleware/Middleware.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="59" column="4" lean-forward="false" selection-start-line="59" selection-start-column="4" selection-end-line="59" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/botbuilder/lib/Session.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="749" column="0" lean-forward="false" selection-start-line="749" selection-start-column="0" selection-end-line="749" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -812,11 +766,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bot.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="645" column="0" lean-forward="false" selection-start-line="645" selection-start-column="0" selection-end-line="645" selection-end-column="0" />
+        <state relative-caret-position="235">
+          <caret line="441" column="10" lean-forward="true" selection-start-line="441" selection-start-column="10" selection-end-line="441" selection-end-column="10" />
           <folding>
             <element signature="e#0#41#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/locales/en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="160" column="208" lean-forward="false" selection-start-line="160" selection-start-column="208" selection-end-line="160" selection-end-column="208" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firebase_operations.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="195" column="31" lean-forward="true" selection-start-line="195" selection-start-column="31" selection-end-line="195" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
