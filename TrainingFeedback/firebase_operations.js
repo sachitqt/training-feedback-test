@@ -199,7 +199,7 @@ function getEmailIdFromUsername(username, callbackFunction) {
 
 function getUserPendingFeedback(emailId, callbackFunction){
     firebase.database().ref('pendingFeedback/'+emailId.replaceAll('.', ':')).once('value', function (snapshot) {
-        callbackFunction(snapshot.val());
+        callbackFunction(snapshot);
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
     })
