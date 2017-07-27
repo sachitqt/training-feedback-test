@@ -47,9 +47,10 @@ bot.on('contactRelationUpdate', function (message) {
         username = message.user ? message.user.name : "Unknown";
         firstName = username.split(" ")[0];
         saveAddress = message.address;
+        var greetingMessage =   getDayTimings();
         var reply = new builder.Message()
             .address(message.address)
-            .text('Hey %s, thanks for adding me (handshake).  I will guide you in providing feedback for the trainings you attend.', firstName || 'there');
+            .text('Hey %s, %s and thanks for adding me (handshake).  I will guide you in providing feedback for the trainings you attend.', firstName || 'there', greetingMessage);
         bot.send(reply);
     } else {
         isUserStartFilling = false;
@@ -59,6 +60,22 @@ bot.on('contactRelationUpdate', function (message) {
     }
 
 });
+
+/**
+ * This function will return the greeting message according to the current time
+ * @returns {*}
+ */
+function getDayTimings() {
+    var currentDate = new Date();
+    var curHr = currentDate.getHours();
+    if (curHr < 12) {
+        return 'Good Morning';
+    } else if (curHr < 18) {
+        return 'Good Afternoon';
+    } else {
+        return 'Good Evening';
+    }
+}
 
 
 //=========================================================
@@ -97,7 +114,7 @@ bot.dialog("/", [
                             retryPrompt: i18n.__('retry_prompt')
                         });
                 } else {
-                    session.endDialog("You have no pending feedback yet. Enjoy!!!")
+                    session.endDialog("You have no pending feedback yet. Enjoy!!!  (whistle)")
                 }
             })
         }
@@ -108,7 +125,7 @@ bot.dialog("/", [
             var selectedOptionIndex = results.response.index;
             switch (selectedOptionIndex) {
                 case 0:
-                    session.send('Shabaash! (monkey) (monkey)');
+                    session.send('Shabaash! (monkey) (joy)');
                     session.send(i18n.__('question_start_msg'));
                     session.beginDialog('startFeedbackQuestions');
                     break;
@@ -191,7 +208,7 @@ bot.dialog('startFeedbackQuestions', [
         var questionObject = session.userData.questionArray[6];
         questionObject.answer = userAnswer;
         session.send(i18n.__('half_attempt_msg'));
-        session.send("Here is the next question")
+        session.send("Next question")
         buildQuestionsAndOptions(session, session.userData.questionArray[7]);
     },
     function (session, results) {
@@ -230,8 +247,8 @@ bot.dialog('startFeedbackQuestions', [
         var questionObject = session.userData.questionArray[11];
         questionObject.answer = userAnswer;
         session.send("You are almost there, one more to go.");
-        session.send("(bhangra)");
-        session.send("Here is the final question ")
+        session.send("(bhangra) (fireworks)");
+        session.send("Here is the final question ");
         buildQuestionsAndOptions(session, session.userData.questionArray[12]);
     },
     function (session, results) {
@@ -259,17 +276,22 @@ bot.dialog('notFillingFeedback', [
     function (session) {
         saveAddress = session.message.address;
         username = saveAddress.user.name;
+        firstName = username.split(" ")[0];
+
         lastSentMessage = session.message.localTimestamp;
         session.send("(kya) :^)");
-        builder.Prompts.text(session, username + ", " + i18n.__('reason_msg'));
+        builder.Prompts.text(session, firstName + ", " + i18n.__('reason_msg'));
     },
     function (session, results) {
         session.dialogData.notFillingFeedbackReason = results.response;
         var response = session.dialogData.notFillingFeedbackReason;
-        session.send("Submitting Response, Please wait...");
+        firebaseOperations.deleteUserPendingFeedback(trainingId, username);
+        session.send("Submitting Feedback, Please wait...");
         session.sendTyping();
         saveAddress = session.message.address;
         username = saveAddress.user.name;
+        firstName = username.split(" ")[0];
+
         sendEmail(session, username + "- " + i18n.__('notSubmitting'), "Here is the reason-: " + response, false);
     }
 ]);
@@ -313,7 +335,7 @@ bot.dialog('showFeedbackReview', [
         lastSentMessage = session.message.localTimestamp;
     },
     function (session, results) {
-        var selectOption = results.response.entity.split('_');
+        var selectOption = results.response.entity.split(' ');
         var qNumber = selectOption[1];
         qNumber = --qNumber;
         session.userData.editQuestionNumber = qNumber;
@@ -456,7 +478,7 @@ function sendEmail(session, subject, text, feedback) {
             console.log('Email sent: ' + info.response);
             session.send(i18n.__('mail_sent_msg'))
             session.send("Thanks **%s** for filling your feedback (bow)", firstName);
-            fs.unlinkSync('response/session_feedback.csv');
+            // fs.unlinkSync('response/session_feedback.csv');
         }
         transporter.close();
         deleteAllData(session);
@@ -546,10 +568,10 @@ function selectOptionAfterCompletingAnswer(session, results) {
  * @param session
  */
 function deleteAllData(session) {
+    isUserStartFilling = false;
     session.userData = {};
     session.dialogData = {};
     taskForIdealState.stop();
-    isUserStartFilling = false;
 }
 
 /**
@@ -564,7 +586,7 @@ function checkLastSentMessageTime() {
         diff /= 60;
         console.log(Math.abs(Math.round(diff)));
         var timeDifference = Math.abs(Math.round(diff));
-        if (timeDifference >= 4) {
+        if (timeDifference >= 1) {
             sendProactiveMessage();
         }
     }
