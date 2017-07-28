@@ -30,6 +30,7 @@
     "node-cron": "^1.2.0",
     "nodemailer": "^4.0.1",
     "restify": "^4.3.0",
-    "xls-to-json-lc": "^0.3.4"
+    "xls-to-json-lc": "^0.3.4",
+    "xlsx-to-json-lc": "^0.4.1"
   }
 }
