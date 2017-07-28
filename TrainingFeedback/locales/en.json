@@ -143,7 +143,8 @@
       "answer": ""
     }
   ],
-  "subject": "Session Feedback",
+  "subject_feedback": "Session Feedback",
+  "subject_response": "Session Response",
   "notSubmitting": "Not Submitting",
   "response_header": "Here is the list of responses that you have submitted, you can edit any response before submitting it.",
   "retry_prompt": [

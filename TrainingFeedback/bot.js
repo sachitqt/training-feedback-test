@@ -1,7 +1,3 @@
-/**
- * Created by sachit on 15/07/17.
- */
-
 var builder = require('botbuilder');
 var nodemailer = require('nodemailer');
 var firebaseOperations = require('./firebase_operations.js');
@@ -50,8 +46,10 @@ bot.on('contactRelationUpdate', function (message) {
         var greetingMessage =   getDayTimings();
         var reply = new builder.Message()
             .address(message.address)
-            .text('Hey %s, %s and thanks for adding me (handshake).  I will guide you in providing feedback for the trainings you attend.', firstName || 'there', greetingMessage);
+            .text("Hey **%s**, *%s* and thanks for adding me (highfive).  I will guide you to provide feedback for the " +
+                "trainings here itself so that you don't have to fill a form on Zoho anymore", store.get('firstname') || "there", greetingMessage);
         bot.send(reply);
+
     } else {
         isUserStartFilling = false;
         taskForIdealState.stop();
@@ -286,7 +284,7 @@ bot.dialog('notFillingFeedback', [
         session.dialogData.notFillingFeedbackReason = results.response;
         var response = session.dialogData.notFillingFeedbackReason;
         firebaseOperations.deleteUserPendingFeedback(trainingId, username);
-        session.send("Submitting Feedback, Please wait...");
+        session.send("Submitting response, Please wait...");
         session.sendTyping();
         saveAddress = session.message.address;
         username = saveAddress.user.name;
@@ -498,7 +496,7 @@ function submitAllResponse(session) {
     firstName = username.split(" ")[0];
     isUserStartFilling = false;
 
-    session.send("Submitting Response, Please wait...");
+    session.send("Submitting feedback, Please wait...");
     session.sendTyping();
     var totalResponse = session.userData.questionArray;
     firebaseOperations.saveFeedbackToDB(trainingId, username, session.userData.questionArray);
