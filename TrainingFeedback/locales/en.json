@@ -170,7 +170,8 @@
     "edit 10",
     "edit 11",
     "edit 12",
-    "edit 13"
+    "edit 13",
+    "submit"
   ],
   "session_reset_msg": "I have lost my memory (morningafter) please type '**Start**' to start the feedback again",
   "not_started_msg": "Hey (wait)! You have not started filling the feedback yet. Please give all responses before submitting the feedback.",

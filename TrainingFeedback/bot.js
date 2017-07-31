@@ -83,6 +83,7 @@ bot.use(builder.Middleware.dialogVersion({version: 1.0, resetCommand: /^reset/i}
 
 bot.dialog("/", [
     function (session) {
+        session.sendTyping();
         var username = session.message.user.name;
         if (username == undefined) {
             username = "there";
@@ -229,7 +230,7 @@ bot.dialog('startFeedbackQuestions', [
         var questionObject = session.userData.questionArray[6];
         questionObject.answer = userAnswer;
         session.send(i18n.__('half_attempt_msg'));
-        session.send("Next question")
+        session.send("Next question");
         buildQuestionsAndOptions(session, session.userData.questionArray[7]);
     },
     function (session, results) {
@@ -353,6 +354,10 @@ bot.dialog('showFeedbackReview', [
             session.userData.trainingId);
     },
     function (session, results) {
+        if(results.response.entity=="submit") {
+            submitAllResponse(session);
+            return;
+        }
         var selectOption = results.response.entity.split(" ");
         var qNumber = selectOption[1];
         qNumber = --qNumber;
@@ -645,7 +650,7 @@ function checkForPendingFeedback() {
 
 
 /**
- * This method will send a reminder to user to fill the feedback form in case if user is in ideal state
+ * This method will send a reminder to user to fill the feedback in case if user is in ideal state
  * @param address
  * @param trainingName
  */

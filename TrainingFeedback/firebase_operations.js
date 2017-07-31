@@ -55,7 +55,6 @@ module.exports = {
     },
     addUserSession: function (username, address) {
         getEmailIdFromUsername(username, function (emailId) {
-            console.log("Email Id: " + emailId);
             firebase.database().ref('sessions/' + emailId.replaceAll('.', ':')).set({
                 username: username,
                 address: address
