@@ -22,10 +22,10 @@ let config = {
 firebase.initializeApp(config);
 
 module.exports = {
-    saveFeedbackToDB: function (trainingId, userId, questionAnswers) {
+    saveFeedbackToDB: function (trainingId, userId, questionAnswers, trainingName) {
         getEmailIdFromUsername(userId, function (emailId) {
             if (emailId) {
-                saveTrainingFeedback(trainingId, emailId, username, questionAnswers);
+                saveTrainingFeedback(trainingId, emailId, username, questionAnswers, trainingName);
             }
         });
     },
@@ -126,7 +126,7 @@ function saveUser(userData) {
     });
 }
 
-function saveTrainingFeedback(trainingId, userId, username, questionAnswers) {
+function saveTrainingFeedback(trainingId, userId, username, questionAnswers, trainingName) {
     let questionAnswerData = {};
     for (let index = 0; index < questionAnswers.length; index++) {
         questionAnswerData[questionAnswers[index].question.replace('.', '')] = questionAnswers[index].answer;
@@ -135,6 +135,7 @@ function saveTrainingFeedback(trainingId, userId, username, questionAnswers) {
         trainingId: trainingId,
         userId: userId,
         username: username,
+        trainingName: trainingName,
         questionAnswers: questionAnswerData
     });
     firebase.database().ref('pendingFeedback/' + userId.replaceAll('.', ':') + '/' + trainingId).remove(function (error) {
