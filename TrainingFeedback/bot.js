@@ -90,8 +90,8 @@ bot.dialog("/", [
         var firstName = username.split(" ")[0];
         session.userData.firstName = firstName;
         var userMessage = (session.message.text).toLowerCase();
-        if (userMessage != 'go') {
-            session.endDialog("Hey %s, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'go'** to start filling the feedback", session.userData.firstName);
+        if (userMessage != 'start') {
+            session.endDialog("Hey **%s**, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'Start'** to start filling the feedback", session.userData.firstName);
         } else {
             firebaseOperations.isFeedbackPendingForUser(username, function (isPendingFeedback) {
                 if (isPendingFeedback) {
@@ -110,48 +110,52 @@ bot.dialog("/", [
                         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), attendeeId, trainingId);
                         console.log(username + " -> " + session.userData.trainingName + ", " + session.userData.trainingId);
 
+                        session.send('Shabaash! (monkey) (joy)');
                         session.send(i18n.__('welcome1_msg'));
                         session.send(i18n.__('welcome2_msg'));
-                        builder.Prompts.choice(
-                            session,
-                            i18n.__('choose_start_option'),
-                            i18n.__('dialogLabels'),
-                            {
-                                listStyle: builder.ListStyle.button,
-                                retryPrompt: i18n.__('retry_prompt')
-                            });
+                        // session.send(i18n.__('question_start_msg'));
+                        session.beginDialog('startFeedbackQuestions');
+
+                        // builder.Prompts.choice(
+                        //     session,
+                        //     i18n.__('choose_start_option'),
+                        //     i18n.__('dialogLabels'),
+                        //     {
+                        //         listStyle: builder.ListStyle.button,
+                        //         retryPrompt: i18n.__('retry_prompt')
+                        //     });
                     });
                 } else {
                     session.endDialog("You have no pending feedback yet. Enjoy!!!  (whistle)")
                 }
             })
         }
-    },
-    function (session, results) {
-        if (results.response) {
-            firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
-                session.userData.trainingId);
-            var selectedOptionIndex = results.response.index;
-            switch (selectedOptionIndex) {
-                case 0:
-                    session.send('Shabaash! (monkey) (joy)');
-                    session.send(i18n.__('question_start_msg'));
-                    session.beginDialog('startFeedbackQuestions');
-                    break;
-
-                case 1:
-                    session.beginDialog('notFillingFeedback');
-                    break;
-
-                default:
-                    session.send(i18n.__('no_option_found_error'));
-                    break;
-            }
-
-        } else {
-            session.send(i18n.__('error_msg'));
-        }
     }
+    // function (session, results) {
+    //     if (results.response) {
+    //         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
+    //             session.userData.trainingId);
+    //         var selectedOptionIndex = results.response.index;
+    //         switch (selectedOptionIndex) {
+    //             case 0:
+    //                 session.send('Shabaash! (monkey) (joy)');
+    //                 session.send(i18n.__('question_start_msg'));
+    //                 session.beginDialog('startFeedbackQuestions');
+    //                 break;
+    //
+    //             case 1:
+    //                 session.beginDialog('notFillingFeedback');
+    //                 break;
+    //
+    //             default:
+    //                 session.send(i18n.__('no_option_found_error'));
+    //                 break;
+    //         }
+    //
+    //     } else {
+    //         session.send(i18n.__('error_msg'));
+    //     }
+    // }
 ]);
 
 
@@ -294,7 +298,7 @@ bot.dialog('startFeedbackQuestions', [
 ]);
 
 
-// Dialog that will ask user the reason of not filling the feedback form
+// Dialog that will ask user the reason of not filling the feedback
 bot.dialog('notFillingFeedback', [
     function (session) {
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
@@ -333,7 +337,7 @@ bot.dialog('showFeedbackReview', [
             var question = session.userData.questionArray[index].question;
             var answer = session.userData.questionArray[index].answer;
             var id = session.userData.questionArray[index].id;
-            response = response + ' \n' + ('**' + id + '.** ' + question + ' \n' + answer + ' \n');
+            response = response + ' \n' + ('**' + id + '.** ' + question + ' <br />' + '**Answer:** ' + answer + '<br />' + ' \n');
         }
 
         builder.Prompts.choice(
@@ -585,8 +589,6 @@ function selectOptionAfterCompletingAnswer(session, results) {
 function deleteAllData(session) {
     session.userData = {};
     session.dialogData = {};
-    // session.sessionState    =   {};
-    // taskForIdealState.stop();
 }
 
 /**
@@ -617,7 +619,7 @@ function checkForPendingFeedback() {
             var address = snapshot.val().address;
             firebaseOperations.isFeedbackPendingForUser(username, function (isPendingFeedback) {
                 if (isPendingFeedback) {
-                    var name, isStarted, lastSentMessage, trainingId, attendeeId, attendeeName;
+                    var name, isStarted, lastSentMessage, trainingId, attendeeId, trainerName;
                     firebaseOperations.getPendingFeedbackForUser(username, function (pendingFeedbackArray) {
                         pendingFeedbackArray.forEach(function (child) {
                             name = child.val().trainingName;
@@ -628,8 +630,8 @@ function checkForPendingFeedback() {
                         });
                         if (!isStarted) {
                             var msg = new builder.Message().address(address);
-                            msg.text("You have just attended the **'%s'** session. We request you to fill the feedback form ASAP. " +
-                                "Please type **'go'** to start filling the feedback.", name);
+                            msg.text("You have just attended the **'%s'** session. We request you to fill the feedback ASAP. " +
+                                "Please type **'Start'** to start filling the feedback. :)", name);
                             bot.send(msg);
                         } else {
                             checkForIdealCondition(address, lastSentMessage, trainingId, attendeeId, name);
@@ -687,7 +689,7 @@ function getAddressAndBroadcastMessage(res, next) {
 function sendBroadcastToAllMembers(username, address) {
     try {
         var msg = new builder.Message().address(address);
-        var message = "Hey **%s**, How was your experience so far. If you got any issue, please contact to Sachit or Lipika"
+        var message = "Hey **%s**, How was your experience so far. If you got any issue, please contact Sachit or Lipika."
         msg.text(message, username);
         msg.textLocale('en-US');
         bot.send(msg);
@@ -724,6 +726,4 @@ module.exports = {
     sendBroadcast: function (res, next) {
         getAddressAndBroadcastMessage(res, next);
     }
-
-
 }

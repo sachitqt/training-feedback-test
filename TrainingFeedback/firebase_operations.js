@@ -22,8 +22,8 @@ let config = {
 firebase.initializeApp(config);
 
 module.exports = {
-    saveFeedbackToDB: function (trainingId, userId, questionAnswers, trainingName) {
-        getEmailIdFromUsername(userId, function (emailId) {
+    saveFeedbackToDB: function (trainingId, username, questionAnswers, trainingName) {
+        getEmailIdFromUsername(username, function (emailId) {
             if (emailId) {
                 saveTrainingFeedback(trainingId, emailId, username, questionAnswers, trainingName);
             }
@@ -54,9 +54,12 @@ module.exports = {
         });
     },
     addUserSession: function (username, address) {
-        firebase.database().ref('sessions/').push({
-            username: username,
-            address: address
+        getEmailIdFromUsername(username, function (emailId) {
+            console.log("Email Id: " + emailId);
+            firebase.database().ref('sessions/' + emailId.replaceAll('.', ':')).set({
+                username: username,
+                address: address
+            });
         });
     },
     getUserSession: function (callbackFunction) {
@@ -157,15 +160,15 @@ function isFeedbackPending(userId, callbackFunction) {
 }
 
 function getEmailIdFromUsername(username, callbackFunction) {
+    let emailId = '';
     firebase.database().ref('users/').once('value', function (snapshot) {
         snapshot.forEach(function (child) {
             let user = child.val();
-            let emailId = '';
             if (user.firstName + ' ' + user.lastName === username) {
                 emailId = user.emailId;
             }
-            callbackFunction(emailId);
-        })
+        });
+        callbackFunction(emailId);
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
     })
