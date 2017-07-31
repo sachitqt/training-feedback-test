@@ -84,8 +84,8 @@ bot.use(builder.Middleware.dialogVersion({version: 1.0, resetCommand: /^reset/i}
 bot.dialog("/", [
     function (session) {
         var username = session.message.user.name;
-        if(username == undefined) {
-            username    =   "there";
+        if (username == undefined) {
+            username = "there";
         }
         var firstName = username.split(" ")[0];
         session.userData.firstName = firstName;
@@ -349,7 +349,7 @@ bot.dialog('showFeedbackReview', [
             session.userData.trainingId);
     },
     function (session, results) {
-        var selectOption = results.response.entity.split(' ');
+        var selectOption = results.response.entity.split(" ");
         var qNumber = selectOption[1];
         qNumber = --qNumber;
         session.userData.editQuestionNumber = qNumber;
@@ -513,7 +513,8 @@ function submitAllResponse(session) {
     session.sendTyping();
     var totalResponse = session.userData.questionArray;
 
-    firebaseOperations.saveFeedbackToDB(session.userData.trainingId, username, session.userData.questionArray);
+    firebaseOperations.saveFeedbackToDB(session.userData.trainingId, username, session.userData.questionArray,
+        session.userData.trainingName);
     console.log(username + "-> Submit" + session.userData.questionArray);
 
     var fields = ['id', 'question', 'answer'];
@@ -638,13 +639,13 @@ function checkForPendingFeedback() {
             })
         })
     })
-
-
 }
 
 
 /**
  * This method will send a reminder to user to fill the feedback form in case if user is in ideal state
+ * @param address
+ * @param trainingName
  */
 function sendProactiveMessage(address, trainingName) {
     try {
@@ -658,6 +659,44 @@ function sendProactiveMessage(address, trainingName) {
         console.log(err.message);
     }
 }
+
+/**
+ * this method will get the address from the database and will send a message.
+ * @param res
+ * @param next
+ */
+function getAddressAndBroadcastMessage(res, next) {
+    firebaseOperations.getUserSession(function (sessionArray) {
+        sessionArray.forEach(function (snapshot) {
+            var username = snapshot.val().username;
+            var firstName = username.split(" ")[0];
+            var address = snapshot.val().address;
+            sendBroadcastToAllMembers(firstName, address);
+        });
+    });
+    res.send('triggered');
+    next();
+}
+
+
+/**
+ * This method will broadcast a message to all the member connected with bot
+ * @param username
+ * @param address
+ */
+function sendBroadcastToAllMembers(username, address) {
+    try {
+        var msg = new builder.Message().address(address);
+        var message = "Hey **%s**, How was your experience so far. If you got any issue, please contact to Sachit or Lipika"
+        msg.text(message, username);
+        msg.textLocale('en-US');
+        bot.send(msg);
+
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+
 
 /**
  * This cron service will iterate the user data from the sesison table and will check that if any pending feedback is
@@ -678,5 +717,13 @@ module.exports = {
     },
     startCron: function () {
         startCronToCheckPendingFeedback();
+    },
+    getFirebaseObject: function () {
+        return firebaseOperations;
+    },
+    sendBroadcast: function (res, next) {
+        getAddressAndBroadcastMessage(res, next);
     }
+
+
 }
