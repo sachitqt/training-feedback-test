@@ -58,19 +58,24 @@ module.exports = {
             }
         });
     },
-    addUserSession: function (username, address, skypeId) {
+    addUserSession: function (username, address) {
         firebase.database().ref('sessions/').push({
             username: username,
-            address: address,
-            skypeId: skypeId
+            address: address
         });
     },
     getUserSession: function (callbackFunction) {
-        firebase.database().ref('session/').once('value', function (snapshot) {
+        firebase.database().ref('sessions/').once('value', function (snapshot) {
             callbackFunction(snapshot);
         }, function (errorObject) {
             console.log('The read failed: ' + errorObject.code);
         })
+    },
+    updateStartedStatusOfPendingFeedback: function (isStarted, attendeeId, trainingId) {
+        firebase.database().ref('pendingFeedback/' + attendeeId.replaceAll('.', ':') + "/" + trainingId + "/isStarted").set(isStarted);
+    },
+    updateLastSentMessageOfPendingFeedback: function (lastSentMessage, attendeeId, trainingId) {
+        firebase.database().ref('pendingFeedback/' + attendeeId.replaceAll('.', ':') + "/" + trainingId + "/lastSentMessage").set(lastSentMessage);
     }
 };
 
