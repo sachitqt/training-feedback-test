@@ -22,15 +22,10 @@ let config = {
 firebase.initializeApp(config);
 
 module.exports = {
-    saveQuestionsToDB: function (questions) {
-        questions.forEach(function (question) {
-            writeQuestionData(question.id, question.question, question.options, question.question_type);
-        });
-    },
-    saveFeedbackToDB: function (trainingId, userId, questionAnswers) {
+    saveFeedbackToDB: function (trainingId, userId, questionAnswers, trainingName) {
         getEmailIdFromUsername(userId, function (emailId) {
             if (emailId) {
-                saveTrainingFeedback(trainingId, emailId, questionAnswers);
+                saveTrainingFeedback(trainingId, emailId, username, questionAnswers, trainingName);
             }
         });
     },
@@ -121,15 +116,6 @@ function saveUserData() {
 }
 
 function saveUser(userData) {
-    // firebase.database().ref('users/' + userData.EmailId.replaceAll('.', ':')).set({
-    //     employeeId: userData.EmployeeID,
-    //     firstName: userData.FirstName,
-    //     lastName: userData.LastName,
-    //     fullName: userData.FirstName + ' ' + userData.LastName,
-    //     emailId: userData.EmailId,
-    //     skypeId: userData.SkypeId
-    // });
-    // console.log(userData);
     firebase.database().ref('users/' + userData.EmailID.replaceAll('.', ':')).set({
         employeeId: userData.EmployeeID,
         firstName: userData.FirstName,
@@ -145,15 +131,7 @@ function saveUser(userData) {
     });
 }
 
-function saveFeedback(trainingId, userId, questionAnswers) {
-    getEmailIdFromUsername(userId, function (emailId) {
-        if (emailId) {
-            saveTrainingFeedback(trainingId, emailId, questionAnswers);
-        }
-    });
-}
-
-function saveTrainingFeedback(trainingId, userId, questionAnswers) {
+function saveTrainingFeedback(trainingId, userId, username, questionAnswers, trainingName) {
     let questionAnswerData = {};
     for (let index = 0; index < questionAnswers.length; index++) {
         questionAnswerData[questionAnswers[index].question.replace('.', '')] = questionAnswers[index].answer;
@@ -161,68 +139,13 @@ function saveTrainingFeedback(trainingId, userId, questionAnswers) {
     firebase.database().ref('trainingFeedback/' + trainingId + '/' + userId.replaceAll('.', ':')).set({
         trainingId: trainingId,
         userId: userId,
+        username: username,
+        trainingName: trainingName,
         questionAnswers: questionAnswerData
     });
     firebase.database().ref('pendingFeedback/' + userId.replaceAll('.', ':') + '/' + trainingId).remove(function (error) {
         console.log(error);
     })
-}
-
-function fetchTrainingFeedback(trainingId) {
-    firebase.database().ref('trainingFeedback/' + trainingId).once('value', function (snapshot) {
-        console.log(snapshot.val());
-    }, function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-    });
-}
-
-function saveTrainingData(trainingName, facilitator, attendees, trainingDate) {
-    let id = firebase.database().ref('trainings/').push({
-        trainingName: trainingName,
-        facilitator: facilitator,
-        trainingDate: trainingDate
-    });
-    let trainingId = id.path.o[1];
-    for (let index = 0; index < attendees.length; index++) {
-        firebase.database().ref('trainings/' + trainingId + '/attendees/' + index).set({
-            attendeeName: attendees[index],
-            isAttended: true,
-        });
-        firebase.database().ref('pendingFeedback/' + attendees[index].replaceAll('.', ':') + '/' + trainingId).set({
-            attendeeName: attendees[index],
-            trainingId: trainingId,
-            userId: attendees[index]
-        });
-    }
-}
-
-function fetchTrainingData() {
-    firebase.database().ref('trainings/').once('value', function (snapshot) {
-        console.log(snapshot.val());
-        snapshot.forEach(function (user) {
-            console.log(user.val());
-        });
-    }, function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-    });
-}
-
-function getSelectedTraining(trainingId, callbackFunction) {
-    firebase.database().ref('trainings/' + trainingId).once('value', function (snapshot) {
-        callbackFunction(snapshot);
-    }, function (errorObject) {
-        console.log('The read failed: ' + errorObject.code);
-    })
-}
-
-function fetchNonFilledTrainings() {
-    firebase.database().ref('pendingFeedback/').once('value', function (snapshot) {
-        snapshot.forEach(function (child) {
-            console.log(child.val())
-        });
-    }, function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-    });
 }
 
 function isFeedbackPending(userId, callbackFunction) {
@@ -260,44 +183,7 @@ function deletePendingFeedback(trainingId, emailId) {
     firebase.database().ref('pendingFeedback/' + emailId.replaceAll('.', ':') + '/' + trainingId).remove();
 }
 
-function getQuestions() {
-    firebase.database().ref('questions/').once('value', function (snapshot) {
-        console.log(snapshot);
-    }, function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-    })
-}
-
 String.prototype.replaceAll = function (str1, str2, ignore) {
     return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof(str2) == "string") ? str2.replace(/\$/g, "$$$$") : str2);
 }
-
-// function test(username, callbackFunction){
-//     getEmailIdFromUsername(username, function (emailId) {
-//         if (emailId) {
-//             getUserPendingFeedback(emailId, callbackFunction);
-//         }
-//     });
-// }
-
-// getEmailIdFromUsername('Lipika Gupta', function (emailId) {
-//     console.log(emailId);
-// });
-// isFeedbackPending('sahil.goel@quovantis.com', '-KpFmXgFygU3AsDywr8h', function(isFeedbackPending){
-//     console.log('isFeedbackPending ' + isFeedbackPending);
-// });
-// writeQuestionsToFirebase(i18n.__('questions'));
-// saveUserData();
-
-
-// fetchNonFilledTrainings();
-// fetchTrainingData();
-// saveTrainingData('Espresso', 'lipika.gupta@quovantis.com', ['sachit.wadhawan@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
-// saveTrainingData('Machine Learning', 'sachit.wadhawan@quovantis.com', ['lipika.gupta@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
-// saveTrainingData('MVP', 'vikas.goyal@quovantis.com', ['gautam.gupta@quovantis.com', 'sumeet.mehta@quovantis.com', 'lipika.gupta@quovantis.com', 'sachit.wadhawan@quovantis.com', 'praween.mishra@quovantis.com', 'sahil.goel@quovantis.com'], 'June');
-// saveTrainingFeedback(0, 1, "");
-// saveFeedback('1', 'Lipika Gupta', "");
-// test('Lipika Gupta', function (isFeedbackPending) {
-//     console.log(isFeedbackPending);
-// });
 
