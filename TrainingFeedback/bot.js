@@ -331,14 +331,13 @@ bot.dialog('showFeedbackReview', [
     function (session) {
         session.send(i18n.__('response_header'));
         session.sendTyping();
-        var responseAttachments = [];
         var response = "";
 
         for (var index = 0; index < session.userData.questionArray.length; index++) {
             var question = session.userData.questionArray[index].question;
             var answer = session.userData.questionArray[index].answer;
             var id = session.userData.questionArray[index].id;
-            response = response + ' \n' + ('**' + id + '.** ' + question + ' <br />' + '**Answer:** ' + answer + '<br />' + ' \n');
+            response = response + ' \n' + ('**' + id + '.** ' + question + ' <br />' + '**Your Feedback:** ' + answer + '<br />' + ' \n');
         }
 
         builder.Prompts.choice(
@@ -347,9 +346,9 @@ bot.dialog('showFeedbackReview', [
             i18n.__('edit_options'),
             {
                 listStyle: builder.ListStyle.none,
-                retryPrompt: i18n.__('retry_command_prompt')
+                retryPrompt: i18n.__('retry_command_edit')
             });
-        session.send("Please type 'edit (question number)' to edit the response for ex- **edit 1** or **'submit'** to submit all responses");
+        session.send("Please type 'edit (question number)' to edit the response. For example- **edit 1** or **'submit'** to submit all responses");
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
     },

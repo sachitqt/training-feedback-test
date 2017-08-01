@@ -157,6 +157,10 @@
     "This is incorrect command, type 'help' to see all available commands",
     "This is invalid question, please type correct command."
   ],
+  "retry_command_edit" :[
+    "This is not the correct question number. Please enter the correct question.",
+    "This is invalid question, please type correct command."
+  ],
   "edit_options": [
     "edit 1",
     "edit 2",
