@@ -148,9 +148,9 @@
   "notSubmitting": "Not Submitting",
   "response_header": "Here is the list of responses that you have submitted, you can edit any response before submitting it.",
   "retry_prompt": [
-    "Please choose one option for the above question",
-    "I would request you to please select an option for the above question",
-    "I am sorry but I did not understand that. I need you to select one of the options above"
+    "Please choose correct option for the above question",
+    "I would request you to please select correct option",
+    "I am sorry but you write something else that is not in given in the options"
   ],
   "retry_command_prompt": [
     "This is not correct command. Please enter the valid command",
@@ -159,7 +159,7 @@
   ],
   "retry_command_edit" :[
     "This is not the correct question number. Please enter the correct question.",
-    "This is invalid question, please type correct command."
+    "This seems to be a wrong question number. Please type correct command."
   ],
   "edit_options": [
     "edit 1",

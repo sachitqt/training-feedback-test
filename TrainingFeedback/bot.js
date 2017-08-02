@@ -113,7 +113,7 @@ bot.dialog("/", [
 
                         session.send('Shabaash! (monkey) (joy)');
                         session.send(i18n.__('welcome1_msg'));
-                        session.send(i18n.__('welcome2_msg'));
+                        // session.send(i18n.__('welcome2_msg'));
                         // session.send(i18n.__('question_start_msg'));
                         session.beginDialog('startFeedbackQuestions');
 
@@ -353,7 +353,7 @@ bot.dialog('showFeedbackReview', [
             session.userData.trainingId);
     },
     function (session, results) {
-        if(results.response.entity=="submit") {
+        if (results.response.entity == "submit") {
             submitAllResponse(session);
             return;
         }
@@ -393,17 +393,17 @@ bot.dialog('showFeedbackReview', [
 ]);
 
 // The dialog stack is cleared and this dialog is invoked when the user enters 'help'.
-bot.dialog('help', function (session, args, next) {
-    session.endDialog('Global commands that are available anytime: %s', i18n.__('help_msg'));
-})
-    .triggerAction({
-        matches: /^help$/i,
-        onSelectAction: (session, args, next) => {
-            // Add the help dialog to the dialog stack
-            // (override the default behavior of replacing the stack)
-            session.beginDialog(args.action, args);
-        }
-    });
+// bot.dialog('help', function (session, args, next) {
+//     session.endDialog('Global commands that are available anytime: %s', i18n.__('help_msg'));
+// })
+//     .triggerAction({
+//         matches: /^help$/i,
+//         onSelectAction: (session, args, next) => {
+//             // Add the help dialog to the dialog stack
+//             // (override the default behavior of replacing the stack)
+//             session.beginDialog(args.action, args);
+//         }
+//     });
 
 
 // The dialog stack is cleared and this dialog is invoked when the user enters 'help'.
@@ -415,8 +415,8 @@ bot.dialog('submit', function (session, args, next) {
         for (var index = 0; index < length; index++) {
             var answer = session.userData.questionArray[index].answer;
             var id = session.userData.questionArray[index].id;
-            if (answer == '') {
-                session.endDialog(i18n.__("wait"), id)
+            if (answer === "") {
+                session.endDialog(i18n.__("wait"), index);
                 return;
             }
         }
@@ -521,8 +521,8 @@ function submitAllResponse(session) {
     session.sendTyping();
     var totalResponse = session.userData.questionArray;
 
-    firebaseOperations.saveFeedbackToDB(session.userData.trainingId, username, session.userData.questionArray,
-        session.userData.trainingName);
+    // firebaseOperations.saveFeedbackToDB(session.userData.trainingId, username, session.userData.questionArray,
+    //     session.userData.trainingName);
     console.log(username + "-> Submit" + session.userData.questionArray);
 
     var fields = ['id', 'question', 'answer'];
