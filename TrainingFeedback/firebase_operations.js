@@ -53,21 +53,26 @@ module.exports = {
             }
         });
     },
-    addUserSession: function (username, address, skypeId) {
-        firebase.database().ref('sessions/' +
-            '' +
-            '').push({
-            username: username,
-            address: address,
-            skypeId: skypeId
+    addUserSession: function (username, address) {
+        getEmailIdFromUsername(username, function (emailId) {
+            firebase.database().ref('sessions/' + emailId.replaceAll('.', ':')).set({
+                username: username,
+                address: address
+            });
         });
     },
     getUserSession: function (callbackFunction) {
-        firebase.database().ref('session/').once('value', function (snapshot) {
+        firebase.database().ref('sessions/').once('value', function (snapshot) {
             callbackFunction(snapshot);
         }, function (errorObject) {
             console.log('The read failed: ' + errorObject.code);
         })
+    },
+    updateStartedStatusOfPendingFeedback: function (isStarted, attendeeId, trainingId) {
+        firebase.database().ref('pendingFeedback/' + attendeeId.replaceAll('.', ':') + "/" + trainingId + "/isStarted").set(isStarted);
+    },
+    updateLastSentMessageOfPendingFeedback: function (lastSentMessage, attendeeId, trainingId) {
+        firebase.database().ref('pendingFeedback/' + attendeeId.replaceAll('.', ':') + "/" + trainingId + "/lastSentMessage").set(lastSentMessage);
     }
 };
 
@@ -185,4 +190,3 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
     return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof(str2) == "string") ? str2.replace(/\$/g, "$$$$") : str2);
 }
 
-// saveUserData();

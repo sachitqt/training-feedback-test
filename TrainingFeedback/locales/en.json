@@ -148,16 +148,36 @@
   "notSubmitting": "Not Submitting",
   "response_header": "Here is the list of responses that you have submitted, you can edit any response before submitting it.",
   "retry_prompt": [
-    "Please choose one option for the above question",
-    "I would request you to please select an option for the above question",
-    "I am sorry but I did not understand that. I need you to select one of the options above"
+    "Please choose correct option for the above question",
+    "I would request you to please select correct option",
+    "I am sorry but you write something else that is not in given in the options"
   ],
   "retry_command_prompt": [
     "This is not correct command. Please enter the valid command",
     "This is incorrect command, type 'help' to see all available commands",
     "This is invalid question, please type correct command."
   ],
-  "session_reset_msg": "I have lost my memory (morningafter) please type '**go**' to start the feedback again",
+  "retry_command_edit" :[
+    "This is not the correct question number. Please enter the correct question.",
+    "This seems to be a wrong question number. Please type correct command."
+  ],
+  "edit_options": [
+    "edit 1",
+    "edit 2",
+    "edit 3",
+    "edit 4",
+    "edit 5",
+    "edit 6",
+    "edit 7",
+    "edit 8",
+    "edit 9",
+    "edit 10",
+    "edit 11",
+    "edit 12",
+    "edit 13",
+    "submit"
+  ],
+  "session_reset_msg": "I have lost my memory (morningafter) please type '**Start**' to start the feedback again",
   "not_started_msg": "Hey (wait)! You have not started filling the feedback yet. Please give all responses before submitting the feedback.",
   "help_msg": "\n* If you want to edit any response type **'edit question_number'**. Example- edit 4 \n* if you want to submit response type **'submit'** \n* If you want to reset all responses type **'restart'** \n* If you want to check all available commands type **'help'**",
   "mail_not_sent_msg": "We are not able to send your response to TM team. Please contact to support.",
@@ -171,13 +191,12 @@
   "welcome2_msg": "You can type '**help**' anytime to see all available commands that I can respond to.",
   "welcome3_msg": "**I will help you in providing the feedback for the training** (wave)",
   "feedback_fill_msg": "You have just attended the session. We request you to fill the feedback ASAP. ",
-  "msg_to_start_feedback": "You have just attended the session. We request you to fill the feedback ASAP. Please type **'go'** to start filling the feedback.",
+  "msg_to_start_feedback": "You have just attended the session. We request you to fill the feedback ASAP. What would you like to do now?",
   "question_start_msg": "Here are the questions:",
   "choose_start_option": "What would you like to do? (** Tip :** *Please select or type the option*)",
   "delete_bot": "Bot has been delete from the skype list",
   "dialogLabels": [
-    "Start",
-    "Skip"
+    "Start"
   ],
   "ratingDialogLabels": [
     "1",
@@ -194,8 +213,8 @@
     "Yes",
     "No"
   ],
-  "wait": "Hey (wait)! You have only attempted %s/13 questions. Please give all responses before submitting the feedback.",
-  "answer_update":"Your **answer %s** has been updated successfully (rock)",
-  "inactive_msg":"Hey %s, why are you not responding. Its been long time you didn't see me :(, Please choose option ASAP.",
-  "invalid_query":"Hey %s, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'help'** to see all available commands that I can handle."
+  "wait": "Hey (wait)! You have only attempted **%s/13** questions. Please give all responses before submitting the feedback.",
+  "answer_update": "Your **answer %s** has been updated successfully (rock)",
+  "inactive_msg": "Hey **%s**, I can see that you have started filling the **'%s'** session feedback but did not complete it. I promise (promise) that it will take hardly 5 minutes. Please fill it ASAP otherwise I will keep bothering you. ]:)",
+  "invalid_query": "Hey %s, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'help'** to see all available commands that I can handle."
 }
