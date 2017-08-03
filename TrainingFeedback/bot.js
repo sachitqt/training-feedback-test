@@ -33,20 +33,24 @@ bot.on('error', function (e) {
 
 bot.on('contactRelationUpdate', function (message) {
     if (message.action === 'add') {
-        taskForPendingFeedback.start();
         var username = message.user ? message.user.name : "Unknown";
         var firstName = username.split(" ")[0];
         var saveAddress = message.address;
         var greetingMessage = getDayTimings();
         var reply = new builder.Message()
-            .address(message.address)
-            .text("Hey **%s**, *%s* and thanks for adding me (highfive).  I will guide you to provide feedback for the " +
-                "trainings here itself so that you don't have to fill a form on Zoho anymore", firstName || "there", greetingMessage);
-        bot.send(reply);
-        firebaseOperations.addUserSession(username, saveAddress);
-
+            .address(message.address);
+        firebaseOperations.getUserEmailId(username, function (emailId) {
+            if (emailId === '') {
+                reply.text("Hey **%s**, Your skype user name doesn't match in our database. We will highly recommend you to change your skype name to get " +
+                    "all the notifications of the session or contact to TM team. ", firstName);
+            } else {
+                reply.text("Hey **%s**, *%s* and thanks for adding me (highfive).  I will guide you to provide feedback for the " +
+                    "trainings here itself so that you don't have to fill a form on Zoho anymore", firstName || "there", greetingMessage);
+            }
+            firebaseOperations.addUserSession(saveAddress);
+            bot.send(reply);
+        });
     } else {
-        taskForPendingFeedback.stop();
         console.log(i18n.__('delete_bot'))
     }
 
@@ -96,13 +100,24 @@ bot.dialog("/", [
         } else {
             firebaseOperations.isFeedbackPendingForUser(username, function (isPendingFeedback) {
                 if (isPendingFeedback) {
-                    var trainingId, trainingName, attendeeId;
+                    var trainingId, trainingName, attendeeId, isStarted = false;
                     firebaseOperations.getPendingFeedbackForUser(username, function (pendingFeedbackArray) {
-                        pendingFeedbackArray.forEach(function (child) {
-                            trainingId = child.val().trainingId;
-                            trainingName = child.val().trainingName;
-                            attendeeId = child.val().attendeeId;
-                        });
+
+                        var BreakException = {};
+                        try {
+                            pendingFeedbackArray.forEach(function (child) {
+                                isStarted = child.val().isStarted;
+                                trainingId = child.val().trainingId;
+                                trainingName = child.val().trainingName;
+                                attendeeId = child.val().attendeeId;
+                                if (isStarted) {
+                                    throw BreakException;
+                                }
+                            });
+                        } catch (e) {
+                            if (e !== BreakException) throw e;
+                        }
+
                         session.userData.trainingId = trainingId;
                         session.userData.trainingName = trainingName;
                         session.userData.attendeeId = attendeeId;
@@ -113,23 +128,15 @@ bot.dialog("/", [
 
                         session.send('Shabaash! (monkey) (joy)');
                         session.send(i18n.__('welcome1_msg'));
-                        // session.send(i18n.__('welcome2_msg'));
-                        // session.send(i18n.__('question_start_msg'));
+                        session.sendTyping();
+                        session.send("Here are the questions for the session **'%s'**", trainingName);
                         session.beginDialog('startFeedbackQuestions');
 
-                        // builder.Prompts.choice(
-                        //     session,
-                        //     i18n.__('choose_start_option'),
-                        //     i18n.__('dialogLabels'),
-                        //     {
-                        //         listStyle: builder.ListStyle.button,
-                        //         retryPrompt: i18n.__('retry_prompt')
-                        //     });
                     });
                 } else {
                     session.endDialog("You have no pending feedback yet. Enjoy!!!  (whistle)")
                 }
-            })
+            });
         }
     }
     // function (session, results) {
@@ -170,11 +177,10 @@ bot.dialog('startFeedbackQuestions', [
             session.userData.trainingId);
         session.userData['questionArray'] = new arraylist();
         session.userData.questionArray.add(i18n.__("questions"));
-        session.send("**Tip :** *Please select or type the option*");
+        // session.send("**Tip :** *Please select or type the option*");
         buildQuestionsAndOptions(session, session.userData.questionArray[0]);
     },
     function (session, results) {
-
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
         var userAnswer = results.response.entity;
@@ -465,6 +471,8 @@ bot.dialog('/done', (session) => {
  */
 function sendEmail(session, subject, text, feedback) {
 
+    var path = "response/" + session.userData.firstName + ".csv";
+
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -482,8 +490,8 @@ function sendEmail(session, subject, text, feedback) {
             subject: subject,
             text: text,
             attachments: [{
-                filename: session.message.user.name + '.csv',
-                path: "response/" + session.message.user.name + ".csv"
+                filename: session.userData.firstName + '.csv',
+                path: path
             }]
         };
     } else {
@@ -502,7 +510,7 @@ function sendEmail(session, subject, text, feedback) {
             console.log('Email sent: ' + info.response);
             session.send(i18n.__('mail_sent_msg'));
             session.send("Thanks **%s** for filling your feedback (bow)", session.userData.firstName);
-            // fs.unlinkSync("response/" + session.message.user.name + ".csv");
+            fs.unlinkSync(path);
         }
         transporter.close();
         deleteAllData(session);
@@ -527,7 +535,7 @@ function submitAllResponse(session) {
 
     var fields = ['id', 'question', 'answer'];
     var csv = json2csv({data: totalResponse, fields: fields});
-    fs.writeFile("response/" + session.message.user.name + ".csv", csv, function (err) {
+    fs.writeFile("response/" + session.userData.firstName + ".csv", csv, function (err) {
         if (err) throw err;
         console.log('file saved');
     });
@@ -610,7 +618,6 @@ function checkForIdealCondition(address, lastSentMessage, trainingId, attendeeId
         sendProactiveMessage(address, trainingName);
         lastSentMessage = new Date().getTime();
         firebaseOperations.updateLastSentMessageOfPendingFeedback(lastSentMessage, attendeeId, trainingId);
-
     }
 }
 /**
@@ -619,26 +626,34 @@ function checkForIdealCondition(address, lastSentMessage, trainingId, attendeeId
 function checkForPendingFeedback() {
     firebaseOperations.getUserSession(function (totalSignedUserArray) {
         totalSignedUserArray.forEach(function (snapshot) {
-            var username = snapshot.val().username;
             var address = snapshot.val().address;
+            var username = address.user.name;
             firebaseOperations.isFeedbackPendingForUser(username, function (isPendingFeedback) {
                 if (isPendingFeedback) {
-                    var name, isStarted, lastSentMessage, trainingId, attendeeId, trainerName;
-                    firebaseOperations.getPendingFeedbackForUser(username, function (pendingFeedbackArray) {
-                        pendingFeedbackArray.forEach(function (child) {
-                            name = child.val().trainingName;
-                            isStarted = child.val().isStarted;
-                            lastSentMessage = child.val().lastSentMessage;
-                            trainingId = child.val().trainingId;
-                            attendeeId = child.val().attendeeId;
-                        });
+                    var name, isStarted, lastSentMessage, trainingId, attendeeId;
+                    firebaseOperations.getPendingFeedbackForUser(username, function (pendingFeedbackObject) {
+                        var BreakException = {};
+                        try {
+                            pendingFeedbackObject.forEach(function (child) {
+                                isStarted = child.val().isStarted;
+                                name = child.val().trainingName;
+                                if (isStarted) {
+                                    name = child.val().trainingName;
+                                    lastSentMessage = child.val().lastSentMessage;
+                                    trainingId = child.val().trainingId;
+                                    attendeeId = child.val().attendeeId;
+                                    checkForIdealCondition(address, lastSentMessage, trainingId, attendeeId, name);
+                                    throw BreakException;
+                                }
+                            });
+                        } catch (e) {
+                            if (e !== BreakException) throw e;
+                        }
                         if (!isStarted) {
                             var msg = new builder.Message().address(address);
                             msg.text("You have just attended the **'%s'** session. We request you to fill the feedback ASAP. " +
                                 "Please type **'Start'** to start filling the feedback. :)", name);
                             bot.send(msg);
-                        } else {
-                            checkForIdealCondition(address, lastSentMessage, trainingId, attendeeId, name);
                         }
                     });
                 }
@@ -709,7 +724,7 @@ function sendBroadcastToAllMembers(username, address) {
  * available for that user, send a proactive message to that user
  */
 function startCronToCheckPendingFeedback() {
-    taskForPendingFeedback = cron.schedule('*/1 * * * *', function () {
+    taskForPendingFeedback = cron.schedule('0 */2 * * *', function () {
         console.log('Running a task to check pending feedback');
         checkForPendingFeedback();
     }, false);

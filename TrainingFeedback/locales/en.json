@@ -150,7 +150,7 @@
   "retry_prompt": [
     "Please choose correct option for the above question",
     "I would request you to please select correct option",
-    "I am sorry but you write something else that is not in given in the options"
+    "I am sorry but you write something else that is not given in the options"
   ],
   "retry_command_prompt": [
     "This is not correct command. Please enter the valid command",

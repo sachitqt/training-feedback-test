@@ -53,14 +53,19 @@ module.exports = {
             }
         });
     },
-    addUserSession: function (username, address) {
-        getEmailIdFromUsername(username, function (emailId) {
-            firebase.database().ref('sessions/' + emailId.replaceAll('.', ':')).set({
-                username: username,
-                address: address
-            });
+    // addUserSession: function (username, address) {
+    //     getEmailIdFromUsername(username, function (emailId) {
+    //         firebase.database().ref('sessions/' + emailId.replaceAll('.', ':')).push({
+    //             address: address
+    //         });
+    //     });
+    // },
+    addUserSession: function (address) {
+        firebase.database().ref('sessions/' + address.user.id).set({
+            address: address
         });
     },
+
     getUserSession: function (callbackFunction) {
         firebase.database().ref('sessions/').once('value', function (snapshot) {
             callbackFunction(snapshot);
