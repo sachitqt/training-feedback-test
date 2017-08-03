@@ -22,8 +22,8 @@ let config = {
 firebase.initializeApp(config);
 
 module.exports = {
-    saveFeedbackToDB: function (trainingId, userId, questionAnswers, trainingName) {
-        getEmailIdFromUsername(userId, function (emailId) {
+    saveFeedbackToDB: function (trainingId, username, questionAnswers, trainingName) {
+        getEmailIdFromUsername(username, function (emailId) {
             if (emailId) {
                 saveTrainingFeedback(trainingId, emailId, username, questionAnswers, trainingName);
             }
@@ -54,7 +54,9 @@ module.exports = {
         });
     },
     addUserSession: function (username, address, skypeId) {
-        firebase.database().ref('sessions/').push({
+        firebase.database().ref('sessions/' +
+            '' +
+            '').push({
             username: username,
             address: address,
             skypeId: skypeId
@@ -118,6 +120,7 @@ function saveUser(userData) {
         fullName: userData.FirstName + ' ' + userData.LastName,
         emailId: userData.EmailID,
         skypeId: userData.SkypeID,
+        skypeName: userData.FirstName + ' ' + userData.LastName,
         title: userData.Title,
         currentProductTeam: userData.CurrentProductTeam,
         primaryReviewer: userData.PrimaryReviewer,
@@ -152,15 +155,15 @@ function isFeedbackPending(userId, callbackFunction) {
 }
 
 function getEmailIdFromUsername(username, callbackFunction) {
+    let emailId = '';
     firebase.database().ref('users/').once('value', function (snapshot) {
         snapshot.forEach(function (child) {
             let user = child.val();
-            let emailId = '';
-            if (user.firstName + ' ' + user.lastName === username) {
+            if (user.skypeName === username) {
                 emailId = user.emailId;
             }
-            callbackFunction(emailId);
-        })
+        });
+        callbackFunction(emailId);
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
     })
@@ -182,3 +185,4 @@ String.prototype.replaceAll = function (str1, str2, ignore) {
     return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof(str2) == "string") ? str2.replace(/\$/g, "$$$$") : str2);
 }
 
+// saveUserData();
