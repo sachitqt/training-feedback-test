@@ -130,6 +130,7 @@ function saveUser(userData) {
         fullName: userData.FirstName + ' ' + userData.LastName,
         emailId: userData.EmailID,
         skypeId: userData.SkypeID,
+        skypeName: userData.FirstName + ' ' + userData.LastName,
         title: userData.Title,
         currentProductTeam: userData.CurrentProductTeam,
         primaryReviewer: userData.PrimaryReviewer,
@@ -168,7 +169,7 @@ function getEmailIdFromUsername(username, callbackFunction) {
     firebase.database().ref('users/').once('value', function (snapshot) {
         snapshot.forEach(function (child) {
             let user = child.val();
-            if (user.firstName + ' ' + user.lastName === username) {
+            if (user.skypeName === username) {
                 emailId = user.emailId;
             }
         });
