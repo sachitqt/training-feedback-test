@@ -146,7 +146,7 @@
   "subject_feedback": "Session Feedback",
   "subject_response": "Session Response",
   "notSubmitting": "Not Submitting",
-  "response_header": "Here is the list of responses that you have submitted, you can edit any response before submitting it.",
+  "response_header": "Here is the list of feedback that you have submitted, you can edit any feedback before submitting it.",
   "retry_prompt": [
     "Please choose correct option for the above question",
     "I would request you to please select correct option",
@@ -154,11 +154,10 @@
   ],
   "retry_command_prompt": [
     "This is not correct command. Please enter the valid command",
-    "This is incorrect command, type 'help' to see all available commands",
-    "This is invalid question, please type correct command."
+    "This is invalid command. Please enter correct command"
   ],
-  "retry_command_edit" :[
-    "This is not the correct question number. Please enter the correct question.",
+  "retry_command_edit": [
+    "Invalid question number or command. Please enter the valid question or command to edit.",
     "This seems to be a wrong question number. Please type correct command."
   ],
   "edit_options": [
@@ -178,12 +177,12 @@
     "submit"
   ],
   "session_reset_msg": "I have lost my memory (morningafter) please type '**Start**' to start the feedback again",
-  "not_started_msg": "Hey (wait)! You have not started filling the feedback yet. Please give all responses before submitting the feedback.",
-  "help_msg": "\n* If you want to edit any response type **'edit question_number'**. Example- edit 4 \n* if you want to submit response type **'submit'** \n* If you want to reset all responses type **'restart'** \n* If you want to check all available commands type **'help'**",
-  "mail_not_sent_msg": "We are not able to send your response to TM team. Please contact to support.",
-  "mail_sent_msg": "We have sent your response to TM team. Thanks for your time.",
+  "not_started_msg": "Hey (wait)! You have not started filling the feedback yet. Please complete the feedback and then submit",
+  "help_msg": "\n* If you want to edit any feedback type **'edit question_number'**. Example- edit 4 \n* if you want to submit response type **'submit'** \n* If you want to reset all responses type **'restart'** \n* If you want to check all available commands type **'help'**",
+  "mail_not_sent_msg": "We are not able to send your feedback to TM team. Please contact to support.",
+  "mail_sent_msg": "Your feedback has been submitted, thanks for your time (bow)",
   "reason_msg": "Can you please write the reason why don't you want to fill the feedback? (chappal)",
-  "complete_all_ques_msg": "Great Job! (clap) You have submitted all the responses successfully and we appreciate this. (y) What would you like to do now?",
+  "complete_all_ques_msg": "Great Job! (clap) You have submitted your feedback successfully and we appreciate this. (y) What would you like to do now?",
   "half_attempt_msg": "You have completed almost half of the questions. (kya) baat hai. Here is a (trophy) for you.",
   "error_msg": "There is some problem, please try after some time",
   "no_option_found_error": "Sorry I couldn't get you. It seems you have entered something else. Can you please try 'help' for how to proceed.",
@@ -209,11 +208,16 @@
     "Submit",
     "Review"
   ],
+  "optionDialogLabels": [
+    "Submit",
+    "Review Again",
+    "Edit Feedback"
+  ],
   "confirmationDialogLabels": [
     "Yes",
     "No"
   ],
-  "wait": "Hey (wait)! You have only attempted **%s/13** questions. Please give all responses before submitting the feedback.",
+  "wait": "Hey (wait)! You have only attempted **%s/13** questions. Please complete your feedback and then submit",
   "answer_update": "Your **answer %s** has been updated successfully (rock)",
   "inactive_msg": "Hey **%s**, I can see that you have started filling the **'%s'** session feedback but did not complete it. I promise (promise) that it will take hardly 5 minutes. Please fill it ASAP otherwise I will keep bothering you. ]:)",
   "invalid_query": "Hey %s, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'help'** to see all available commands that I can handle."

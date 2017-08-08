@@ -1,6 +1,6 @@
 var builder = require('botbuilder');
-var nodemailer = require('nodemailer');
 var firebaseOperations = require('./firebase_operations.js');
+var customOperations = require('./custom.js');
 let i18n = require("i18n");
 var json2csv = require('json2csv');
 var fs = require('fs');
@@ -16,20 +16,18 @@ i18n.configure({
 const connector = new builder.ChatConnector({
     appId: process.env.MICROSOFT_APP_ID,
     appPassword: process.env.MICROSOFT_APP_PASSWORD
+    // appId: null,
+    // appPassword: null
 });
 
-// // Create bot and default message handler
+// Create bot and default message handler
 const bot = new builder.UniversalBot(connector);
 
-
 var question, answer;
-var taskForPendingFeedback;
 
-
-// log any bot errors into the console
-bot.on('error', function (e) {
-    console.log('And error ocurred', e);
-});
+const logUserConversation = (event) => {
+    console.log('message: ' + event.text + ', user: ' + event.address.user.name);
+};
 
 bot.on('contactRelationUpdate', function (message) {
     if (message.action === 'add') {
@@ -89,11 +87,7 @@ bot.dialog("/", [
     function (session) {
         session.sendTyping();
         var username = session.message.user.name;
-        if (username == undefined) {
-            username = "there";
-        }
-        var firstName = username.split(" ")[0];
-        session.userData.firstName = firstName;
+        session.userData.firstName = username.split(" ")[0];
         var userMessage = (session.message.text).toLowerCase();
         if (userMessage != 'start') {
             session.endDialog("Hey **%s**, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'Start'** to start filling the feedback", session.userData.firstName);
@@ -102,7 +96,6 @@ bot.dialog("/", [
                 if (isPendingFeedback) {
                     var trainingId, trainingName, attendeeId, isStarted = false;
                     firebaseOperations.getPendingFeedbackForUser(username, function (pendingFeedbackArray) {
-
                         var BreakException = {};
                         try {
                             pendingFeedbackArray.forEach(function (child) {
@@ -122,15 +115,16 @@ bot.dialog("/", [
                         session.userData.trainingName = trainingName;
                         session.userData.attendeeId = attendeeId;
 
-                        firebaseOperations.updateStartedStatusOfPendingFeedback(true, attendeeId, trainingId);
-                        firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), attendeeId, trainingId);
-                        console.log(username + " -> " + session.userData.trainingName + ", " + session.userData.trainingId);
-
                         session.send('Shabaash! (monkey) (joy)');
                         session.send(i18n.__('welcome1_msg'));
                         session.sendTyping();
                         session.send("Here are the questions for the session **'%s'**", trainingName);
                         session.beginDialog('startFeedbackQuestions');
+
+                        firebaseOperations.updateStartedStatusOfPendingFeedback(true, attendeeId, trainingId);
+                        firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), attendeeId, trainingId);
+                        console.log(username + " -> " + session.userData.trainingName + ", " + session.userData.trainingId);
+
 
                     });
                 } else {
@@ -139,31 +133,7 @@ bot.dialog("/", [
             });
         }
     }
-    // function (session, results) {
-    //     if (results.response) {
-    //         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
-    //             session.userData.trainingId);
-    //         var selectedOptionIndex = results.response.index;
-    //         switch (selectedOptionIndex) {
-    //             case 0:
-    //                 session.send('Shabaash! (monkey) (joy)');
-    //                 session.send(i18n.__('question_start_msg'));
-    //                 session.beginDialog('startFeedbackQuestions');
-    //                 break;
-    //
-    //             case 1:
-    //                 session.beginDialog('notFillingFeedback');
-    //                 break;
-    //
-    //             default:
-    //                 session.send(i18n.__('no_option_found_error'));
-    //                 break;
-    //         }
-    //
-    //     } else {
-    //         session.send(i18n.__('error_msg'));
-    //     }
-    // }
+
 ]);
 
 
@@ -173,120 +143,126 @@ bot.dialog("/", [
  */
 bot.dialog('startFeedbackQuestions', [
     function (session) {
-        firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
-            session.userData.trainingId);
         session.userData['questionArray'] = new arraylist();
         session.userData.questionArray.add(i18n.__("questions"));
         // session.send("**Tip :** *Please select or type the option*");
-        buildQuestionsAndOptions(session, session.userData.questionArray[0]);
-    },
-    function (session, results) {
+        customOperations.buildQuestionForFeedback(session, session.userData.questionArray[0], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
+    },
+    function (session, results) {
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[0];
         questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[1]);
-    },
-    function (session, results) {
+        customOperations.buildQuestionForFeedback(session, session.userData.questionArray[1], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
+    },
+    function (session, results) {
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[1];
         questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[2]);
-    },
-    function (session, results) {
+        customOperations.buildQuestionForFeedback(session, session.userData.questionArray[2], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
+    },
+    function (session, results) {
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[2];
         questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[3]);
-    },
-    function (session, results) {
+        customOperations.buildQuestionForFeedback(session, session.userData.questionArray[3], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
+
+    },
+    function (session, results) {
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[3];
         questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[4]);
-    },
-    function (session, results) {
+        customOperations.buildQuestionForFeedback(session, session.userData.questionArray[4], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
+    },
+    function (session, results) {
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[4];
         questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[5]);
-    },
-    function (session, results) {
+        customOperations.buildQuestionForFeedback(session, session.userData.questionArray[5], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
+    },
+    function (session, results) {
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[5];
         questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[6]);
+        customOperations.buildQuestionForFeedback(session, session.userData.questionArray[6], builder);
+        firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
+            session.userData.trainingId);
+
     },
     function (session, results) {
         session.sendTyping();
-        firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
-            session.userData.trainingId);
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[6];
         questionObject.answer = userAnswer;
         session.send(i18n.__('half_attempt_msg'));
         session.send("Next question");
-        buildQuestionsAndOptions(session, session.userData.questionArray[7]);
-    },
-    function (session, results) {
+        customOperations.buildQuestionForFeedback(session, session.userData.questionArray[7], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
+
+    },
+    function (session, results) {
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[7];
         questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[8]);
-    },
-    function (session, results) {
+        customOperations.buildQuestionForFeedback(session, session.userData.questionArray[8], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
+
+    },
+    function (session, results) {
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[8];
         questionObject.answer = userAnswer;
         session.send("**Tip :** *Please type the answer*");
-        buildQuestionsAndOptions(session, session.userData.questionArray[9]);
-    },
-    function (session, results) {
+        customOperations.buildQuestionForFeedback(session, session.userData.questionArray[9], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
+
+    },
+    function (session, results) {
         var userAnswer = results.response;
         var questionObject = session.userData.questionArray[9];
         questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[10]);
-    },
-    function (session, results) {
+        customOperations.buildQuestionForFeedback(session, session.userData.questionArray[10], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
+
+    },
+    function (session, results) {
         var userAnswer = results.response;
         var questionObject = session.userData.questionArray[10];
         questionObject.answer = userAnswer;
-        buildQuestionsAndOptions(session, session.userData.questionArray[11]);
+        customOperations.buildQuestionForFeedback(session, session.userData.questionArray[11], builder);
+        firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
+            session.userData.trainingId);
+
     },
     function (session, results) {
         session.sendTyping();
-        firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
-            session.userData.trainingId);
         var userAnswer = results.response;
         var questionObject = session.userData.questionArray[11];
         questionObject.answer = userAnswer;
         session.send("You are almost there, one more to go.");
         session.send("(bhangra) (fireworks)");
         session.send("Here is the final question ");
-        buildQuestionsAndOptions(session, session.userData.questionArray[12]);
-    },
-    function (session, results) {
+        customOperations.buildQuestionForFeedback(session, session.userData.questionArray[12], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
+
+    },
+    function (session, results) {
         var userAnswer = results.response.entity;
         var questionObject = session.userData.questionArray[12];
         questionObject.answer = userAnswer;
@@ -298,37 +274,19 @@ bot.dialog('startFeedbackQuestions', [
                 listStyle: builder.ListStyle.button,
                 retryPrompt: i18n.__('retry_prompt')
             });
-    },
-    function (session, results) {
-        selectOptionAfterCompletingAnswer(session, results);
-    }
-]);
-
-
-// Dialog that will ask user the reason of not filling the feedback
-bot.dialog('notFillingFeedback', [
-    function (session) {
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
-        session.send("(kya) :^)");
-        builder.Prompts.text(session, session.userData.firstName + ", " + i18n.__('reason_msg'));
+
     },
     function (session, results) {
-        var username = session.message.user.name;
-        session.dialogData.notFillingFeedbackReason = results.response;
-        var response = session.dialogData.notFillingFeedbackReason;
-        firebaseOperations.deleteUserPendingFeedback(session.userData.trainingId, username);
-        console(username + " -> Delete" + session.userData.trainingId);
-        session.send("Submitting response, Please wait...");
-        session.sendTyping();
-        sendEmail(session, username + "- " + i18n.__('notSubmitting'), "Here is the reason-: " + response, false);
+        customOperations.optionAfterCompletingFeedback(session, results);
     }
 ]);
 
 
 bot.dialog('submitResponse', [
     function (session) {
-        submitAllResponse(session);
+        submitFeedback(session);
     }
 ]);
 
@@ -338,36 +296,55 @@ bot.dialog('showFeedbackReview', [
         session.send(i18n.__('response_header'));
         session.sendTyping();
         var response = "";
-
         for (var index = 0; index < session.userData.questionArray.length; index++) {
             var question = session.userData.questionArray[index].question;
             var answer = session.userData.questionArray[index].answer;
             var id = session.userData.questionArray[index].id;
             response = response + ' \n' + ('**' + id + '.** ' + question + ' <br />' + '**Your Feedback:** ' + answer + '<br />' + ' \n');
         }
-
         builder.Prompts.choice(
             session,
             response,
-            i18n.__('edit_options'),
+            i18n.__('optionDialogLabels'),
             {
-                listStyle: builder.ListStyle.none,
-                retryPrompt: i18n.__('retry_command_edit')
+                listStyle: builder.ListStyle.button,
+                retryPrompt: i18n.__('retry_command_prompt')
             });
-        session.send("Please type 'edit (question number)' to edit the response. For example- **edit 1** or **'submit'** to submit all responses");
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
     },
     function (session, results) {
-        if (results.response.entity == "submit") {
-            submitAllResponse(session);
-            return;
+        customOperations.doOperation(session, results);
+    }
+]);
+
+
+bot.dialog('editing', [
+    function (session, args) {
+        if (args && args.reprompt) {
+            builder.Prompts.text(session, "Please type 'edit (question number)' to edit the feedback. For example- **edit 1**")
+        } else {
+            builder.Prompts.text(session, "Please type 'edit (question number)' to edit the feedback. For example- **edit 1**");
         }
-        var selectOption = results.response.entity.split(" ");
-        var qNumber = selectOption[1];
-        qNumber = --qNumber;
-        session.userData.editQuestionNumber = qNumber;
-        buildQuestionsAndOptions(session, session.userData.questionArray[qNumber]);
+    },
+    function (session, results) {
+        try {
+            var prefixCommand = results.response.split(" ")[0];
+            var selectOption = results.response.split(" ")[1];
+            if (prefixCommand != "edit" || selectOption < 1 || selectOption > 13) {
+                session.send(i18n.__("retry_command_edit")[0]);
+                session.replaceDialog('editing', {reprompt: true});
+            } else {
+                var qNumber = selectOption;
+                qNumber = --qNumber;
+                session.userData.editQuestionNumber = qNumber;
+                customOperations.buildQuestionForFeedback(session, session.userData.questionArray[qNumber], builder);
+            }
+        } catch (e) {
+            session.send(i18n.__("retry_command_edit")[0]);
+            session.replaceDialog('editing', {reprompt: true});
+            console.log("Question not found");
+        }
     },
     function (session, results) {
         var userAnswer;
@@ -384,7 +361,7 @@ bot.dialog('showFeedbackReview', [
         builder.Prompts.choice(
             session,
             'What would you like to do next?',
-            i18n.__('submitDialogLabels'),
+            i18n.__('optionDialogLabels'),
             {
                 listStyle: builder.ListStyle.button,
                 retryPrompt: i18n.__('retry_command_prompt')
@@ -394,26 +371,26 @@ bot.dialog('showFeedbackReview', [
 
     },
     function (session, results) {
-        selectOptionAfterCompletingAnswer(session, results);
+        customOperations.doOperation(session, results);
     }
 ]);
-
-// The dialog stack is cleared and this dialog is invoked when the user enters 'help'.
-// bot.dialog('help', function (session, args, next) {
-//     session.endDialog('Global commands that are available anytime: %s', i18n.__('help_msg'));
-// })
-//     .triggerAction({
-//         matches: /^help$/i,
-//         onSelectAction: (session, args, next) => {
-//             // Add the help dialog to the dialog stack
-//             // (override the default behavior of replacing the stack)
-//             session.beginDialog(args.action, args);
-//         }
-//     });
 
 
 // The dialog stack is cleared and this dialog is invoked when the user enters 'help'.
 bot.dialog('submit', function (session, args, next) {
+    submitFeedback(session);
+})
+    .triggerAction({
+        matches: /^submit/i,
+        onSelectAction: (session, args) => {
+            // Add the help dialog to the dialog stack
+            // (override the default behavior of replacing the stack)
+            session.beginDialog(args.action, args);
+        }
+    });
+
+
+function submitFeedback(session) {
     if (!(session.userData.questionArray)) {
         session.endDialog(i18n.__('not_started_msg'))
     } else {
@@ -426,17 +403,23 @@ bot.dialog('submit', function (session, args, next) {
                 return;
             }
         }
-        submitAllResponse(session);
+        var username = session.message.user.name;
+        session.send("Submitting feedback, Please wait...");
+        session.sendTyping();
+        var totalResponse = session.userData.questionArray;
+        // firebaseOperations.saveFeedbackToDB(session.userData.trainingId, username, session.userData.questionArray,
+        //     session.userData.trainingName);
+        console.log(username + "-> Submit" + session.userData.questionArray);
+
+        var fields = ['id', 'question', 'answer'];
+        var csv = json2csv({data: totalResponse, fields: fields});
+        fs.writeFile("response/" + session.userData.firstName + ".csv", csv, function (err) {
+            if (err) throw err;
+            console.log('file saved');
+        });
+        customOperations.sendEmailToTMTeam(session, username, "Please check the feedback in attached file-: ", true, fs);
     }
-})
-    .triggerAction({
-        matches: /^submit/i,
-        onSelectAction: (session, args, next) => {
-            // Add the help dialog to the dialog stack
-            // (override the default behavior of replacing the stack)
-            session.beginDialog(args.action, args);
-        }
-    });
+}
 
 
 bot.dialog('/delete', (session) => {
@@ -449,150 +432,11 @@ bot.dialog('/delete', (session) => {
         confirmPrompt: "This will wipe everything out. Are you sure?"
     });
 
-bot.dialog('/done', (session) => {
-    session.endDialog('You are done with editing');
-})
-    .triggerAction({
-        matches: /done/i
-    });
-
 
 //==========================================================
 // helper functions
 //==========================================================
 
-
-/**
- * This method will send an email with the response as CSV file
- * @param session
- * @param subject
- * @param text
- * @param feedback
- */
-function sendEmail(session, subject, text, feedback) {
-
-    var path = "response/" + session.userData.firstName + ".csv";
-
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'grubscrub22@gmail.com',
-            pass: 'grubscrub@22'
-        }
-    });
-
-    var mailOptions;
-
-    if (feedback) {
-        mailOptions = {
-            from: 'grubscrub22@gmail.com',
-            to: 'sachit.wadhawan@quovantis.com',
-            subject: subject,
-            text: text,
-            attachments: [{
-                filename: session.userData.firstName + '.csv',
-                path: path
-            }]
-        };
-    } else {
-        mailOptions = {
-            from: 'grubscrub22@gmail.com',
-            to: 'sachit.wadhawan@quovantis.com',
-            subject: subject,
-            text: text
-        };
-    }
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-            session.send(i18n.__('mail_not_sent_msg'));
-        } else {
-            console.log('Email sent: ' + info.response);
-            session.send(i18n.__('mail_sent_msg'));
-            session.send("Thanks **%s** for filling your feedback (bow)", session.userData.firstName);
-            fs.unlinkSync(path);
-        }
-        transporter.close();
-        deleteAllData(session);
-        session.endDialog();
-    });
-}
-
-
-/**
- * This method will submit all response to the server, also will make a CSV file and send it to the TM team
- * @param session
- */
-function submitAllResponse(session) {
-    var username = session.message.user.name;
-    session.send("Submitting feedback, Please wait...");
-    session.sendTyping();
-    var totalResponse = session.userData.questionArray;
-
-    // firebaseOperations.saveFeedbackToDB(session.userData.trainingId, username, session.userData.questionArray,
-    //     session.userData.trainingName);
-    console.log(username + "-> Submit" + session.userData.questionArray);
-
-    var fields = ['id', 'question', 'answer'];
-    var csv = json2csv({data: totalResponse, fields: fields});
-    fs.writeFile("response/" + session.userData.firstName + ".csv", csv, function (err) {
-        if (err) throw err;
-        console.log('file saved');
-    });
-    sendEmail(session, username + "- " + i18n.__('subject_feedback'), "Please check the response in attached file-: ", true);
-}
-
-
-/**
- * this method is used to build the questions with an options
- * @param session
- * @param questionObject
- */
-function buildQuestionsAndOptions(session, questionObject) {
-    var question = questionObject.question;
-    var options = questionObject.options;
-    var questionsType = questionObject.question_type;
-    var id = questionObject.id;
-    if (questionsType === 'choice') {
-        builder.Prompts.choice(
-            session,
-            id + ". " + question,
-            options,
-            {
-                listStyle: builder.ListStyle.button,
-                retryPrompt: i18n.__('retry_prompt')
-            });
-    } else if (questionsType === 'text') {
-        builder.Prompts.text(session, id + ". " + question);
-    }
-}
-
-
-/**
- * This method will call once user has submitted all the response, there will be two options, submit and review.
- * The selection will navigate user to the corresponding dialog
- * @param session
- * @param results
- */
-function selectOptionAfterCompletingAnswer(session, results) {
-    if (results.response) {
-        var selectedOptionIndex = results.response.index;
-        switch (selectedOptionIndex) {
-            case 0:
-                session.beginDialog("submitResponse");
-                break;
-
-            case 1:
-                session.beginDialog("showFeedbackReview");
-                break;
-
-            default:
-                break;
-
-        }
-
-    }
-}
 
 /**
  * This method will clear the current session of the user or will delete local data
@@ -724,12 +568,13 @@ function sendBroadcastToAllMembers(username, address) {
  * available for that user, send a proactive message to that user
  */
 function startCronToCheckPendingFeedback() {
-    taskForPendingFeedback = cron.schedule('0 */2 * * *', function () {
+    var taskForPendingFeedback = cron.schedule('0 */1 * * *', function () {
         console.log('Running a task to check pending feedback');
         checkForPendingFeedback();
     }, false);
     taskForPendingFeedback.start();
 }
+
 
 module.exports = {
 
@@ -745,4 +590,5 @@ module.exports = {
     sendBroadcast: function (res, next) {
         getAddressAndBroadcastMessage(res, next);
     }
-}
+};
+
