@@ -78,7 +78,16 @@ module.exports = {
     },
     updateLastSentMessageOfPendingFeedback: function (lastSentMessage, attendeeId, trainingId) {
         firebase.database().ref('pendingFeedback/' + attendeeId.replaceAll('.', ':') + "/" + trainingId + "/lastSentMessage").set(lastSentMessage);
-    }
+    },
+
+    // setCurrentQuestionNumber: function (attendeeId, trainingId, questionNumber) {
+    //     firebase.database().ref('pendingFeedback/' + attendeeId.replaceAll('.', ':') + "/" + trainingId + "/currentQuestion").set(questionNumber);
+    // },
+    //
+    // getCurrentQuestionNumber: function (attendeeId, trainingId, callbackFunction) {
+    //     getCurrentQuestion(attendeeId, trainingId, callbackFunction)
+    // }
+
 };
 
 /**
@@ -186,6 +195,16 @@ function getUserPendingFeedback(emailId, callbackFunction) {
         console.log("The read failed: " + errorObject.code);
     })
 }
+
+
+function getCurrentQuestion(emailId, trainingId, callbackFunction) {
+    firebase.database().ref('pendingFeedback/' + emailId.replaceAll('.', ':') + "/" + trainingId + "/currentQuestion").once('value', function (snapshot) {
+        callbackFunction(snapshot);
+    }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+    })
+}
+
 
 function deletePendingFeedback(trainingId, emailId) {
     firebase.database().ref('pendingFeedback/' + emailId.replaceAll('.', ':') + '/' + trainingId).remove();

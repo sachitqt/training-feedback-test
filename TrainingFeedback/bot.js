@@ -25,9 +25,6 @@ const bot = new builder.UniversalBot(connector);
 
 var question, answer;
 
-const logUserConversation = (event) => {
-    console.log('message: ' + event.text + ', user: ' + event.address.user.name);
-};
 
 bot.on('contactRelationUpdate', function (message) {
     if (message.action === 'add') {
@@ -79,6 +76,23 @@ function getDayTimings() {
 bot.use(builder.Middleware.dialogVersion({version: 1.0, resetCommand: /^reset/i}));
 
 
+const logUserConversation = (header, event) => {
+    console.log(header + event.text + ', user: ' + event.address.user.name);
+};
+
+// Middleware for logging
+bot.use({
+    receive: function (event, next) {
+        logUserConversation('user sent: ', event);
+        next();
+    },
+    send: function (event, next) {
+        logUserConversation('bot sent: ', event);
+        next();
+    }
+});
+
+
 //==========================================================
 // dialogs
 //==========================================================
@@ -114,13 +128,12 @@ bot.dialog("/", [
                         session.userData.trainingId = trainingId;
                         session.userData.trainingName = trainingName;
                         session.userData.attendeeId = attendeeId;
-
-                        session.send('Shabaash! (monkey) (joy)');
-                        session.send(i18n.__('welcome1_msg'));
                         session.sendTyping();
-                        session.send("Here are the questions for the session **'%s'**", trainingName);
+
+                        session.send("Shabaash! (monkey) (joy)" + "<br />" + i18n.__('welcome1_msg') + "<br /> <br />" + "Here are the questions for the session **'%s'**", trainingName);
                         session.beginDialog('startFeedbackQuestions');
 
+                        // firebaseOperations.setCurrentQuestionNumber(session.userData.attendeeId, session.userData.trainingId, 0);
                         firebaseOperations.updateStartedStatusOfPendingFeedback(true, attendeeId, trainingId);
                         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), attendeeId, trainingId);
                         console.log(username + " -> " + session.userData.trainingName + ", " + session.userData.trainingId);
@@ -145,56 +158,44 @@ bot.dialog('startFeedbackQuestions', [
     function (session) {
         session.userData['questionArray'] = new arraylist();
         session.userData.questionArray.add(i18n.__("questions"));
-        // session.send("**Tip :** *Please select or type the option*");
+
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[0], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
     },
     function (session, results) {
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[0];
-        questionObject.answer = userAnswer;
+        session.userData.questionArray[0].answer = results.response.entity;
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[1], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
     },
     function (session, results) {
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[1];
-        questionObject.answer = userAnswer;
+        session.userData.questionArray[1].answer = results.response.entity;
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[2], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
     },
     function (session, results) {
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[2];
-        questionObject.answer = userAnswer;
+        session.userData.questionArray[2].answer = results.response.entity;
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[3], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
 
     },
     function (session, results) {
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[3];
-        questionObject.answer = userAnswer;
+        session.userData.questionArray[3].answer = results.response.entity;
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[4], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
     },
     function (session, results) {
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[4];
-        questionObject.answer = userAnswer;
+        session.userData.questionArray[4].answer = results.response.entity;
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[5], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
     },
     function (session, results) {
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[5];
-        questionObject.answer = userAnswer;
+        session.userData.questionArray[5].answer = results.response.entity;
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[6], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
@@ -202,29 +203,22 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[6];
-        questionObject.answer = userAnswer;
-        session.send(i18n.__('half_attempt_msg'));
-        session.send("Next question");
+        session.userData.questionArray[6].answer = results.response.entity;
+        session.send(i18n.__('half_attempt_msg') + " Let's move to the next question");
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[7], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
 
     },
     function (session, results) {
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[7];
-        questionObject.answer = userAnswer;
+        session.userData.questionArray[7].answer = results.response.entity;
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[8], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
 
     },
     function (session, results) {
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[8];
-        questionObject.answer = userAnswer;
+        session.userData.questionArray[8].answer = results.response.entity;
         session.send("**Tip :** *Please type the answer*");
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[9], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
@@ -232,18 +226,14 @@ bot.dialog('startFeedbackQuestions', [
 
     },
     function (session, results) {
-        var userAnswer = results.response;
-        var questionObject = session.userData.questionArray[9];
-        questionObject.answer = userAnswer;
+        session.userData.questionArray[9].answer = results.response;
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[10], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
 
     },
     function (session, results) {
-        var userAnswer = results.response;
-        var questionObject = session.userData.questionArray[10];
-        questionObject.answer = userAnswer;
+        session.userData.questionArray[10].answer = results.response;
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[11], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
@@ -251,21 +241,15 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.sendTyping();
-        var userAnswer = results.response;
-        var questionObject = session.userData.questionArray[11];
-        questionObject.answer = userAnswer;
-        session.send("You are almost there, one more to go.");
-        session.send("(bhangra) (fireworks)");
-        session.send("Here is the final question ");
+        session.userData.questionArray[11].answer = results.response;
+        session.send("You are almost there, one more to go." + "<br />" + "(bhangra) (fireworks)" + "<br />" + "Here is the final question");
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[12], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
 
     },
     function (session, results) {
-        var userAnswer = results.response.entity;
-        var questionObject = session.userData.questionArray[12];
-        questionObject.answer = userAnswer;
+        session.userData.questionArray[12].answer = results.response.entity;
         builder.Prompts.choice(
             session,
             i18n.__('complete_all_ques_msg'),
@@ -423,6 +407,8 @@ function submitFeedback(session) {
 
 
 bot.dialog('/delete', (session) => {
+    session.sendTyping();
+    // firebaseOperations.setCurrentQuestionNumber(session.userData.attendeeId, session.userData.trainingId, 0);
     deleteAllData(session);
     session.endDialog(i18n.__('session_reset_msg'));
 

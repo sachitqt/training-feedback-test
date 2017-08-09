@@ -69,17 +69,23 @@ module.exports = {
         var options = questionObject.options;
         var questionsType = questionObject.question_type;
         var id = questionObject.id;
-        if (questionsType === 'choice') {
-            builder.Prompts.choice(
-                session,
-                id + ". " + question,
-                options,
-                {
-                    listStyle: builder.ListStyle.button,
-                    retryPrompt: i18n.__('retry_prompt')
-                });
-        } else if (questionsType === 'text') {
-            builder.Prompts.text(session, id + ". " + question);
+        var prompt = id + ". " + question;
+
+        switch (questionsType){
+            case "choice":
+                builder.Prompts.choice(
+                    session,
+                    prompt,
+                    options,
+                    {
+                        listStyle: builder.ListStyle.button,
+                        retryPrompt: i18n.__('retry_prompt')
+                    });
+                break;
+
+            case "text":
+                builder.Prompts.text(session, prompt);
+                break;
         }
     },
 
