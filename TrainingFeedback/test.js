@@ -236,8 +236,7 @@ bot.dialog('startFeedbackQuestions', [
         firebaseOperations.getCurrentQuestionNumber(session.userData.attendeeId, session.userData.trainingId, function (snapshot) {
             var data = snapshot.val();
             if(data==6) {
-                session.send(i18n.__('half_attempt_msg'));
-                session.send("Next question");
+                session.send(i18n.__('half_attempt_msg') + " Let's move to the next question");
                 firebaseOperations.setCurrentQuestionNumber(session.userData.attendeeId, session.userData.trainingId, 7);
                 customOperations.buildQuestionForFeedback(session, session.userData.questionArray[7], builder);
             }
@@ -310,9 +309,7 @@ bot.dialog('startFeedbackQuestions', [
         firebaseOperations.getCurrentQuestionNumber(session.userData.attendeeId, session.userData.trainingId, function (snapshot) {
             var data = snapshot.val();
             if(data==11) {
-                session.send("You are almost there, one more to go.");
-                session.send("(bhangra) (fireworks)");
-                session.send("Here is the final question ");
+                session.send("You are almost there, one more to go." + "<br />" + "(bhangra) (fireworks)" + "<br />" + "Here is the final question");
                 firebaseOperations.setCurrentQuestionNumber(session.userData.attendeeId, session.userData.trainingId, 12);
                 customOperations.buildQuestionForFeedback(session, session.userData.questionArray[12], builder);
             }

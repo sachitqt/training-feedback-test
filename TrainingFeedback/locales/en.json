@@ -4,142 +4,91 @@
       "id": 1,
       "question_type": "choice",
       "question": "The trainer seemed knowledgeable of the training area.",
-      "options": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5"
-      ],
+      "options": "1|2|3|4|5",
       "answer": ""
     },
     {
       "id": 2,
       "question_type": "choice",
       "question": "The trainer presented the contents well.",
-      "options": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5"
-      ],
+      "options": "1|2|3|4|5",
       "answer": ""
     },
     {
       "id": 3,
       "question_type": "choice",
       "question": "The trainer was able to engage with the participants to make the session interactive and interesting.",
-      "options": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5"
-      ],
+      "options": "1|2|3|4|5",
       "answer": ""
     },
     {
       "id": 4,
       "question_type": "choice",
       "question": "The training has enabled me to put my learning into practice now or will be able to use my learning in the future.",
-      "options": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5"
-      ],
+      "options": "1|2|3|4|5",
       "answer": ""
     },
     {
       "id": 5,
       "question_type": "choice",
       "question": "Content was easy to understand and inline with my expectations from the session.",
-      "options": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5"
-      ],
+      "options": "1|2|3|4|5",
       "answer": ""
     },
     {
       "id": 6,
       "question_type": "choice",
       "question": "I would recommend this course to other team members.",
-      "options": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5"
-      ],
+      "options": "1|2|3|4|5",
       "answer": ""
     },
     {
       "id": 7,
       "question_type": "choice",
       "question": "The training started at the scheduled time?",
-      "options": [
-        "Yes",
-        "No"
-      ],
+      "options": "Yes|No",
       "answer": ""
     },
     {
       "id": 8,
       "question_type": "choice",
       "question": "I was given enough notification for the training to plan my product tasks accordingly?",
-      "options": [
-        "Yes",
-        "No"
-      ],
+      "options": "Yes|No",
       "answer": ""
     },
     {
       "id": 9,
       "question_type": "choice",
       "question": "The training was conducted in a conducive and well-equipped environment?",
-      "options": [
-        "Yes",
-        "No"
-      ],
+      "options": "Yes|No",
       "answer": ""
     },
     {
       "id": 10,
       "question_type": "text",
       "question": "What is at least one learning that you can take from this session?",
-      "options": [],
+      "options": "",
       "answer": ""
     },
     {
       "id": 11,
       "question_type": "text",
       "question": "How can this training be further improved for better results – give at least 1 recommendation.",
-      "options": [],
+      "options": "",
       "answer": ""
     },
     {
       "id": 12,
       "question_type": "text",
       "question": "Do you have any other feedback for improvement?",
-      "options": [],
+      "options": "",
       "answer": ""
     },
     {
       "id": 13,
       "question_type": "choice",
       "question": "Overall Rating",
-      "options": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5"
-      ],
+      "options": "1|2|3|4|5",
       "answer": ""
     }
   ],
@@ -193,7 +142,8 @@
   "msg_to_start_feedback": "You have just attended the session. We request you to fill the feedback ASAP. What would you like to do now?",
   "question_start_msg": "Here are the questions:",
   "choose_start_option": "What would you like to do? (** Tip :** *Please select or type the option*)",
-  "delete_bot": "Bot has been delete from the skype list",
+  "delete_bot": "Bot has been deleted from the skype list",
+  "tip_restart":"**Tip :** You can type **'restart'** anytime before submitting the feedback to start filling the feedback from beginning.",
   "dialogLabels": [
     "Start"
   ],
@@ -211,7 +161,7 @@
   "optionDialogLabels": [
     "Submit",
     "Review",
-    "Edit Feedback"
+    "Edit"
   ],
   "confirmationDialogLabels": [
     "Yes",
@@ -220,5 +170,6 @@
   "wait": "Hey (wait)! You have only attempted **%s/13** questions. Please complete your feedback and then submit",
   "answer_update": "Your **answer %s** has been updated successfully (rock)",
   "inactive_msg": "Hey **%s**, I can see that you have started filling the **'%s'** session feedback but did not complete it. I promise (promise) that it will take hardly 5 minutes. Please fill it ASAP otherwise I will keep bothering you. ]:)",
-  "invalid_query": "Hey %s, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'help'** to see all available commands that I can handle."
+  "invalid_query": "Hey %s, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'help'** to see all available commands that I can handle.",
+  "too_fast_msg":"Hey %s, you were too fast this time (wait), I would request you to please slow down else I can give you some crazy results and it will not be my fault."
 }

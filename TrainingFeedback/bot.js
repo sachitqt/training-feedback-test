@@ -6,6 +6,7 @@ var json2csv = require('json2csv');
 var fs = require('fs');
 var arraylist = require('arraylist');
 var cron = require('node-cron');
+var ls = require('local-storage');
 
 
 i18n.configure({
@@ -29,6 +30,8 @@ var question, answer;
 bot.on('contactRelationUpdate', function (message) {
     if (message.action === 'add') {
         var username = message.user ? message.user.name : "Unknown";
+        var userId = message.user.id.split(":")[1];
+        ls.set(userId, 0);
         var firstName = username.split(" ")[0];
         var saveAddress = message.address;
         var greetingMessage = getDayTimings();
@@ -46,6 +49,7 @@ bot.on('contactRelationUpdate', function (message) {
             bot.send(reply);
         });
     } else {
+        ls.clear();
         console.log(i18n.__('delete_bot'))
     }
 
@@ -83,8 +87,30 @@ const logUserConversation = (header, event) => {
 // Middleware for logging
 bot.use({
     receive: function (event, next) {
-        logUserConversation('user sent: ', event);
-        next();
+        var userId = event.user.id.split(":")[1];
+        var currentSavedDate = event.localTimestamp;
+        if (currentSavedDate == undefined) {
+            currentSavedDate = 0;
+            next();
+            return;
+        }
+        var currentTime = new Date(currentSavedDate).getSeconds();
+        var lastSaveDate = ls.get(userId);
+        if (lastSaveDate == null) {
+            lastSaveDate = 0;
+        }
+        var lastSavedTime = new Date(lastSaveDate).getSeconds();
+        var diff = (currentTime - lastSavedTime);
+        var timeDifference = Math.abs(Math.round(diff));
+        console.log("Time: ", diff);
+        if (timeDifference > 4) {
+            logUserConversation('user sent: ', event);
+            next();
+        } else {
+            sendProactiveMessageToNotifyUserActivity(event.address, i18n.__('too_fast_msg'));
+            console.log("You were too fast at this time and we are not processing this result.")
+        }
+        ls.set(userId, currentSavedDate);
     },
     send: function (event, next) {
         logUserConversation('bot sent: ', event);
@@ -99,13 +125,14 @@ bot.use({
 
 bot.dialog("/", [
     function (session) {
-        session.sendTyping();
         var username = session.message.user.name;
         session.userData.firstName = username.split(" ")[0];
         var userMessage = (session.message.text).toLowerCase();
         if (userMessage != 'start') {
+            session.sendTyping();
             session.endDialog("Hey **%s**, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'Start'** to start filling the feedback", session.userData.firstName);
         } else {
+            session.sendTyping();
             firebaseOperations.isFeedbackPendingForUser(username, function (isPendingFeedback) {
                 if (isPendingFeedback) {
                     var trainingId, trainingName, attendeeId, isStarted = false;
@@ -131,9 +158,9 @@ bot.dialog("/", [
                         session.sendTyping();
 
                         session.send("Shabaash! (monkey) (joy)" + "<br />" + i18n.__('welcome1_msg') + "<br /> <br />" + "Here are the questions for the session **'%s'**", trainingName);
+                        session.send(i18n.__('tip_restart'));
                         session.beginDialog('startFeedbackQuestions');
 
-                        // firebaseOperations.setCurrentQuestionNumber(session.userData.attendeeId, session.userData.trainingId, 0);
                         firebaseOperations.updateStartedStatusOfPendingFeedback(true, attendeeId, trainingId);
                         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), attendeeId, trainingId);
                         console.log(username + " -> " + session.userData.trainingName + ", " + session.userData.trainingId);
@@ -156,6 +183,7 @@ bot.dialog("/", [
  */
 bot.dialog('startFeedbackQuestions', [
     function (session) {
+        session.sendTyping();
         session.userData['questionArray'] = new arraylist();
         session.userData.questionArray.add(i18n.__("questions"));
 
@@ -165,11 +193,13 @@ bot.dialog('startFeedbackQuestions', [
     },
     function (session, results) {
         session.userData.questionArray[0].answer = results.response.entity;
+        session.userData.lastSentTime = 1000;
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[1], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
     },
     function (session, results) {
+        session.sendTyping();
         session.userData.questionArray[1].answer = results.response.entity;
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[2], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
@@ -183,6 +213,7 @@ bot.dialog('startFeedbackQuestions', [
 
     },
     function (session, results) {
+        session.sendTyping();
         session.userData.questionArray[3].answer = results.response.entity;
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[4], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
@@ -218,6 +249,7 @@ bot.dialog('startFeedbackQuestions', [
 
     },
     function (session, results) {
+        session.sendTyping();
         session.userData.questionArray[8].answer = results.response.entity;
         session.send("**Tip :** *Please type the answer*");
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[9], builder);
@@ -233,6 +265,7 @@ bot.dialog('startFeedbackQuestions', [
 
     },
     function (session, results) {
+        session.sendTyping();
         session.userData.questionArray[10].answer = results.response;
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[11], builder);
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
@@ -240,7 +273,6 @@ bot.dialog('startFeedbackQuestions', [
 
     },
     function (session, results) {
-        session.sendTyping();
         session.userData.questionArray[11].answer = results.response;
         session.send("You are almost there, one more to go." + "<br />" + "(bhangra) (fireworks)" + "<br />" + "Here is the final question");
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[12], builder);
@@ -249,6 +281,7 @@ bot.dialog('startFeedbackQuestions', [
 
     },
     function (session, results) {
+        session.sendTyping();
         session.userData.questionArray[12].answer = results.response.entity;
         builder.Prompts.choice(
             session,
@@ -314,6 +347,7 @@ bot.dialog('editing', [
     function (session, results) {
         try {
             var prefixCommand = results.response.split(" ")[0];
+            prefixCommand = prefixCommand.toLowerCase();
             var selectOption = results.response.split(" ")[1];
             if (prefixCommand != "edit" || selectOption < 1 || selectOption > 13) {
                 session.send(i18n.__("retry_command_edit")[0]);
@@ -360,9 +394,16 @@ bot.dialog('editing', [
 ]);
 
 
-// The dialog stack is cleared and this dialog is invoked when the user enters 'help'.
+// feedback is started submit when this dialog gets invoke
 bot.dialog('submit', function (session, args, next) {
-    submitFeedback(session);
+    firebaseOperations.isFeedbackPendingForUser(session.message.user.name, function (isPendingFeedback) {
+        if (isPendingFeedback) {
+            submitFeedback(session);
+        } else {
+            session.endDialog("You have no pending feedback yet. Enjoy!!!  (whistle)")
+        }
+    });
+
 })
     .triggerAction({
         matches: /^submit/i,
@@ -504,6 +545,25 @@ function sendProactiveMessage(address, trainingName) {
         var firstName = name.split(" ")[0];
         var msg = new builder.Message().address(address);
         msg.text(i18n.__('inactive_msg'), firstName, trainingName);
+        bot.send(msg);
+
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+
+
+/**
+ * This method will send a warning message if user is typing too fast and want to break our BOT :)
+ * @param address
+ * @param message
+ */
+function sendProactiveMessageToNotifyUserActivity(address, message) {
+    try {
+        var name = address.user.name;
+        var firstName = name.split(" ")[0];
+        var msg = new builder.Message().address(address);
+        msg.text(message, firstName);
         bot.send(msg);
 
     } catch (err) {
