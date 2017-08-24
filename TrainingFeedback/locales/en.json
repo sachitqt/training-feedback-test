@@ -96,28 +96,28 @@
     {
       "id": 1,
       "question_type": "choice",
-      "question": "The trainer seemed knowledgeable of the training area.",
+      "question": "The round table seemed knowledgeable of the training area.",
       "options": "1|2|3|4|5",
       "answer": ""
     },
     {
       "id": 2,
       "question_type": "choice",
-      "question": "The trainer presented the contents well.",
+      "question": "The round table presented the contents well.",
       "options": "1|2|3|4|5",
       "answer": ""
     },
     {
       "id": 3,
       "question_type": "choice",
-      "question": "The trainer was able to engage with the participants to make the session interactive and interesting.",
+      "question": "The round table was able to engage with the participants to make the session interactive and interesting.",
       "options": "1|2|3|4|5",
       "answer": ""
     },
     {
       "id": 4,
       "question_type": "choice",
-      "question": "The training has enabled me to put my learning into practice now or will be able to use my learning in the future.",
+      "question": "The round table has enabled me to put my learning into practice now or will be able to use my learning in the future.",
       "options": "1|2|3|4|5",
       "answer": ""
     }
@@ -126,21 +126,21 @@
     {
       "id": 1,
       "question_type": "text",
-      "question": "The trainer seemed knowledgeable of the training area.",
+      "question": "The workshop seemed knowledgeable of the training area.",
       "options": "",
       "answer": ""
     },
     {
       "id": 2,
       "question_type": "text",
-      "question": "The trainer presented the contents well.",
+      "question": "The workshop presented the contents well.",
       "options": "",
       "answer": ""
     },
     {
       "id": 3,
       "question_type": "text",
-      "question": "The trainer was able to engage with the participants to make the session interactive and interesting.",
+      "question": "The workshop was able to engage with the participants to make the session interactive and interesting.",
       "options": "",
       "answer": ""
     }
