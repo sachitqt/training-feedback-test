@@ -1,5 +1,5 @@
 {
-  "questions": [
+  "training_questions": [
     {
       "id": 1,
       "question_type": "choice",
@@ -92,6 +92,59 @@
       "answer": ""
     }
   ],
+  "roundtable_questions": [
+    {
+      "id": 1,
+      "question_type": "choice",
+      "question": "The trainer seemed knowledgeable of the training area.",
+      "options": "1|2|3|4|5",
+      "answer": ""
+    },
+    {
+      "id": 2,
+      "question_type": "choice",
+      "question": "The trainer presented the contents well.",
+      "options": "1|2|3|4|5",
+      "answer": ""
+    },
+    {
+      "id": 3,
+      "question_type": "choice",
+      "question": "The trainer was able to engage with the participants to make the session interactive and interesting.",
+      "options": "1|2|3|4|5",
+      "answer": ""
+    },
+    {
+      "id": 4,
+      "question_type": "choice",
+      "question": "The training has enabled me to put my learning into practice now or will be able to use my learning in the future.",
+      "options": "1|2|3|4|5",
+      "answer": ""
+    }
+  ],
+  "workshop_questions": [
+    {
+      "id": 1,
+      "question_type": "text",
+      "question": "The trainer seemed knowledgeable of the training area.",
+      "options": "",
+      "answer": ""
+    },
+    {
+      "id": 2,
+      "question_type": "text",
+      "question": "The trainer presented the contents well.",
+      "options": "",
+      "answer": ""
+    },
+    {
+      "id": 3,
+      "question_type": "text",
+      "question": "The trainer was able to engage with the participants to make the session interactive and interesting.",
+      "options": "",
+      "answer": ""
+    }
+  ],
   "subject_feedback": "Session Feedback",
   "subject_response": "Session Response",
   "notSubmitting": "Not Submitting",
@@ -171,5 +224,5 @@
   "answer_update": "Your **answer %s** has been updated successfully (rock)",
   "inactive_msg": "Hey **%s**, I can see that you have started filling the **'%s'** session feedback but did not complete it. I promise (promise) that it will take hardly 5 minutes. Please fill it ASAP otherwise I will keep bothering you. ]:)",
   "invalid_query": "Hey %s, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'help'** to see all available commands that I can handle.",
-  "too_fast_msg":"Hey %s, you were too fast this time (wait), I would request you to please slow down else I can give you some crazy results and it will not be my fault."
+  "too_fast_msg":"Hey %s, you were too fast this time (wait), I would request you to please slow down else I can give you some crazy results and it will not be my fault but for now we are considering your first command."
 }

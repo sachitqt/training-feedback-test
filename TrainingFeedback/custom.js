@@ -32,7 +32,7 @@ module.exports = {
         if (feedback) {
             mailOptions = {
                 from: 'grubscrub22@gmail.com',
-                to: 'sachit.wadhawan@quovantis.com',
+                to: 'malvika.shukla@quovantis.com',
                 subject: subject,
                 text: text,
                 attachments: [{
@@ -43,7 +43,7 @@ module.exports = {
         } else {
             mailOptions = {
                 from: 'grubscrub22@gmail.com',
-                to: 'sachit.wadhawan@quovantis.com',
+                to: 'malvika.shukla@quovantis.com',
                 subject: subject,
                 text: text
             };
@@ -142,6 +142,7 @@ module.exports = {
 function deleteAllData(session) {
     session.userData = {};
     session.dialogData = {};
+    session.endConversation();
 }
 
 

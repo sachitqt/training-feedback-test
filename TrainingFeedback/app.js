@@ -6,7 +6,6 @@ const botify = require('./bot.js');
 // Setup Restify Server
 var server = restify.createServer();
 var bot = botify.getUniversalBotInstance();
-var firebaseObject = botify.getFirebaseObject();
 
 server.post('/api/messages', bot.connector('*').listen());
 
@@ -18,10 +17,10 @@ server.listen(process.env.port || process.env.PORT || 5000, function () {
 
 
 // Do GET this endpoint to delivey a notification
-// server.get('/api/CustomWebApi', (req, res, next) => {
-//         botify.sendBroadcast(res, next);
-//     }
-// );
+server.get('/api/CustomWebApi', (req, res) => {
+        botify.sendBroadcast(req, res);
+    }
+);
 
 
 

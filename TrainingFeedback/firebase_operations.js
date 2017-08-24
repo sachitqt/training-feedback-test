@@ -170,7 +170,8 @@ function getEmailIdFromUsername(username, callbackFunction) {
     firebase.database().ref('users/').once('value', function (snapshot) {
         snapshot.forEach(function (child) {
             let user = child.val();
-            if (user.skypeName === username) {
+            if (((user.skypeName).toLowerCase() === (username).toLowerCase()) ||
+                ((user.fullName).toLowerCase() === (username).toLowerCase())) {
                 emailId = user.emailId;
             }
         });
