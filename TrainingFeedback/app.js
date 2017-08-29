@@ -100,7 +100,7 @@ function checkForIdealCondition(address, lastSentMessage, trainingId, attendeeId
     diff /= 60;
     console.log(Math.abs(Math.round(diff)));
     var timeDifference = Math.abs(Math.round(diff));
-    if (timeDifference >= 4) {
+    if (timeDifference >= 10) {
         sendProactiveMessage(address, trainingName);
         lastSentMessage = new Date().getTime();
         firebaseOperations.updateLastSentMessageOfPendingFeedback(lastSentMessage, attendeeId, trainingId);

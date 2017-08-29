@@ -96,29 +96,43 @@
     {
       "id": 1,
       "question_type": "choice",
-      "question": "The round table seemed knowledgeable of the training area.",
+      "question": "Which Practice Group do you belong to?",
       "options": "1|2|3|4|5",
       "answer": ""
     },
     {
       "id": 2,
       "question_type": "choice",
-      "question": "The round table presented the contents well.",
+      "question": "Which piece of information was most useful for you?",
       "options": "1|2|3|4|5",
       "answer": ""
     },
     {
       "id": 3,
-      "question_type": "choice",
-      "question": "The round table was able to engage with the participants to make the session interactive and interesting.",
-      "options": "1|2|3|4|5",
+      "question_type": "text",
+      "question": "Please explain your reasons for your choice.",
+      "options": "",
       "answer": ""
     },
     {
       "id": 4,
       "question_type": "choice",
-      "question": "The round table has enabled me to put my learning into practice now or will be able to use my learning in the future.",
+      "question": "Which piece of information was least relevant/did not add any value in the session?",
       "options": "1|2|3|4|5",
+      "answer": ""
+    },
+    {
+      "id": 5,
+      "question_type": "text",
+      "question": "Please explain your reasons for your choice.",
+      "options": "",
+      "answer": ""
+    },
+    {
+      "id": 6,
+      "question_type": "text",
+      "question": "Please share your suggestions for anything else that you would like to be included in the RT",
+      "options": "",
       "answer": ""
     }
   ],
@@ -126,21 +140,28 @@
     {
       "id": 1,
       "question_type": "text",
-      "question": "The workshop seemed knowledgeable of the training area.",
+      "question": "Did the leadership talk succeed in setting your expectations on how to communicate hard feedback?",
       "options": "",
       "answer": ""
     },
     {
       "id": 2,
       "question_type": "text",
-      "question": "The workshop presented the contents well.",
+      "question": "What were your major takeaways from the leadership talk?",
       "options": "",
       "answer": ""
     },
     {
       "id": 3,
       "question_type": "text",
-      "question": "The workshop was able to engage with the participants to make the session interactive and interesting.",
+      "question": "Which aspects went really well during the talk? (related to delivery, content, or any other expectations)",
+      "options": "",
+      "answer": ""
+    },
+    {
+      "id": 4,
+      "question_type": "text",
+      "question": "What could have been done better? (related to delivery, content, or any other expectations)",
       "options": "",
       "answer": ""
     }
@@ -148,11 +169,11 @@
   "subject_feedback": "Session Feedback",
   "subject_response": "Session Response",
   "notSubmitting": "Not Submitting",
-  "response_header": "Here is the list of feedback that you have submitted, you can edit any feedback before submitting it.",
+  "response_header": "Here is the feedback that you have submitted, you can edit any response before submitting it.",
   "retry_prompt": [
     "Please choose correct option for the above question",
     "I would request you to please select correct option",
-    "I am sorry but you write something else that is not given in the options"
+    "I am sorry but you wrote something else that is not given in the options"
   ],
   "retry_command_prompt": [
     "This is not correct command. Please enter the valid command",
@@ -185,10 +206,10 @@
   "mail_sent_msg": "Your feedback has been submitted, thanks for your time (bow)",
   "reason_msg": "Can you please write the reason why don't you want to fill the feedback? (chappal)",
   "complete_all_ques_msg": "Great Job! (clap) You have submitted your feedback successfully and we appreciate this. (y) What would you like to do now?",
-  "half_attempt_msg": "You have completed almost half of the questions. (kya) baat hai. Here is a (trophy) for you.",
+  "half_attempt_msg": "You have completed almost half of the questions. (kya) baat hai. Here is a (trophy) for you. Let's move to the next question.",
   "error_msg": "There is some problem, please try after some time",
   "no_option_found_error": "Sorry I couldn't get you. It seems you have entered something else. Can you please try 'help' for how to proceed.",
-  "welcome1_msg": "You will be presented with a list of questions. Your answer to those questions can help the trainer identify his strengths and improvement areas to serve you better.",
+  "welcome1_msg": "You will be presented with a list of questions. Your answer to those questions can help the trainer identify their strengths and improvement areas to serve you better.",
   "welcome2_msg": "You can type '**help**' anytime to see all available commands that I can respond to.",
   "welcome3_msg": "**I will help you in providing the feedback for the training** (wave)",
   "feedback_fill_msg": "You have just attended the session. We request you to fill the feedback ASAP. ",
@@ -197,6 +218,8 @@
   "choose_start_option": "What would you like to do? (** Tip :** *Please select or type the option*)",
   "delete_bot": "Bot has been deleted from the skype list",
   "tip_restart":"**Tip :** You can type **'restart'** anytime before submitting the feedback to start filling the feedback from beginning.",
+  "tip_subjective":"**Tip :** *Please type the answer*",
+  "final_question_message":"You are almost there, one more to go. <br /> (bhangra) (fireworks) <br /> Here is the final question.",
   "dialogLabels": [
     "Start"
   ],
@@ -220,9 +243,17 @@
     "Yes",
     "No"
   ],
-  "wait": "Hey (wait)! You have only attempted **%s/13** questions. Please complete your feedback and then submit",
-  "answer_update": "Your **answer %s** has been updated successfully (rock)",
-  "inactive_msg": "Hey **%s**, I can see that you have started filling the **'%s'** session feedback but did not complete it. I promise (promise) that it will take hardly 5 minutes. Please fill it ASAP otherwise I will keep bothering you. ]:)",
-  "invalid_query": "Hey %s, what are you saying, Humka kuch samjh me nahi aa ra hai (shake). Please type **'help'** to see all available commands that I can handle.",
-  "too_fast_msg":"Hey %s, you were too fast this time (wait), I would request you to please slow down else I can give you some crazy results and it will not be my fault but for now we are considering your first command."
+  "wait": "Hey (wait)! You have only attempted **%s/%s** questions. Please complete your feedback and then submit",
+  "answer_update": "Your **feedback of question number %s** has been updated successfully (rock)",
+  "inactive_msg": "Hey **%s**, I can see that you have started filling the **'%s'** session feedback but did not complete it. I promise (promise) that it will take hardly 5 minutes (time). Please fill it ASAP otherwise I will keep bothering you. ]:)",
+  "too_fast_msg":"Hey %s, you were too fast this time (wait), I would request you to please slow down else I can give you some crazy results and it will not be my fault but for now we are considering your first command.",
+  "user_not_found":"Hey **%s**, Your skype user name doesn't match in our database. We will highly recommend you to change your skype name to get all the notifications of the session or contact to TM team. ",
+  "user_found":"Hey **%s**, *%s* and thanks for adding me (highfive).  I will notify and guide you to provide feedback for the sessions here itself.<br /><br /> **Tip :** Please type **'Start'** when you are ready to fill the feedback.",
+  "not_getting_message":"Hey **%s**, what are you saying, I am not getting at this moment (shake). Please type **'Start'** to start filling the feedback.",
+  "well_done":"Well done! (monkey) (joy)",
+  "no_pending_feedback":"You have no pending feedback yet. Enjoy!!!  (whistle)",
+  "edit_command_hint":"Please type 'edit (question number)' to edit the response. For example- **edit 1**",
+  "what_next":"What would you like to do next?",
+  "sub_wait":"Submitting feedback, Please wait...",
+  "subject_email":"Please check the feedback in attached file-: "
 }

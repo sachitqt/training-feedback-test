@@ -12,6 +12,7 @@ i18n.configure({
 });
 
 
+
 module.exports = {
 
     sendEmailToTMTeam: function sendEmail(session, username, text, feedback, fs) {
@@ -30,23 +31,9 @@ module.exports = {
         });
 
         if (feedback) {
-            mailOptions = {
-                from: 'grubscrub22@gmail.com',
-                to: 'sachit.wadhawan@quovantis.com',
-                subject: subject,
-                text: text,
-                attachments: [{
-                    filename: session.userData.firstName + '.csv',
-                    path: path
-                }]
-            };
+            mailOptions = mailWithAttachment(mailOptions, subject, text, session, path);
         } else {
-            mailOptions = {
-                from: 'grubscrub22@gmail.com',
-                to: 'sachit.wadhawan@quovantis.com',
-                subject: subject,
-                text: text
-            };
+            mailOptions = mailWithoutAttachment(mailOptions, subject, text);
         }
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
@@ -71,7 +58,7 @@ module.exports = {
         var id = questionObject.id;
         var prompt = id + ". " + question;
 
-        switch (questionsType){
+        switch (questionsType) {
             case "choice":
                 builder.Prompts.choice(
                     session,
@@ -132,7 +119,46 @@ module.exports = {
 
         }
     }
+}
 
+/**
+ * this function will send an email along with attachment
+ * @param mailOptions
+ * @param subject
+ * @param text
+ * @param session
+ * @param path
+ * @returns {{from: string, to: string, subject: *, text: *, attachments: [*]}|*}
+ */
+function mailWithAttachment(mailOptions, subject, text, session, path) {
+    mailOptions = {
+        from: 'grubscrub22@gmail.com',
+        to: 'sachit.wadhawan@quovantis.com',
+        subject: subject,
+        text: text,
+        attachments: [{
+            filename: session.userData.firstName + '.csv',
+            path: path
+        }]
+    };
+    return mailOptions;
+}
+
+/**
+ * this function will send an email
+ * @param mailOptions
+ * @param subject
+ * @param text
+ * @returns {{from: string, to: string, subject: *, text: *}|*}
+ */
+function mailWithoutAttachment(mailOptions, subject, text) {
+    mailOptions = {
+        from: 'grubscrub22@gmail.com',
+        to: 'sachit.wadhawan@quovantis.com',
+        subject: subject,
+        text: text
+    };
+    return mailOptions;
 }
 
 /**
