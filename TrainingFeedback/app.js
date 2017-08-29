@@ -79,8 +79,7 @@ function checkForPendingFeedback() {
                         }
                         if (!isStarted) {
                             var msg = new builder.Message().address(address);
-                            msg.text("You have just attended the **'%s'** session. We request you to fill the feedback ASAP. " +
-                                "Please type **'Start'** to start filling the feedback. :)", name);
+                            msg.text(i18n.__('just_attended_notification'), name);
                             bot.send(msg);
                         }
                     });

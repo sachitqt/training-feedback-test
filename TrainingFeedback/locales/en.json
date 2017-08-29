@@ -220,6 +220,7 @@
   "tip_restart":"**Tip :** You can type **'restart'** anytime before submitting the feedback to start filling the feedback from beginning.",
   "tip_subjective":"**Tip :** *Please type the answer*",
   "final_question_message":"You are almost there, one more to go. <br /> (bhangra) (fireworks) <br /> Here is the final question.",
+  "just_attended_notification":"You have just attended the **'%s'** session. We request you to fill the feedback ASAP. Please type **'Start'** to start filling the feedback. :)",
   "dialogLabels": [
     "Start"
   ],

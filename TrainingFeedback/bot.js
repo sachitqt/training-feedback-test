@@ -577,7 +577,7 @@ bot.dialog('startWorkshopFeedback', [
  * @param type       type of the question
  */
 function processUserResponse(session, results, index, type) {
-    if (type == 1) {
+    if (type === 1) {
         session.userData.questionArray[index].answer = results.response.entity;
     } else {
         session.userData.questionArray[index].answer = results.response;
