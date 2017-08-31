@@ -166,19 +166,31 @@ function isFeedbackPending(userId, callbackFunction) {
 }
 
 function getEmailIdFromUsername(username, callbackFunction) {
-    let emailId = '';
-    firebase.database().ref('users/').once('value', function (snapshot) {
-        snapshot.forEach(function (child) {
-            let user = child.val();
-            if (((user.skypeName).toLowerCase() === (username).toLowerCase()) ||
-                ((user.fullName).toLowerCase() === (username).toLowerCase())) {
-                emailId = user.emailId;
-            }
-        });
-        callbackFunction(emailId);
+    firebase.database().ref('users/').orderByChild('skypeName').equalTo(username).once('value', function (snapshot) {
+        var obj = snapshot.val();
+        var key = Object.keys(snapshot.val())[0];
+        callbackFunction(obj[key].emailId);
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
-    })
+    });
+
+    // console.time('FetchEmailId');
+    // let emailId = '';
+    // firebase.database().ref('users/').once('value', function (snapshot) {
+    //     console.time('FetchEmailId');
+    //     snapshot.forEach(function (child) {
+    //         let user = child.val();
+    //         if (((user.skypeName).toLowerCase() === (username).toLowerCase()) ||
+    //             ((user.fullName).toLowerCase() === (username).toLowerCase())) {
+    //             emailId = user.emailId;
+    //         }
+    //     });
+    //     console.timeEnd('FetchEmailId');
+    //     // console.timeEnd('FetchEmailId');
+    //     callbackFunction(emailId);
+    // }, function (errorObject) {
+    //     console.log("The read failed: " + errorObject.code);
+    // })
 }
 
 function getUserPendingFeedback(emailId, callbackFunction) {
@@ -186,9 +198,8 @@ function getUserPendingFeedback(emailId, callbackFunction) {
         callbackFunction(snapshot);
     }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
-    })
+    });
 }
-
 
 
 function deletePendingFeedback(trainingId, emailId) {
@@ -197,4 +208,4 @@ function deletePendingFeedback(trainingId, emailId) {
 
 String.prototype.replaceAll = function (str1, str2, ignore) {
     return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof(str2) == "string") ? str2.replace(/\$/g, "$$$$") : str2);
-}
+};
