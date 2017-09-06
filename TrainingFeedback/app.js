@@ -19,8 +19,6 @@ i18n.configure({
 });
 
 
-server.post('/api/messages', bot.connector('*').listen());
-
 server.listen(process.env.port || process.env.PORT || LOCALHOST_DEV_PORT, function startServer() {
     console.log(`${server.name} listening at: ${server.url}`);
     startCronToCheckPendingFeedback();
@@ -37,6 +35,7 @@ server.get('/', function (request, response, next) {
 });
 
 
+server.post('/api/messages', bot.connector('*').listen());
 
 // Do GET this endpoint to delivey a notification
 server.get('/api/CustomWebApi', (req, res) => {
