@@ -166,31 +166,33 @@ function isFeedbackPending(userId, callbackFunction) {
 }
 
 function getEmailIdFromUsername(username, callbackFunction) {
-    firebase.database().ref('users/').orderByChild('skypeName').equalTo(username).once('value', function (snapshot) {
-        var obj = snapshot.val();
-        var key = Object.keys(snapshot.val())[0];
-        callbackFunction(obj[key].emailId);
-    }, function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-    });
-
-    // console.time('FetchEmailId');
-    // let emailId = '';
-    // firebase.database().ref('users/').once('value', function (snapshot) {
-    //     console.time('FetchEmailId');
-    //     snapshot.forEach(function (child) {
-    //         let user = child.val();
-    //         if (((user.skypeName).toLowerCase() === (username).toLowerCase()) ||
-    //             ((user.fullName).toLowerCase() === (username).toLowerCase())) {
-    //             emailId = user.emailId;
-    //         }
-    //     });
-    //     console.timeEnd('FetchEmailId');
-    //     // console.timeEnd('FetchEmailId');
-    //     callbackFunction(emailId);
+    // firebase.database().ref('users/').orderByChild('skypeName').equalTo(username).once('value', function (snapshot) {
+    //     console.log("UserName-Cron", username);
+    //     var obj = snapshot.val();
+    //     console.log("Snapshot-Cron", snapshot.val());
+    //     var key = Object.keys(snapshot.val())[0];
+    //     callbackFunction(obj[key].emailId);
     // }, function (errorObject) {
     //     console.log("The read failed: " + errorObject.code);
-    // })
+    // });
+
+    // console.time('FetchEmailId');
+    let emailId = '';
+    firebase.database().ref('users/').once('value', function (snapshot) {
+        console.time('FetchEmailId');
+        snapshot.forEach(function (child) {
+            let user = child.val();
+            if (((user.skypeName).toLowerCase() === (username).toLowerCase()) ||
+                ((user.fullName).toLowerCase() === (username).toLowerCase())) {
+                emailId = user.emailId;
+            }
+        });
+        console.timeEnd('FetchEmailId');
+        // console.timeEnd('FetchEmailId');
+        callbackFunction(emailId);
+    }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+    })
 }
 
 function getUserPendingFeedback(emailId, callbackFunction) {

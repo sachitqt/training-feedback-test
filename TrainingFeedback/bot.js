@@ -22,7 +22,6 @@ const connector = new builder.ChatConnector({
 const bot = new builder.UniversalBot(connector);
 var question, answer;
 
-
 bot.on('contactRelationUpdate', function (message) {
     if (message.action === 'add') {
         addBotToUserSkypeContact(message);
@@ -44,7 +43,7 @@ const logUserConversation = (header, event) => {
     console.log(header + event.text + ', user: ' + event.address.user.name);
 };
 
-// Middleware for logging
+// Middleware for logginga
 bot.use({
     receive: function (event, next) {
         console.log("Type", event.type);

@@ -11,6 +11,7 @@ var bot = botify.getUniversalBotInstance();
 var builder = botify.getBuilderObject();
 let i18n = require("i18n");
 
+const LOCALHOST_DEV_PORT = 5000;
 
 i18n.configure({
     locales: ['en', 'de'],
@@ -20,11 +21,21 @@ i18n.configure({
 
 server.post('/api/messages', bot.connector('*').listen());
 
-server.listen(process.env.port || process.env.PORT || 5000, function () {
+server.listen(process.env.port || process.env.PORT || LOCALHOST_DEV_PORT, function startServer() {
+    console.log(`${server.name} listening at: ${server.url}`);
     startCronToCheckPendingFeedback();
-    console.log('%s listening to %s', server.name, server.url);
-
 });
+
+// configure a root status handler so we know our bot server is online
+server.get('/', function (request, response, next) {
+    let statusInfo = {
+        name: 'chatterbot-azure-linux',
+        status: 'online'
+    }
+    response.send(200, statusInfo);
+    next();
+});
+
 
 
 // Do GET this endpoint to delivey a notification
@@ -33,7 +44,7 @@ server.get('/api/CustomWebApi', (req, res) => {
     }
 );
 
-//--------------------------------------------- Cron Work ----------------------------------------------------------------------//
+//--------------------------------------------- Cron Work ------------------------------------------------------------//
 
 
 /**
@@ -41,7 +52,7 @@ server.get('/api/CustomWebApi', (req, res) => {
  * available for that user, send a proactive message to that user
  */
 function startCronToCheckPendingFeedback() {
-    var taskForPendingFeedback = cron.schedule('0 */30 * * * *', function () {
+    var taskForPendingFeedback = cron.schedule('0 */1 * * * *', function () {
         console.log('Running a task to check pending feedback');
         checkForPendingFeedback();
     }, false);
