@@ -25,7 +25,7 @@ module.exports = {
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'grubscrub22@gmail.com',
+                user: 'info.chatterbotfeedback@gmail.com',
                 pass: 'grubscrub@22'
             }
         });
@@ -132,7 +132,7 @@ module.exports = {
  */
 function mailWithAttachment(mailOptions, subject, text, session, path) {
     mailOptions = {
-        from: 'grubscrub22@gmail.com',
+        from: 'info.chatterbotfeedback@gmail.com',
         to: 'sachit.wadhawan@quovantis.com',
         subject: subject,
         text: text,
@@ -153,7 +153,7 @@ function mailWithAttachment(mailOptions, subject, text, session, path) {
  */
 function mailWithoutAttachment(mailOptions, subject, text) {
     mailOptions = {
-        from: 'grubscrub22@gmail.com',
+        from: 'info.chatterbotfeedback@gmail.com',
         to: 'sachit.wadhawan@quovantis.com',
         subject: subject,
         text: text
