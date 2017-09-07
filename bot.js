@@ -1,3 +1,7 @@
+/**
+ * This file is created by sachit
+ */
+
 var builder = require('botbuilder');
 var firebaseOperations = require('./firebase_operations.js');
 var customOperations = require('./custom.js');
@@ -213,8 +217,8 @@ function submitUserResponse(session) {
     var username = session.message.user.name;
     session.send(i18n.__('sub_wait'));
     var totalResponse = session.userData.questionArray;
-    firebaseOperations.saveFeedbackToDB(session.userData.trainingId, username, session.userData.questionArray,
-        session.userData.trainingName);
+    // firebaseOperations.saveFeedbackToDB(session.userData.trainingId, username, session.userData.questionArray,
+    //     session.userData.trainingName);
     var fields = ['id', 'question', 'answer'];
     var csv = json2csv({data: totalResponse, fields: fields});
     fs.writeFile("response/" + session.userData.firstName + ".csv", csv, function (err) {
@@ -293,7 +297,8 @@ function addBotToUserSkypeContact(message) {
     localStorage.set(userId, message.timestamp);
     var firstName = username.split(" ")[0];
     var saveAddress = message.address;
-    var greetingMessage = getDayTimings();
+    var timeStamp   =   message.timestamp;
+    var greetingMessage = getDayTimings(timeStamp);
     var reply = new builder.Message()
         .address(message.address);
     firebaseOperations.getUserEmailId(username, function (emailId) {
@@ -390,8 +395,8 @@ function checkForPendingFeedback(username, session) {
  * This function will return the greeting message according to the current time
  * @returns {*}
  */
-function getDayTimings() {
-    var currentDate = new Date();
+function getDayTimings(timeStamp) {
+    var currentDate = new Date(timeStamp);
     var curHr = currentDate.getHours();
     if (curHr < 12) {
         return 'Good Morning';
