@@ -1,6 +1,5 @@
 let firebase = require('firebase')
-let exceltojson = require("xls-to-json-lc");
-let xlsxtojson = require("xlsx-to-json-lc");
+// let xlsxtojson = require("xlsx-to-json-lc");
 let i18n = require("i18n");
 
 i18n.configure({
@@ -106,22 +105,22 @@ function writeQuestionData(questionId, question, answerOptions, questionType) {
         answer: ''
     });
 }
-
-function saveUserData() {
-    xlsxtojson({
-        input: __dirname + '/user_data.xlsx',
-        output: null,
-        lowerCaseHeaders: false //to convert all excel headers to lowr case in json
-    }, function (err, result) {
-        if (err) {
-            console.error(err);
-        } else {
-            result.forEach(function (userData) {
-                saveUser(userData);
-            });
-        }
-    });
-}
+//
+// function saveUserData() {
+//     xlsxtojson({
+//         input: __dirname + '/user_data.xlsx',
+//         output: null,
+//         lowerCaseHeaders: false //to convert all excel headers to lowr case in json
+//     }, function (err, result) {
+//         if (err) {
+//             console.error(err);
+//         } else {
+//             result.forEach(function (userData) {
+//                 saveUser(userData);
+//             });
+//         }
+//     });
+// }
 
 function saveUser(userData) {
     firebase.database().ref('users/' + userData.EmailID.replaceAll('.', ':')).set({
