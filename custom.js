@@ -1,5 +1,5 @@
 /**
- * Created by sachit on 03/08/17.
+ * This file is created by sachit
  */
 
 var nodemailer = require('nodemailer');

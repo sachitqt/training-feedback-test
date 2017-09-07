@@ -23,7 +23,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tarunkohli/training-feedback-bot.git"
+    "url": "git+https://github.com/ersachit/training-feedback-bot"
   },
   "dependencies": {
     "arraylist": "^0.1.0",
