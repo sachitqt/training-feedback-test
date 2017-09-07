@@ -297,7 +297,8 @@ function addBotToUserSkypeContact(message) {
     localStorage.set(userId, message.timestamp);
     var firstName = username.split(" ")[0];
     var saveAddress = message.address;
-    var greetingMessage = getDayTimings();
+    var timeStamp   =   message.timestamp;
+    var greetingMessage = getDayTimings(timeStamp);
     var reply = new builder.Message()
         .address(message.address);
     firebaseOperations.getUserEmailId(username, function (emailId) {
@@ -394,8 +395,8 @@ function checkForPendingFeedback(username, session) {
  * This function will return the greeting message according to the current time
  * @returns {*}
  */
-function getDayTimings() {
-    var currentDate = new Date();
+function getDayTimings(timeStamp) {
+    var currentDate = new Date(timeStamp);
     var curHr = currentDate.getHours();
     if (curHr < 12) {
         return 'Good Morning';
