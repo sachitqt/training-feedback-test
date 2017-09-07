@@ -1,3 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 .env
 node_modules/
+.idea/modules.xml
+.idea/training-feedback-bot.iml
+.idea/workspace.xml
+images/
