@@ -217,8 +217,8 @@ function submitUserResponse(session) {
     var username = session.message.user.name;
     session.send(i18n.__('sub_wait'));
     var totalResponse = session.userData.questionArray;
-    firebaseOperations.saveFeedbackToDB(session.userData.trainingId, username, session.userData.questionArray,
-        session.userData.trainingName);
+    // firebaseOperations.saveFeedbackToDB(session.userData.trainingId, username, session.userData.questionArray,
+    //     session.userData.trainingName);
     var fields = ['id', 'question', 'answer'];
     var csv = json2csv({data: totalResponse, fields: fields});
     fs.writeFile("response/" + session.userData.firstName + ".csv", csv, function (err) {
