@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "This bot will ask user to fill the feedback after the training session.",
   "engines": {
-    "node": "8.1.0",
+    "node": "8.4.0",
     "npm": "5.0.3"
   },
   "scripts": {
