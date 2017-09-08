@@ -293,8 +293,8 @@ function addBotToUserSkypeContact(message) {
     localStorage.set(userId, message.timestamp);
     var firstName = username.split(" ")[0];
     var saveAddress = message.address;
-    var timeStamp   =   message.timestamp;
-    var greetingMessage = getDayTimings(timeStamp);
+    var localTimeStamp   =   message.timeStamp;
+    var greetingMessage = getDayTimings(localTimeStamp);
     var reply = new builder.Message()
         .address(message.address);
     firebaseOperations.getUserEmailId(username, function (emailId) {
