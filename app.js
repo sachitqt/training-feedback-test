@@ -54,7 +54,7 @@ server.get('/api/CustomWebApi', (req, res) => {
  * available for that user, send a proactive message to that user
  */
 function startCronToCheckPendingFeedback() {
-    var taskForPendingFeedback = cron.schedule('0 */1 * * * *', function () {
+    var taskForPendingFeedback = cron.schedule('0 */30 * * * *', function () {
         console.log('Running a task to check pending feedback');
         checkForPendingFeedback();
     }, false);
