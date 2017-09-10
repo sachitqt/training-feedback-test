@@ -247,7 +247,7 @@
   "wait": "Hey (wait)! You have only attempted **%s/%s** questions. Please complete your feedback and then submit",
   "answer_update": "Your **feedback of question number %s** has been updated successfully (rock)",
   "inactive_msg": "Hey **%s**, I can see that you have started filling the **'%s'** session feedback but did not complete it. I promise (promise) that it will take hardly 5 minutes (time). Please fill it ASAP otherwise I will keep bothering you. ]:)",
-  "too_fast_msg": "Hey %s, you were too fast this time (wait), I would request you to please slow down else I can give you some crazy results and it will not be my fault but for now we are considering your first command.",
+  "too_fast_msg": "Hey %s, you were too fast this time (wait), I would request you to please slow down else I can give you some crazy results and it will not be my fault.",
   "user_not_found": "Hey **%s**, Your skype user name doesn't match in our database. We will highly recommend you to change your skype name to get all the notifications of the session or contact to TM team. ",
   "user_found": "Hey **%s**, *%s* and thanks for adding me (highfive).  I will notify and guide you to provide feedback for the sessions here itself.<br /><br /> **Tip :** Please type **'Start'** when you are ready to fill the feedback.",
   "not_getting_message": "Hey **%s**, I'm sorry, I don't understand!(shake) Sometimes I have an easier time with a few simple keywords. Please type **'Start'** to start filling the feedback.",

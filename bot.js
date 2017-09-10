@@ -5,7 +5,8 @@ var json2csv = require('json2csv');
 var fs = require('fs');
 var arraylist = require('arraylist');
 var cron = require('node-cron');
-var localStorage = require('local-storage');
+var LocalStorage = require('node-localstorage').LocalStorage;
+localStorage = new LocalStorage('./scratch');
 let i18n = require("i18n");
 
 
@@ -43,19 +44,17 @@ const logUserConversation = (header, event) => {
     console.log(header + event.text + ', user: ' + event.address.user.name);
 };
 
-// Middleware for logginga
+// Middleware for logging
 bot.use({
     receive: function (event, next) {
         console.log("Type", event.type);
         if (event.type === 'message' && !(event.text.startsWith("Edited previous message:"))) {
-            var {diff, timeDifference} = calculateTimeDifferenceBetweenEvents(event);
-            if (timeDifference > 2) {
+            var timeDifference = calculateTimeDifferenceBetweenEvents(event);
+            if (timeDifference > 3) {
                 logUserConversation('user sent: ', event);
                 next();
             } else {
-                if (diff != -1 || diff != -2) {
-                    sendProactiveMessageToNotifyUserActivity(event.address, i18n.__('too_fast_msg'));
-                }
+                sendProactiveMessageToNotifyUserActivity(event.address, i18n.__('too_fast_msg'));
             }
         } else if (event.type === 'contactRelationUpdate') {
             logUserConversation('user sent: ', event);
@@ -82,8 +81,7 @@ bot.dialog("/", [
         var userMessage = (session.message.text).toLowerCase();
         session.sendTyping();
         if (userMessage != 'start') {
-            // session.send(i18n.__('not_getting_message'), session.userData.firstName)
-            session.endDialog(i18n.__('web_link'), "[Click me](https://www.google.com/search?q="+userMessage+")")
+            session.endDialog(i18n.__('web_link'), "[Click me](https://www.google.com/search?q=" + userMessage + ")")
         } else {
             checkForPendingFeedback(username, session);
         }
@@ -289,13 +287,17 @@ function deleteAllData(session) {
  * @param message
  */
 function addBotToUserSkypeContact(message) {
-    var username = message.user ? message.user.name : "Unknown";
-    var userId = message.user.id.split(":")[1];
-    localStorage.set(userId, message.timestamp);
-    var firstName = username.split(" ")[0];
-    var saveAddress = message.address;
-    var localTimeStamp   =   message.timeStamp;
-    var greetingMessage = getDayTimings(localTimeStamp);
+    var username = message.user ? message.user.name : "Unknown"
+    var userId = message.user.id.split(":")[1]
+
+    console.log("UserId", userId)
+    localStorage.setItem(userId, message.timestamp)
+    console.log("UserId", localStorage.getItem(userId))
+
+    var firstName = username.split(" ")[0]
+    var saveAddress = message.address
+    var localTimeStamp = message.timeStamp
+    var greetingMessage = getDayTimings(localTimeStamp)
     var reply = new builder.Message()
         .address(message.address);
     firebaseOperations.getUserEmailId(username, function (emailId) {
@@ -411,18 +413,29 @@ function getDayTimings(timeStamp) {
  */
 function calculateTimeDifferenceBetweenEvents(event) {
     var userId = event.user.id.split(":")[1];
+    console.log("Timestamp", event.timestamp)
     var currentSavedDate = event.timestamp;
-    var currentTime = new Date(currentSavedDate).getSeconds();
-    var lastSaveDate = localStorage.get(userId);
+    console.log("currentSaveDate", currentSavedDate)
+    var currentTime = new Date(currentSavedDate);
+    console.log("currentTime", currentTime)
+    var lastSaveDate = localStorage.getItem(userId);
+    console.log("LastSaveDate", lastSaveDate)
     if (lastSaveDate === null) {
         lastSaveDate = 0;
     }
-    var lastSavedTime = new Date(lastSaveDate).getSeconds();
+    var lastSavedTime = new Date(lastSaveDate);
+    console.log("LastSaveTime", lastSavedTime)
+
     var diff = (currentTime - lastSavedTime);
-    var timeDifference = Math.abs(Math.round(diff));
-    console.log("Time: ", timeDifference);
-    localStorage.set(userId, currentSavedDate);
-    return {diff, timeDifference};
+    var timeDifferenceInMillis = Math.abs(Math.round(diff));
+    console.log("Millis: ", timeDifferenceInMillis);
+
+    var seconds = timeDifferenceInMillis/1000
+    console.log("Seconds: ", seconds);
+
+    localStorage.setItem(userId, currentSavedDate);
+    console.log("newTime", currentSavedDate)
+    return seconds;
 }
 
 
