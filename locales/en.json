@@ -252,7 +252,7 @@
   "user_found": "Hey **%s**, *%s* and thanks for adding me (highfive).  I will notify and guide you to provide feedback for the sessions here itself.<br /><br /> **Tip :** Please type **'Start'** when you are ready to fill the feedback.",
   "not_getting_message": "Hey **%s**, I'm sorry, I don't understand!(shake) Sometimes I have an easier time with a few simple keywords. Please type **'Start'** to start filling the feedback.",
   "well_done": "Well done! (monkey) (joy)",
-  "web_link": "Oh dear! I wish I know the answer but I am learning things day by day. %s to see the results on web or type **'Start'** to start filling the feedback.",
+  "web_link": "Oh dear! I wish I knew the answer but I am learning things day by day. %s to see the results on web or type **'Start'** to start filling the feedback.",
   "no_pending_feedback": "You have no pending feedback yet. Enjoy!!!  (whistle)",
   "edit_command_hint": "Please type 'edit (question number)' to edit the response. For example- **edit 1**",
   "what_next": "What would you like to do next?",

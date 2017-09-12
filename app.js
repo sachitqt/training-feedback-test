@@ -54,7 +54,7 @@ server.get('/api/CustomWebApi', (req, res) => {
  * available for that user, send a proactive message to that user
  */
 function startCronToCheckPendingFeedback() {
-    var taskForPendingFeedback = cron.schedule('0 */30 * * * *', function () {
+    var taskForPendingFeedback = cron.schedule('0 0 */2 * * *', function () {
         console.log('Running a task to check pending feedback');
         checkForPendingFeedback();
     }, false);
@@ -112,7 +112,7 @@ function checkForIdealCondition(address, lastSentMessage, trainingId, attendeeId
     diff /= 60;
     console.log(Math.abs(Math.round(diff)));
     var timeDifference = Math.abs(Math.round(diff));
-    if (timeDifference >= 10) {
+    if (timeDifference >= 30) {
         sendProactiveMessage(address, trainingName);
         lastSentMessage = new Date().getTime();
         firebaseOperations.updateLastSentMessageOfPendingFeedback(lastSentMessage, attendeeId, trainingId);

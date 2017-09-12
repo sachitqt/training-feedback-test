@@ -81,7 +81,7 @@ bot.dialog("/", [
         var userMessage = (session.message.text).toLowerCase();
         session.sendTyping();
         if (userMessage != 'start') {
-            session.endDialog(i18n.__('web_link'), "[Click me](https://www.google.com/search?q=" + userMessage + ")")
+            session.endDialog(i18n.__('web_link'), "[Click here](https://www.google.com/search?q=" + userMessage + ")")
         } else {
             checkForPendingFeedback(username, session);
         }
