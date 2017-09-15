@@ -182,7 +182,8 @@ function getEmailIdFromUsername(username, callbackFunction) {
         snapshot.forEach(function (child) {
             let user = child.val();
             if (((user.skypeName).toLowerCase() === (username).toLowerCase()) ||
-                ((user.fullName).toLowerCase() === (username).toLowerCase())) {
+                ((user.fullName).toLowerCase() === (username).toLowerCase()) ||
+                ((user.skypeId).toLowerCase() === (username).toLowerCase())) {
                 emailId = user.emailId;
             }
         });
