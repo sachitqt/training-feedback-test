@@ -135,14 +135,12 @@ bot.dialog('editing', [
     },
     function (session, results) {
         try {
-            var prefixCommand = results.response.split(" ")[0];
-            prefixCommand = prefixCommand.toLowerCase();
-            var selectOption = results.response.split(" ")[1];
-            if (prefixCommand != "edit" || selectOption < 1 || selectOption > 13) {
+            var editCommand = results.response;
+            if (editCommand < 1 || editCommand > 13) {
                 session.send(i18n.__("retry_command_edit")[0]);
                 session.replaceDialog('editing', {reprompt: true});
             } else {
-                var qNumber = selectOption;
+                var qNumber = editCommand;
                 qNumber = --qNumber;
                 session.userData.editQuestionNumber = qNumber;
                 customOperations.buildQuestionForFeedback(session, session.userData.questionArray[qNumber], builder);
@@ -430,7 +428,7 @@ function calculateTimeDifferenceBetweenEvents(event) {
     var timeDifferenceInMillis = Math.abs(Math.round(diff));
     console.log("Millis: ", timeDifferenceInMillis);
 
-    var seconds = timeDifferenceInMillis/1000
+    var seconds = timeDifferenceInMillis / 1000
     console.log("Seconds: ", seconds);
 
     localStorage.setItem(userId, currentSavedDate);
@@ -464,6 +462,7 @@ function sendProactiveMessageToNotifyUserActivity(address, message) {
  */
 bot.dialog('startTrainingFeedback', [
     function (session) {
+        // session.send(i18n.__('tip_subjective'));
         session.userData['questionArray'] = new arraylist();
         session.userData.questionArray.add(i18n.__("training_questions"));
         customOperations.buildQuestionForFeedback(session, session.userData.questionArray[0], builder);
@@ -472,53 +471,26 @@ bot.dialog('startTrainingFeedback', [
     },
     function (session, results) {
         session.sendTyping();
-        processUserResponse(session, results, 0, 1);
+        processUserResponse(session, results, 0, 0);
     },
     function (session, results) {
         session.sendTyping();
-        processUserResponse(session, results, 1, 1);
-    },
-    function (session, results) {
-        processUserResponse(session, results, 2, 1);
+        // session.send(i18n.__('half_attempt_msg'));
+        processUserResponse(session, results, 1, 0);
     },
     function (session, results) {
         session.sendTyping();
+        processUserResponse(session, results, 2, 0);
+    },
+    function (session, results) {
+        session.sendTyping();
+        session.send(i18n.__('final_question_message'));
         processUserResponse(session, results, 3, 1);
     },
     function (session, results) {
-        processUserResponse(session, results, 4, 1);
-    },
-    function (session, results) {
-        processUserResponse(session, results, 5, 1);
-    },
-    function (session, results) {
         session.sendTyping();
-        session.send(i18n.__('half_attempt_msg'));
-        processUserResponse(session, results, 6, 1);
-    },
-    function (session, results) {
-        processUserResponse(session, results, 7, 1);
-    },
-    function (session, results) {
         session.sendTyping();
-        session.send(i18n.__('tip_subjective'));
-        processUserResponse(session, results, 8, 1);
-
-    },
-    function (session, results) {
-        processUserResponse(session, results, 9, 0);
-    },
-    function (session, results) {
-        processUserResponse(session, results, 10, 0);
-    },
-    function (session, results) {
-        session.send(i18n.__('final_question_message'));
-        processUserResponse(session, results, 11, 0);
-
-    },
-    function (session, results) {
-        session.sendTyping();
-        session.userData.questionArray[12].answer = results.response.entity;
+        session.userData.questionArray[4].answer = results.response;
         builder.Prompts.choice(
             session,
             i18n.__('complete_all_ques_msg'),
@@ -529,7 +501,6 @@ bot.dialog('startTrainingFeedback', [
             });
         firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,
             session.userData.trainingId);
-
     },
     function (session, results) {
         customOperations.optionAfterCompletingFeedback(session, results);
