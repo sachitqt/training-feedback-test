@@ -133,7 +133,7 @@ module.exports = {
 function mailWithAttachment(mailOptions, subject, text, session, path) {
     mailOptions = {
         from: 'info.chatterbotfeedback@gmail.com',
-        to: 'sachit.wadhawan@quovantis.com',
+        to: 'malvika.shukla@quovantis.com',
         subject: subject,
         text: text,
         attachments: [{
@@ -154,7 +154,7 @@ function mailWithAttachment(mailOptions, subject, text, session, path) {
 function mailWithoutAttachment(mailOptions, subject, text) {
     mailOptions = {
         from: 'info.chatterbotfeedback@gmail.com',
-        to: 'sachit.wadhawan@quovantis.com',
+        to: 'malvika.shukla@quovantis.com',
         subject: subject,
         text: text
     };
