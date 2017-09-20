@@ -295,14 +295,14 @@ function addBotToUserSkypeContact(message) {
     var firstName = username.split(" ")[0]
     var saveAddress = message.address
     var localTimeStamp = message.timeStamp
-    var greetingMessage = getDayTimings(localTimeStamp)
+    // var greetingMessage = getDayTimings(localTimeStamp)
     var reply = new builder.Message()
         .address(message.address);
     firebaseOperations.getUserEmailId(username, function (emailId) {
         if (emailId === '') {
             reply.text(i18n.__('user_not_found'), firstName);
         } else {
-            reply.text(i18n.__('user_found'), firstName || "there", greetingMessage);
+            reply.text(i18n.__('user_found'), firstName || "there");
         }
         firebaseOperations.addUserSession(saveAddress);
         bot.send(reply);
