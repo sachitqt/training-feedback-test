@@ -298,11 +298,11 @@ function addBotToUserSkypeContact(message) {
     // var greetingMessage = getDayTimings(localTimeStamp)
     var reply = new builder.Message()
         .address(message.address);
-    firebaseOperations.getUserEmailId(username, function (emailId) {
-        if (emailId === '') {
+    firebaseOperations.getUserName(username, function (name) {
+        if (name === '') {
             reply.text(i18n.__('user_not_found'), firstName);
         } else {
-            reply.text(i18n.__('user_found'), firstName || "there");
+            reply.text(i18n.__('user_found'), name || "there");
         }
         firebaseOperations.addUserSession(saveAddress);
         bot.send(reply);
