@@ -8,7 +8,6 @@ var cron = require('node-cron');
 var LocalStorage = require('node-localstorage').LocalStorage;
 localStorage = new LocalStorage('./scratch');
 let i18n = require("i18n");
-var apiairecognizer = require('api-ai-recognizer');
 var decodeString = require('unescape');
 
 
@@ -32,12 +31,6 @@ bot.on('contactRelationUpdate', function (message) {
     } else {
         console.log(i18n.__('delete_bot'))
     }
-});
-
-
-var recognizer = new apiairecognizer("e4a3d6efbda5418a935bc9f24cdd4650");
-var intents = new builder.IntentDialog({
-    recognizers: [recognizer]
 });
 
 //=========================================================
@@ -94,16 +87,6 @@ bot.dialog("/", [
         var userMessage = (session.message.text).toLowerCase();
         session.sendTyping();
         if (userMessage != 'start') {
-            // intents.matches('GeneralQuestions', function (session, args) {
-            //     var fulfillment = builder.EntityRecognizer.findEntity(args.entities, 'fulfillment');
-            //     if (fulfillment) {
-            //         var speech = fulfillment.entity;
-            //         session.send(speech);
-            //     } else {
-            //         session.send('Sorry...not sure how to respond to that');
-            //     }
-            // });
-
             session.endDialog(i18n.__('web_link'), "[Click here](https://www.google.com/search?q=" + userMessage + ")")
         } else {
             checkForPendingFeedback(username, session);

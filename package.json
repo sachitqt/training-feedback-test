@@ -1,6 +1,6 @@
 {
   "name": "ChatterBot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This bot will ask user to fill the feedback after the training session.",
   "engines": {
     "node": "8.4.0",
