@@ -17,6 +17,15 @@ let config = {
     projectId: "botsun-83f8c",
     storageBucket: "botsun-83f8c.appspot.com",
     messagingSenderId: "673044083117"
+
+    // apiKey: "AIzaSyC8tNit3xN0evbUs5Gtppt2lMBFcFUvVSs",
+    // authDomain: "botsun-dev.firebaseapp.com",
+    // databaseURL: "https://botsun-dev.firebaseio.com",
+    // projectId: "botsun-dev",
+    // storageBucket: "",
+    // messagingSenderId: "971452376224"
+
+
 };
 firebase.initializeApp(config);
 

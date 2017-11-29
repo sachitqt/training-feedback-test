@@ -8,6 +8,8 @@ var cron = require('node-cron');
 var LocalStorage = require('node-localstorage').LocalStorage;
 localStorage = new LocalStorage('./scratch');
 let i18n = require("i18n");
+var apiairecognizer = require('api-ai-recognizer');
+var decodeString = require('unescape');
 
 
 i18n.configure({
@@ -30,6 +32,17 @@ bot.on('contactRelationUpdate', function (message) {
         console.log(i18n.__('delete_bot'))
     }
 });
+
+
+var recognizer = new apiairecognizer("e4a3d6efbda5418a935bc9f24cdd4650");
+var intents = new builder.IntentDialog({
+    recognizers: [recognizer]
+});
+
+//=========================================================
+// api.ai implementation
+//=========================================================
+
 
 
 //=========================================================
@@ -60,7 +73,6 @@ bot.use({
             logUserConversation('user sent: ', event);
             next();
         }
-
     },
     send: function (event, next) {
         logUserConversation('bot sent: ', event);
@@ -81,12 +93,24 @@ bot.dialog("/", [
         var userMessage = (session.message.text).toLowerCase();
         session.sendTyping();
         if (userMessage != 'start') {
+            // intents.matches('GeneralQuestions', function (session, args) {
+            //     var fulfillment = builder.EntityRecognizer.findEntity(args.entities, 'fulfillment');
+            //     if (fulfillment) {
+            //         var speech = fulfillment.entity;
+            //         session.send(speech);
+            //     } else {
+            //         session.send('Sorry...not sure how to respond to that');
+            //     }
+            // });
+
             session.endDialog(i18n.__('web_link'), "[Click here](https://www.google.com/search?q=" + userMessage + ")")
         } else {
             checkForPendingFeedback(username, session);
         }
     }
 ]);
+
+
 
 
 bot.dialog('submitResponse', [
@@ -315,14 +339,14 @@ function addBotToUserSkypeContact(message) {
  * @param session           user session
  * @param trainingName      name of the training
  * @param trainingType      type of the training
- * @param attendeeId        id of the attendeed
+ * @param attendeeId        id of the attendee
  * @param trainingId        id of the training
  * @param username          current user name
  */
 function startTrainingBasedOnType(session, trainingName, trainingType, attendeeId, trainingId, username) {
     session.send(i18n.__("well_done") + "<br />" + i18n.__('welcome1_msg') + "<br /> <br />" + "Here are the questions for the session **'%s'**", trainingName);
     session.send(i18n.__('tip_restart'));
-
+    trainingType    =   parseInt(trainingType);
     switch (trainingType) {
         case 1: // for trainings
             session.beginDialog('startTrainingFeedback');
@@ -333,6 +357,7 @@ function startTrainingBasedOnType(session, trainingName, trainingType, attendeeI
         case 3: // workshop
             session.beginDialog('startWorkshopFeedback');
             break;
+
     }
 
     firebaseOperations.updateStartedStatusOfPendingFeedback(true, attendeeId, trainingId);
@@ -562,10 +587,11 @@ bot.dialog('startWorkshopFeedback', [
  * @param type       type of the question
  */
 function processUserResponse(session, results, index, type) {
+
     if (type === 1) {
-        session.userData.questionArray[index].answer = results.response.entity;
+        session.userData.questionArray[index].answer = decodeString(results.response.entity);
     } else {
-        session.userData.questionArray[index].answer = results.response;
+        session.userData.questionArray[index].answer = decodeString(results.response);
     }
     customOperations.buildQuestionForFeedback(session, session.userData.questionArray[index + 1], builder);
     firebaseOperations.updateLastSentMessageOfPendingFeedback(new Date().getTime(), session.userData.attendeeId,

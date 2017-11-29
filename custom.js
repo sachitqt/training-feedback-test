@@ -12,16 +12,21 @@ i18n.configure({
 });
 
 
-
 module.exports = {
 
     sendEmailToTMTeam: function sendEmail(session, username, text, feedback, fs) {
 
-        var subject, path, mailOptions;
+        var subject, path, mailOptions, to;
 
         subject = username + "- " + i18n.__('subject_feedback');
         path = "response/" + session.userData.firstName + ".csv";
 
+        var trainingType = session.userData.trainingType;
+        if (trainingType == 3 || trainingType == '3') {
+            to = 'sunidhi@quovantis.com'
+        } else {
+            to = 'malvika.shukla@quovantis.com';
+        }
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -30,10 +35,11 @@ module.exports = {
             }
         });
 
+
         if (feedback) {
-            mailOptions = mailWithAttachment(mailOptions, subject, text, session, path);
+            mailOptions = mailWithAttachment(mailOptions, subject, text, session, path, to);
         } else {
-            mailOptions = mailWithoutAttachment(mailOptions, subject, text);
+            mailOptions = mailWithoutAttachment(mailOptions, subject, text, to);
         }
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
@@ -130,10 +136,10 @@ module.exports = {
  * @param path
  * @returns {{from: string, to: string, subject: *, text: *, attachments: [*]}|*}
  */
-function mailWithAttachment(mailOptions, subject, text, session, path) {
+function mailWithAttachment(mailOptions, subject, text, session, path, to) {
     mailOptions = {
         from: 'info.chatterbotfeedback@gmail.com',
-        to: 'malvika.shukla@quovantis.com',
+        to: to,
         subject: subject,
         text: text,
         attachments: [{
@@ -151,10 +157,10 @@ function mailWithAttachment(mailOptions, subject, text, session, path) {
  * @param text
  * @returns {{from: string, to: string, subject: *, text: *}|*}
  */
-function mailWithoutAttachment(mailOptions, subject, text) {
+function mailWithoutAttachment(mailOptions, subject, text, to) {
     mailOptions = {
         from: 'info.chatterbotfeedback@gmail.com',
-        to: 'malvika.shukla@quovantis.com',
+        to: to,
         subject: subject,
         text: text
     };

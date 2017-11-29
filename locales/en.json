@@ -84,7 +84,7 @@
     {
       "id": 1,
       "question_type": "text",
-      "question": "Did the leadership talk succeed in setting your expectations on how to communicate hard feedback?",
+      "question": "Did the session succeed in setting your expectations about the given topic?",
       "options": "",
       "answer": ""
     },
@@ -192,12 +192,12 @@
   "answer_update": "Your **feedback of question number %s** has been updated successfully (rock)",
   "inactive_msg": "Hey **%s**, I can see that you have started filling the **'%s'** session feedback but did not complete it. I promise (promise) that it will take hardly 5 minutes (time). Please fill it ASAP otherwise I will keep bothering you. ]:)",
   "too_fast_msg": "Hey %s, you were too fast this time (wait), I would request you to please slow down else I can give you some crazy results and it will not be my fault.",
-  "user_not_found": "Hey **%s**, Your skype user name doesn't match in our database. We will highly recommend you to change your skype name to get all the notifications of the session or contact to TM team. ",
+  "user_not_found": "Hey **%s**, Your skype user name doesn't match in our database. We highly recommend you to change your skype name to get all the notifications of the session. Otherwise, please contact TM team. ",
   "user_found": "Hey **%s**, thanks for adding me (highfive).  I will notify and guide you to provide feedback for the sessions here itself.<br /><br /> **Tip :** Please type **'Start'** when you are ready to fill the feedback.",
   "not_getting_message": "Hey **%s**, I'm sorry, I don't understand!(shake) Sometimes I have an easier time with a few simple keywords. Please type **'Start'** to start filling the feedback.",
   "well_done": "Great. (monkey) (joy)",
   "web_link": "Oh dear! I wish I knew the answer but I am learning things day by day. %s to see the results on web or type **'Start'** to start filling the feedback.",
-  "no_pending_feedback": "You have no pending feedback yet. Enjoy!!!  (whistle)",
+  "no_pending_feedback": "You have no pending feedback as of now. Enjoy!!!  (whistle)",
   "edit_command_hint": "Please type 'question number' to edit the response. For example- **1**",
   "what_next": "What would you like to do next?",
   "sub_wait": "Submitting feedback, Please wait...",
